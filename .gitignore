@@ -1,0 +1,11 @@
+*.class
+*.jar
+*.iml
+*.iws
+*.ipr
+target
+test.txt
+EulerSolutionsWithJava8	
+donotcommit
+README~
+#*
