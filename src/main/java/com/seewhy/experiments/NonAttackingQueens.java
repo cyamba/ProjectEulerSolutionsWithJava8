@@ -38,7 +38,8 @@ public class NonAttackingQueens extends AbstractEulerSolver {
         List<int[][]> nonAttackingSolutions = generatePermutationCollection(original)
                 .parallelStream()
                 .map(Arrays2D::fromPermutation)
-                .filter(this::isNonAttackingQueensBoard).collect(toList());
+                .filter(this::isNonAttackingQueensBoard)
+                .collect(toList());
 
         String result = nonAttackingSolutions
                 .stream()

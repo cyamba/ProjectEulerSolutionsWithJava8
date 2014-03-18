@@ -1,19 +1,20 @@
 package com.seewhy.solutions.euler59;
 
+import com.seewhy.common.collections.CollectionBlocks;
 import com.seewhy.common.collections.Collections;
 import com.seewhy.common.io.Java8Reader;
 import com.seewhy.common.io.Printer;
-import com.seewhy.common.util.NumberStringConversions;
 import com.seewhy.solutions.AbstractEulerSolver;
 import com.seewhy.solutions.EulerRunner;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
-
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Created by cbyamba on 2014-03-07.
@@ -33,19 +34,54 @@ public class XORDecryption extends AbstractEulerSolver {
                     .boxed()
                     .collect(toList()));
 
+    private static final List<String> dictionaryWords = Java8Reader.reader(DICTIONARY)
+            .lines()
+            .map(line -> line.trim())
+            .collect(Collectors.toList());
+
     @Override
     public String doSolve() {
 
         List<List<Character>> allKeys = generateKeys(KEY_LENGTH);
 
-//        allKeys.parallelStream()
-//        .map(key->getCipherStream(NumberStringConversions.listOfCharsToInteger(key)))
-//                .collect(toList());
-
-
-        return "";
+        List<List<String>> wordBlocksOf3 = CollectionBlocks.toBlockList(getCipherStream().collect(toList()), 3);
+        List<List<Character>> mutableResult = new ArrayList<>();
+        try {
+            allKeys.parallelStream()
+                    .peek(key -> Printer.print(key.toArray()))
+                    .forEach(key -> {
+                        if (isDeciphering(key, wordBlocksOf3)) {
+                            mutableResult.add(key);
+                            throw new RuntimeException(
+                                    String.format("terminate execution. answer %s is found",
+                                            Arrays.deepToString(key.toArray())));
+                        }
+                    });
+        } catch (Exception e) {
+            //DO nothing
+        }
+        return Arrays.deepToString(mutableResult.toArray());
     }
 
+    public boolean isDeciphering(List<Character> key, List<List<String>> wordBlocksOf3) {
+        return wordBlocksOf3.stream().map(wordBlock -> decipher(key, wordBlock))
+                .filter(word -> dictionaryWords.contains(word))
+
+                .count() > 10;
+    }
+
+    public List<String> decipher(List<Character> keyBlock, List<String> wordBlock) {
+        List<String> decryptedBlock = new ArrayList<>();
+        IntStream.range(0, wordBlock.size()).forEachOrdered(
+                i ->
+                {
+                    Byte word = Byte.valueOf(keyBlock.get(i).toString());
+                    Byte key = Byte.valueOf(wordBlock.get(i));
+                    decryptedBlock.add(decrypt(word, key));
+                }
+        );
+        return decryptedBlock;
+    }
 
 
     public List<List<Character>> generateKeys(int keyLength) {
@@ -76,13 +112,12 @@ public class XORDecryption extends AbstractEulerSolver {
         });
     }
 
-    public Stream<String> getCipherStream(Byte[] key) {
+    public Stream<String> getCipherStream() {
         return Java8Reader.reader(CIPHER).lines().flatMap(line -> {
             String regex = "" + ',';
             String[] words = line.split(regex);
             return Stream.of(words);
         });
-                //.map(w -> decrypt(Byte.valueOf(w), (byte) (key ^ key)));
     }
 
     protected String decrypt(Byte w, Byte key) {
