@@ -48,7 +48,7 @@ public class XORDecryption extends AbstractEulerSolver {
         List<List<Character>> mutableResult = new ArrayList<>();
         try {
             allKeys.parallelStream()
-                    .peek(key -> Printer.print(key.toArray()))
+                    //.peek(key -> Printer.print(key.toArray()))
                     .forEach(key -> {
                         if (isDeciphering(key, wordBlocksOf3)) {
                             mutableResult.add(key);
@@ -58,15 +58,22 @@ public class XORDecryption extends AbstractEulerSolver {
                         }
                     });
         } catch (Exception e) {
-            //DO nothing
+            Printer.print("found! : " + e.toString());
         }
         return Arrays.deepToString(mutableResult.toArray());
     }
 
     public boolean isDeciphering(List<Character> key, List<List<String>> wordBlocksOf3) {
-        return wordBlocksOf3.stream().map(wordBlock -> decipher(key, wordBlock))
-                .filter(word -> dictionaryWords.contains(word))
+        Printer.print("isDeciphering");
 
+        wordBlocksOf3.parallelStream()
+                .map(wordBlock -> decipher(key, wordBlock));
+
+        return wordBlocksOf3.parallelStream()
+                .map(wordBlock -> decipher(key, wordBlock))
+                .peek(w -> System.out.print(w + " "))
+                //TODO reformat after decipher
+                .filter(word -> dictionaryWords.contains(word))
                 .count() > 10;
     }
 
@@ -75,7 +82,8 @@ public class XORDecryption extends AbstractEulerSolver {
         IntStream.range(0, wordBlock.size()).forEachOrdered(
                 i ->
                 {
-                    Byte word = Byte.valueOf(keyBlock.get(i).toString());
+                    Integer s = (int) keyBlock.get(i);
+                    Byte word = Byte.valueOf(s.toString());
                     Byte key = Byte.valueOf(wordBlock.get(i));
                     decryptedBlock.add(decrypt(word, key));
                 }
@@ -85,11 +93,12 @@ public class XORDecryption extends AbstractEulerSolver {
 
 
     public List<List<Character>> generateKeys(int keyLength) {
-        List<List<Character>> keysAccu = ALPHABET.stream().map(c -> {
-            List<Character> keyAccu = new ArrayList<>();
-            keyAccu.add(c);
-            return keyAccu;
-        }).collect(toList());
+        List<List<Character>> keysAccu = ALPHABET.parallelStream()
+                .map(c -> {
+                    List<Character> keyAccu = new ArrayList<>();
+                    keyAccu.add(c);
+                    return keyAccu;
+                }).collect(toList());
         return generateKeys(keysAccu, keyLength);
     }
 
