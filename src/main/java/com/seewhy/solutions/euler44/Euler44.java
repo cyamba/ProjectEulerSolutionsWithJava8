@@ -1,5 +1,7 @@
 package com.seewhy.solutions.euler44;
 
+import com.seewhy.common.collections.LongStreams;
+import com.seewhy.common.collections.Streams;
 import com.seewhy.common.util.UpDownCastArrays;
 
 import static com.seewhy.math.Numbers.*;
@@ -7,43 +9,54 @@ import static com.seewhy.math.Numbers.*;
 import com.seewhy.solutions.AbstractEulerSolver;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.LongUnaryOperator;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 /**
  * Created by cbyamba on 2014-01-24.
  */
 public class Euler44 extends AbstractEulerSolver {
 
-    protected long[] generateNGonalNumbers(long max, LongUnaryOperator operator) {
-        return LongStream.range(1, max).map(operator).toArray();
+    private static final long MAX = 100000;
+
+    protected LongStream generateNGonalNumberStream(long max, LongUnaryOperator... operators) {
+        Stream<LongUnaryOperator> operatorStreams = Streams.<LongUnaryOperator>of(operators);
+        List<LongStream> longStreams = operatorStreams
+                .map(operator -> LongStream.range(1, max)
+                        .map(operator))
+                .collect(Collectors.toList());
+        return LongStreams.concat(longStreams);
     }
 
-    public long[] generateNumbers() {
-        long max = 100000;
-        long[] triangular = generateNGonalNumbers(max, n -> triangularNumber(n));
-        long[] pentagonal = generateNGonalNumbers(max, n -> pentagonalNumber(n));
-        long[] heptagonal = generateNGonalNumbers(max, n -> heptagonalNumber(n));
-
-        long[] merged = LongStream.concat(LongStream.of(triangular), LongStream.of(pentagonal)).toArray();
-        return LongStream.concat(LongStream.of(merged), LongStream.of(heptagonal)).toArray();
+    public LongStream generateNumberStream() {
+        return generateNGonalNumberStream(MAX,
+                n -> triangularNumber(n),
+                n -> pentagonalNumber(n),
+                n -> heptagonalNumber(n)
+        );
     }
 
     @Override
     public String doSolve() {
-        long[] numbers = generateNumbers();
-        long[] sortedNumbers = LongStream.of(numbers).sorted().toArray();
-        long[] founds = findNumbers(sortedNumbers);
-        return Arrays.deepToString(UpDownCastArrays.upCast(founds));
+        return findNumbers(generateNumberStream().sorted().toArray())
+                .boxed()
+                .map(z -> "" + z)
+                .collect(Collectors.joining(", "));
     }
 
-    private long[] findNumbers(long[] sortedNumbers) {
+    private LongStream findNumbers(long[] sortedNumbers) {
         long[] result = new long[sortedNumbers.length];
-        for (int i = 0; i < result.length - 2; i++) {
-            if (sortedNumbers[i] == sortedNumbers[i + 1] && sortedNumbers[i + 1] == sortedNumbers[i + 2]) {
-                result[i] = sortedNumbers[i];
-            }
-        }
-        return LongStream.of(result).filter(x -> x != 0).toArray();
+        IntStream.range(0, result.length - 2).forEach(
+                i -> {
+                    if (sortedNumbers[i] == sortedNumbers[i + 1] && sortedNumbers[i + 1] == sortedNumbers[i + 2]) {
+                        result[i] = sortedNumbers[i];
+                    }
+                });
+        return LongStream.of(result).filter(x -> x != 0);
     }
+
 }
