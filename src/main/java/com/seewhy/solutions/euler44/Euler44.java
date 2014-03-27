@@ -24,12 +24,12 @@ public class Euler44 extends AbstractEulerSolver {
     private static final long MAX = 100000;
 
     protected LongStream generateNGonalNumberStream(long max, LongUnaryOperator... operators) {
-        Stream<LongUnaryOperator> operatorStreams = Streams.<LongUnaryOperator>of(operators);
-        List<LongStream> longStreams = operatorStreams
-                .map(operator -> LongStream.range(1, max)
-                        .map(operator))
-                .collect(Collectors.toList());
-        return LongStreams.concat(longStreams);
+        return LongStreams.concat(
+                Streams.<LongUnaryOperator>of(operators)
+                        .map(operator -> LongStream.range(1, max)
+                                .map(operator))
+                        .collect(Collectors.toList())
+        );
     }
 
     public LongStream generateNumberStream() {

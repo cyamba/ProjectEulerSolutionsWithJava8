@@ -1,5 +1,7 @@
 package com.seewhy.common.collections;
 
+import sun.security.pkcs11.wrapper.Functions;
+
 import java.util.List;
 
 import java.util.stream.LongStream;
@@ -11,9 +13,8 @@ import java.util.stream.Stream;
 public class LongStreams {
 
     public static LongStream concat(List<LongStream> longStreams) {
-        return longStreams.stream()
-                .reduce((accu, newStream) -> LongStream.concat(accu, newStream))
-                .get();
+        return longStreams.stream().flatMapToLong(s -> s);
+
     }
 
     public static LongStream concat(LongStream... longStreams) {
