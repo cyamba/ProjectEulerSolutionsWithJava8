@@ -142,10 +142,6 @@ public class Arrays2D {
             return false;
         }
         return IntStream.range(0, first.length)
-                .peek(x -> {
-                    Printer.print(first[x]);
-                    Printer.print(second[x]);
-                })
                 .allMatch(i -> Arrays.deepEquals(UpDownCastArrays.upCast(first[i]),
                         UpDownCastArrays.upCast(second[i])));
     }

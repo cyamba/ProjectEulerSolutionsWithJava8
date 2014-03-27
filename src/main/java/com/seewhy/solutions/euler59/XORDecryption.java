@@ -2,6 +2,7 @@ package com.seewhy.solutions.euler59;
 
 import com.seewhy.common.collections.CollectionBlocks;
 import com.seewhy.common.collections.Collections;
+import com.seewhy.common.collections.Lists;
 import com.seewhy.common.io.Java8Reader;
 import com.seewhy.common.io.Printer;
 import com.seewhy.solutions.AbstractEulerSolver;
@@ -45,39 +46,39 @@ public class XORDecryption extends AbstractEulerSolver {
         List<List<Character>> allKeys = generateKeys(KEY_LENGTH);
 
         List<List<String>> wordBlocksOf3 = CollectionBlocks.toBlockList(getCipherStream().collect(toList()), 3);
-        List<List<Character>> mutableResult = new ArrayList<>();
-        try {
-            allKeys.parallelStream()
-                    //.peek(key -> Printer.print(key.toArray()))
-                    .forEach(key -> {
-                        if (isDeciphering(key, wordBlocksOf3)) {
-                            mutableResult.add(key);
-                            throw new RuntimeException(
-                                    String.format("terminate execution. answer %s is found",
-                                            Arrays.deepToString(key.toArray())));
-                        }
-                    });
-        } catch (Exception e) {
-            Printer.print("found! : " + e.toString());
+
+        List<List<Character>> mutableKeys = Lists.newArrayList();
+
+        allKeys.parallelStream().forEach(key -> {
+            try {
+                terminateIfDone(decipher(key, wordBlocksOf3));
+            } catch (Exception e) {
+                mutableKeys.add(key);
+            }
+        });
+        List<List<String>> theOneDeciphering = decipher(mutableKeys.get(0), wordBlocksOf3);
+        //TODO compute sum of ascii code
+        return "";
+    }
+
+    private List<List<String>> terminateIfDone(List<List<String>> decipher) {
+        if (isDecipered(decipher)) {
+            return decipher;
         }
-        return Arrays.deepToString(mutableResult.toArray());
+        return null;
     }
 
-    public boolean isDeciphering(List<Character> key, List<List<String>> wordBlocksOf3) {
-        Printer.print("isDeciphering");
+    protected boolean isDecipered(List<List<String>> decipher) {
+        return false;
+    }
 
-        wordBlocksOf3.parallelStream()
-                .map(wordBlock -> decipher(key, wordBlock));
-
+    protected List<List<String>> decipher(List<Character> key, List<List<String>> wordBlocksOf3) {
         return wordBlocksOf3.parallelStream()
-                .map(wordBlock -> decipher(key, wordBlock))
-                .peek(w -> System.out.print(w + " "))
-                //TODO reformat after decipher
-                .filter(word -> dictionaryWords.contains(word))
-                .count() > 10;
+                .map(wordBlock -> decipher0(key, wordBlock))
+                .collect(toList());
     }
 
-    public List<String> decipher(List<Character> keyBlock, List<String> wordBlock) {
+    public List<String> decipher0(List<Character> keyBlock, List<String> wordBlock) {
         List<String> decryptedBlock = new ArrayList<>();
         IntStream.range(0, wordBlock.size()).forEachOrdered(
                 i ->
