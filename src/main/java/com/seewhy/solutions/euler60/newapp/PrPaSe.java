@@ -1,6 +1,5 @@
 package com.seewhy.solutions.euler60.newapp;
 
-import com.seewhy.common.io.Printer;
 import com.seewhy.math.Primes;
 import com.seewhy.solutions.AbstractEulerSolver;
 import com.seewhy.solutions.EulerRunner;
@@ -28,30 +27,8 @@ public class PrPaSe extends AbstractEulerSolver {
                 .map(p -> new PrimeClub().add(p))
                 .collect(Collectors.toList());
 
-        Printer.print(primeClubs.toArray());
-
         //populate prime clubs of size 2 to 5
-        List<PrimeClub> result = primeClubs.stream()
-                .map(club -> updateClub(club, primes)) //2
-                .filter(club -> club != null)
-                .collect(Collectors.toList())
-                .stream()
-                .map(club -> updateClub(club, primes)) //3
-                .filter(club -> club != null)
-                .collect(Collectors.toList())
-                .stream()
-                .map(club -> updateClub(club, primes)) //4
-                .filter(club -> club != null)
-                .collect(Collectors.toList())
-                .stream()
-                .map(club -> updateClub(club, primes))//5
-                .filter(club -> club != null)
-                .collect(Collectors.toList());
-
-
-        Printer.print("populated prime clubs");
-        Printer.print(primeClubs.toArray());
-
+        List<PrimeClub> result = populate(primeClubs, primes, 1);
 
         //group size 5 clubs by sum
         Map<Long, List<PrimeClub>> collect = result.stream()
@@ -60,6 +37,17 @@ public class PrPaSe extends AbstractEulerSolver {
 
         //return smallest sum
         return collect.keySet().stream().sorted().findFirst().get().toString();
+    }
+
+    public List<PrimeClub> populate(List<PrimeClub> clubs, List<Long> primes, int count) {
+        if (count == 5) {
+            return clubs;
+        }
+        return populate(clubs.stream()
+                .map(club -> updateClub(club, primes))
+                .filter(club -> club != null)
+                .collect(Collectors.toList())
+                , primes, ++count);
     }
 
     public PrimeClub updateClub(PrimeClub club, List<Long> primes) {
@@ -82,6 +70,5 @@ public class PrPaSe extends AbstractEulerSolver {
     public void addPrimeToClubs(Long prime, List<PrimeClub> primeClubs) {
         primeClubs.stream().map(club -> club.add(prime));
     }
-
 
 }
