@@ -24,6 +24,8 @@ public class XORDecryption extends AbstractEulerSolver {
 
     private static final int KEY_LENGTH = 3;
 
+    public static final String TEST = "";
+
     public static final String CIPHER = "/Users/cbyamba/programming/github/EulerSolutionsWithJava8" +
             "/src/main/java/com/seewhy/solutions/euler59/cipher1.txt";
 
@@ -45,48 +47,53 @@ public class XORDecryption extends AbstractEulerSolver {
 
         List<List<Character>> allKeys = generateKeys(KEY_LENGTH);
 
+        Printer.print(Arrays.deepToString(allKeys.toArray()));
+
         List<List<String>> wordBlocksOf3 = CollectionBlocks.toBlockList(getCipherStream().collect(toList()), 3);
+
+        Printer.print(Arrays.deepToString(wordBlocksOf3.toArray()));
 
         List<List<Character>> mutableKeys = Lists.newArrayList();
 
-        allKeys.parallelStream().forEach(key -> {
+        allKeys.stream().forEach(key -> {
             try {
                 terminateIfDone(decipher(key, wordBlocksOf3));
             } catch (Exception e) {
                 mutableKeys.add(key);
             }
         });
-        List<List<String>> theOneDeciphering = decipher(mutableKeys.get(0), wordBlocksOf3);
         //TODO compute sum of ascii code
-        return "";
+        return Arrays.deepToString(mutableKeys.toArray());
     }
 
     private List<List<String>> terminateIfDone(List<List<String>> decipher) {
         if (isDecipered(decipher)) {
-            return decipher;
+            throw new FoundException("found a good deciphering key!");
         }
-        return null;
+        return decipher;
     }
 
     protected boolean isDecipered(List<List<String>> decipher) {
-        return false;
+        List<String> words = Decipher.asListOfWords(decipher);
+        Printer.print(words.toArray());
+        return words.stream().filter(w -> dictionaryWords.contains(w)).count() > 5;
     }
 
-    protected List<List<String>> decipher(List<Character> key, List<List<String>> wordBlocksOf3) {
-        return wordBlocksOf3.parallelStream()
-                .map(wordBlock -> decipher0(key, wordBlock))
+    protected List<List<String>> decipher(List<Character> key, List<List<String>> letterBlocksOf3) {
+        return letterBlocksOf3.stream()
+                .map(letterBlock -> decipher0(key, letterBlock))
                 .collect(toList());
     }
 
-    public List<String> decipher0(List<Character> keyBlock, List<String> wordBlock) {
+    public List<String> decipher0(List<Character> keyBlock, List<String> letterBlock) {
         List<String> decryptedBlock = new ArrayList<>();
-        IntStream.range(0, wordBlock.size()).forEachOrdered(
+        IntStream.range(0, letterBlock.size()).forEachOrdered(
                 i ->
                 {
                     Integer s = (int) keyBlock.get(i);
-                    Byte word = Byte.valueOf(s.toString());
-                    Byte key = Byte.valueOf(wordBlock.get(i));
-                    decryptedBlock.add(decrypt(word, key));
+                    Byte key = Byte.valueOf(s.toString());
+                    Byte letter = Byte.valueOf(letterBlock.get(i));
+                    decryptedBlock.add(decrypt(letter, key));
                 }
         );
         return decryptedBlock;
@@ -94,7 +101,7 @@ public class XORDecryption extends AbstractEulerSolver {
 
 
     public List<List<Character>> generateKeys(int keyLength) {
-        List<List<Character>> keysAccu = ALPHABET.parallelStream()
+        List<List<Character>> keysAccu = ALPHABET.stream()
                 .map(c -> {
                     List<Character> keyAccu = new ArrayList<>();
                     keyAccu.add(c);
