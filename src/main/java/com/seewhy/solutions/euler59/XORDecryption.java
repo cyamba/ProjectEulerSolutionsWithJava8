@@ -47,13 +47,7 @@ public class XORDecryption extends AbstractEulerSolver {
     public String doSolve() {
 
         List<List<Character>> allKeys = generateKeys(KEY_LENGTH);
-
-        //Printer.print(Arrays.deepToString(allKeys.toArray()));
-
         List<List<String>> wordBlocksOf3 = CollectionBlocks.toBlockList(getCipherStream().collect(toList()), 3);
-
-        //Printer.print(Arrays.deepToString(wordBlocksOf3.toArray()));
-
         List<List<Character>> mutableKeys = Lists.newArrayList();
 
         final List<List<String>> answer = Lists.newArrayList();
@@ -68,7 +62,7 @@ public class XORDecryption extends AbstractEulerSolver {
                 mutableKeys.add(key);
             }
         });
-        Long sum = computeAsciiSum(answer.get(0), mutableKeys.get(0));
+        Long sum = RawComputation.compute(mutableKeys.get(0));
         return Arrays.deepToString(mutableKeys.toArray()) + "\n"
                 + Arrays.deepToString(answer.get(0).toArray()) + "\n" +
                 "answer : " + sum;
@@ -76,8 +70,10 @@ public class XORDecryption extends AbstractEulerSolver {
 
     private Long computeAsciiSum(List<String> words, List<Character> foundKey) {
         Printer.print("********** PLAIN TEXT **********");
-        Printer.print(words.toArray());
-        char[] letters = words.stream().collect(Collectors.joining("")).toCharArray();
+
+        String text = words.stream().collect(Collectors.joining(" "));
+        Printer.print(text);
+        char[] letters = text.toCharArray();
         return LongStream.range(0, letters.length).map(c -> (int) c).sum();
     }
 
@@ -91,7 +87,6 @@ public class XORDecryption extends AbstractEulerSolver {
 
     protected List<String> tryDecipher(List<List<String>> decipher) {
         List<String> words = Decipher.asListOfWords(decipher);
-        //Printer.print(words.toArray());
         boolean isDeciphered = words.stream().filter(w -> dictionaryWords.contains(w)).count() > 0.5 * words.size();
         return isDeciphered ? words : null;
     }
