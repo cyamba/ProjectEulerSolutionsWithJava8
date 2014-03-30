@@ -33,7 +33,7 @@ public class XORDecryption extends AbstractEulerSolver {
             "/src/main/java/com/seewhy/solutions/euler59/words_remove_before_commit";
 
     private static final List<Character> ALPHABET = Collections.integerToCharacterList(
-            IntStream.range(65, 65 + 26)
+            IntStream.range(97, 97 + 26)
                     .boxed()
                     .collect(toList()));
 
@@ -76,7 +76,7 @@ public class XORDecryption extends AbstractEulerSolver {
     protected boolean isDecipered(List<List<String>> decipher) {
         List<String> words = Decipher.asListOfWords(decipher);
         Printer.print(words.toArray());
-        return words.stream().filter(w -> dictionaryWords.contains(w)).count() > 5;
+        return words.stream().filter(w -> dictionaryWords.contains(w)).count() > 0.5 * words.size();
     }
 
     protected List<List<String>> decipher(List<Character> key, List<List<String>> letterBlocksOf3) {
