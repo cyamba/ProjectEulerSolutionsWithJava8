@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -47,36 +48,52 @@ public class XORDecryption extends AbstractEulerSolver {
 
         List<List<Character>> allKeys = generateKeys(KEY_LENGTH);
 
-        Printer.print(Arrays.deepToString(allKeys.toArray()));
+        //Printer.print(Arrays.deepToString(allKeys.toArray()));
 
         List<List<String>> wordBlocksOf3 = CollectionBlocks.toBlockList(getCipherStream().collect(toList()), 3);
 
-        Printer.print(Arrays.deepToString(wordBlocksOf3.toArray()));
+        //Printer.print(Arrays.deepToString(wordBlocksOf3.toArray()));
 
         List<List<Character>> mutableKeys = Lists.newArrayList();
 
+        final List<List<String>> answer = Lists.newArrayList();
         allKeys.stream().forEach(key -> {
             try {
-                terminateIfDone(decipher(key, wordBlocksOf3));
+                List<String> words = terminateIfDone(decipher(key, wordBlocksOf3));
+                if (words != null) {
+                    answer.add(words);
+                    throw new FoundException("I found the key");
+                }
             } catch (Exception e) {
                 mutableKeys.add(key);
             }
         });
-        //TODO compute sum of ascii code
-        return Arrays.deepToString(mutableKeys.toArray());
+        Long sum = computeAsciiSum(answer.get(0), mutableKeys.get(0));
+        return Arrays.deepToString(mutableKeys.toArray()) + "\n"
+                + Arrays.deepToString(answer.get(0).toArray()) + "\n" +
+                "answer : " + sum;
     }
 
-    private List<List<String>> terminateIfDone(List<List<String>> decipher) {
-        if (isDecipered(decipher)) {
-            throw new FoundException("found a good deciphering key!");
-        }
-        return decipher;
-    }
-
-    protected boolean isDecipered(List<List<String>> decipher) {
-        List<String> words = Decipher.asListOfWords(decipher);
+    private Long computeAsciiSum(List<String> words, List<Character> foundKey) {
+        Printer.print("********** PLAIN TEXT **********");
         Printer.print(words.toArray());
-        return words.stream().filter(w -> dictionaryWords.contains(w)).count() > 0.5 * words.size();
+        char[] letters = words.stream().collect(Collectors.joining("")).toCharArray();
+        return LongStream.range(0, letters.length).map(c -> (int) c).sum();
+    }
+
+    private List<String> terminateIfDone(List<List<String>> decipher) {
+        List<String> result = tryDecipher(decipher);
+        if (decipher != null) {
+            return result;
+        }
+        return null;
+    }
+
+    protected List<String> tryDecipher(List<List<String>> decipher) {
+        List<String> words = Decipher.asListOfWords(decipher);
+        //Printer.print(words.toArray());
+        boolean isDeciphered = words.stream().filter(w -> dictionaryWords.contains(w)).count() > 0.5 * words.size();
+        return isDeciphered ? words : null;
     }
 
     protected List<List<String>> decipher(List<Character> key, List<List<String>> letterBlocksOf3) {
