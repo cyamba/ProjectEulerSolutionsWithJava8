@@ -4,16 +4,13 @@ import com.seewhy.common.collections.CollectionBlocks;
 import com.seewhy.common.collections.Collections;
 import com.seewhy.common.collections.Lists;
 import com.seewhy.common.io.Java8Reader;
-import com.seewhy.common.io.Printer;
 import com.seewhy.solutions.AbstractEulerSolver;
 import com.seewhy.solutions.EulerRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -24,8 +21,6 @@ import static java.util.stream.Collectors.toList;
 public class XORDecryption extends AbstractEulerSolver {
 
     private static final int KEY_LENGTH = 3;
-
-    public static final String TEST = "";
 
     public static final String CIPHER = "/Users/cbyamba/programming/github/EulerSolutionsWithJava8" +
             "/src/main/java/com/seewhy/solutions/euler59/cipher1.txt";
@@ -41,7 +36,7 @@ public class XORDecryption extends AbstractEulerSolver {
     private static final List<String> dictionaryWords = Java8Reader.reader(DICTIONARY)
             .lines()
             .map(line -> line.trim())
-            .collect(Collectors.toList());
+            .collect(toList());
 
     @Override
     public String doSolve() {
@@ -50,10 +45,11 @@ public class XORDecryption extends AbstractEulerSolver {
         List<List<String>> wordBlocksOf3 = CollectionBlocks.toBlockList(getCipherStream().collect(toList()), 3);
         List<List<Character>> mutableKeys = Lists.newArrayList();
 
-        final List<List<String>> answer = Lists.newArrayList();
+        final List<String> answer = Lists.newArrayList();
+
         allKeys.stream().forEach(key -> {
             try {
-                List<String> words = terminateIfDone(decipher(key, wordBlocksOf3));
+                String words = terminateIfDone(decipher(key, wordBlocksOf3));
                 if (words != null) {
                     answer.add(words);
                     throw new FoundException("I found the key");
@@ -63,32 +59,24 @@ public class XORDecryption extends AbstractEulerSolver {
             }
         });
         Long sum = RawComputation.compute(mutableKeys.get(0));
+        String plainText = answer.get(0);
         return Arrays.deepToString(mutableKeys.toArray()) + "\n"
-                + Arrays.deepToString(answer.get(0).toArray()) + "\n" +
+                + plainText + "\n" +
                 "answer : " + sum;
     }
 
-    private Long computeAsciiSum(List<String> words, List<Character> foundKey) {
-        Printer.print("********** PLAIN TEXT **********");
-
-        String text = words.stream().collect(Collectors.joining(" "));
-        Printer.print(text);
-        char[] letters = text.toCharArray();
-        return LongStream.range(0, letters.length).map(c -> (int) c).sum();
-    }
-
-    private List<String> terminateIfDone(List<List<String>> decipher) {
-        List<String> result = tryDecipher(decipher);
+    private String terminateIfDone(List<List<String>> decipher) {
+        String result = tryDecipher(decipher);
         if (decipher != null) {
             return result;
         }
         return null;
     }
 
-    protected List<String> tryDecipher(List<List<String>> decipher) {
+    protected String tryDecipher(List<List<String>> decipher) {
         List<String> words = Decipher.asListOfWords(decipher);
         boolean isDeciphered = words.stream().filter(w -> dictionaryWords.contains(w)).count() > 0.5 * words.size();
-        return isDeciphered ? words : null;
+        return isDeciphered ? Decipher.toString(decipher) : null;
     }
 
     protected List<List<String>> decipher(List<Character> key, List<List<String>> letterBlocksOf3) {

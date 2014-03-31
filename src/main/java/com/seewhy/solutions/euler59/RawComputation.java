@@ -3,7 +3,9 @@ package com.seewhy.solutions.euler59;
 import com.seewhy.common.collections.LongStreams;
 import com.seewhy.common.io.Java8Reader;
 import com.seewhy.common.io.Printer;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -25,15 +27,23 @@ public class RawComputation {
             charKey[i] = key.get(i);
         }
 
-        char[] chars = text.toCharArray();
-        int[] ints = new int[chars.length];
-        for (int i = 0; i < ints.length; i++) {
-            ints[i] = chars[i] ^ charKey[i % charKey.length];
+        String[] asciiSymbols = text.split("" + ',');
+        char[] symbols = new char[asciiSymbols.length];
+        for (int i = 0; i < asciiSymbols.length; i++) {
+            symbols[i] = (char)(Integer.valueOf(asciiSymbols[i]).intValue());
         }
-        return IntStream.of(ints).mapToLong(x -> x).sum();
+
+        int[] symbolsAsIntegers = new int[symbols.length];
+        for (int i = 0; i < symbolsAsIntegers.length; i++) {
+            symbolsAsIntegers[i] = symbols[i] ^ charKey[i % charKey.length];
+        }
+        //TODO optimize everything in XORDecryption
+        //String collect = IntStream.of(symbolsAsIntegers).mapToObj(x -> Character.valueOf((char) x).toString()).collect(Collectors.joining());
+        return IntStream.of(symbolsAsIntegers).mapToLong(x -> x).sum();
     }
 
     public static void main(String[] args) {
+        compute(Arrays.asList('g', 'o', 'd'));
         Printer.print(" test : " + ('*' ^ 'A'));
     }
 }

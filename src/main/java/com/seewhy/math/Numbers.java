@@ -20,6 +20,25 @@ import static java.util.stream.Collectors.toList;
  */
 public class Numbers {
 
+    public static enum FigurativeType {
+        TRIANGLE(3),
+        SQUARE(4),
+        PENTAGONAL(5),
+        HEXAGONAL(6),
+        HEPTAGONAL(7),
+        OCTAGONAL(8);
+
+        private int type;
+
+        FigurativeType(int _type) {
+            type = _type;
+        }
+
+        public int getType() {
+            return type;
+        }
+    }
+
     public static long[] fibbo(long max, long[] numbers) {
         int length = numbers.length;
         if (numbers[length - 1] >= max) {
