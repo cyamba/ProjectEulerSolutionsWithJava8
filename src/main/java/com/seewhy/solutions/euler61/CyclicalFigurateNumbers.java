@@ -2,13 +2,16 @@ package com.seewhy.solutions.euler61;
 
 import static com.seewhy.math.Numbers.*;
 
+import com.seewhy.math.Numbers;
 import com.seewhy.solutions.AbstractEulerSolver;
 import com.seewhy.solutions.EulerRunner;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by cbyamba on 2014-02-10.
@@ -23,11 +26,14 @@ public class CyclicalFigurateNumbers extends AbstractEulerSolver {
     @Override
     public String doSolve() {
 
-        Map<String, List<FigurativeNumber>> collect = triangularNumbersLessThan(1, 3 * END)
+        List<Integer> triangulars = triangularNumbersLessThan(1, 3 * END);
+        Map<String, List<FigurativeNumber>> collect = triangulars
                 .stream().filter(PREDICATE)
-                .map(x -> new FigurativeNumber(x))
+                .map(x -> FigurativeNumber.of(x))
                 .collect(Collectors.groupingBy(FigurativeNumber::getFirstTwo));
 
+        Cycle result = algorithm(triangulars.stream()
+                .map(FigurativeNumber::of), Cycle.of(FigurativeNumber.of(triangulars.get(0))));
         /**
          * start with triangular
          * take lastTo
@@ -42,7 +48,32 @@ public class CyclicalFigurateNumbers extends AbstractEulerSolver {
          * if no take next triangular and repeat
          * else return cycle
          */
-        return Arrays.toString(collect.entrySet().toArray());
+        return "" + result.getCycle().stream()
+                .mapToLong(figNumber -> (long) figNumber.getValue()).sum();
+    }
+
+
+    public Cycle algorithm(Stream<FigurativeNumber> numberStream, Cycle accu) {
+        if (accu.isCycle()) { //TODO add more to termination criteria (length of cycle == 6)
+            return accu;
+        }
+        FigurativeNumber nextNumber = null;
+        while ((nextNumber = findNextNumber(numberStream, accu.getLast())) == null) {
+            FigurativeType type = numberStream.findFirst().get().getType().next();
+            if (type == FigurativeType.UNDEFINED) {
+                break;
+            }
+            numberStream = Numbers.figurativeNumbers(type, 3 * END).stream()
+                    .filter(PREDICATE).map(FigurativeNumber::of);
+        }
+        if (nextNumber == null) {
+            return null;
+        }
+        return algorithm(numberStream, accu.add(nextNumber));
+    }
+
+    private FigurativeNumber findNextNumber(Stream<FigurativeNumber> numberStream, FigurativeNumber last) {
+        return null;
     }
 
 

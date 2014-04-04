@@ -22,10 +22,10 @@ public class MapsTest {
                 .entrySet()
                 .stream()
                 .collect(Collectors.toMap(x -> (int) x.getKey(), y -> negativeInverse(y.getValue().get(0))));
-        Map<Integer, Integer> inverse = Maps.inverse(map);
+        //Map<Integer, Integer> inverse = Maps.inverse(map);
 
 
-        Printer.print(inverse.entrySet().toArray());
+        //Printer.print(inverse.entrySet().toArray());
 
         Map<Integer, Integer> map1 = new HashMap<>();
         map1.put(1, 3);
@@ -33,8 +33,8 @@ public class MapsTest {
         map1.put(0, 2);
         map1.put(4, 1);
         map1.put(3, 0);
-        Map<Integer, Integer> inverse1 = Maps.inverse(map1);
-        Printer.print(inverse1.entrySet().toArray());
+        // Map<Integer, Integer> inverse1 = Maps.inverse(map1);
+        //Printer.print(inverse1.entrySet().toArray());
     }
 
     private int negativeInverse(int x) {
@@ -51,7 +51,7 @@ public class MapsTest {
         map1.put(3, 0);
         List<Integer> map1AsList = Maps.asList(map1);
         Printer.print(map1AsList.toArray());
-        Map<Integer, Integer> map2 = Maps.toMap(map1AsList.toArray(new Integer[map1AsList.size()]));
-        Printer.print(map2.entrySet().toArray());
+        //Map<Integer, Integer> map2 = Maps.toMap(map1AsList.toArray(new Integer[map1AsList.size()]));
+        //Printer.print(map2.entrySet().toArray());
     }
 }

@@ -1,12 +1,15 @@
 package com.seewhy.math;
 
 
+import com.seewhy.common.collections.Lists;
 import com.seewhy.common.io.Printer;
+import com.seewhy.solutions.euler54.poker.Tuple;
 
 import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
@@ -106,7 +109,7 @@ public class Sets {
                 .collect(toList());
     }
 
-    private static List<TreeSet<Integer>> combineWith(List<Integer> originalSet, TreeSet<Integer> set, Integer element) {
+    protected static List<TreeSet<Integer>> combineWith(List<Integer> originalSet, TreeSet<Integer> set, Integer element) {
         return originalSet
                 .stream()
                 .skip(element) //TODO derive the correct formula for where start index should be for optimization
@@ -114,12 +117,13 @@ public class Sets {
                 .collect(toList());
     }
 
+
     //TODO DO
     public static List<TreeSet<Integer>> subsetsOfSizeThree(List<Integer> originalSet) {
         return null;
     }
 
-    private static List<TreeSet<Integer>> combineWithSize2(List<Integer> originalSet, TreeSet<Integer> set, Integer element) {
+    protected static List<TreeSet<Integer>> combineWithSize2(List<Integer> originalSet, TreeSet<Integer> set, Integer element) {
         return originalSet
                 .stream()
                 .skip(element) //TODO derive the correct formula for where start index should be for optimization
@@ -179,4 +183,13 @@ public class Sets {
         Printer.print(setsFixed);
         Printer.print("executed time : " + (end - start));
     }
+
+    public static <T> Stream<Tuple<T, T>> subsetsOfSizeTwo_(List<T> anagrams) {
+        return IntStream.range(1, anagrams.size()).boxed().flatMap(
+                i -> IntStream.range(0, i).mapToObj(
+                        j -> Tuple.tuple(anagrams.get(i), anagrams.get(j))
+                )
+        );
+    }
+
 }

@@ -1,5 +1,7 @@
 package com.seewhy.solutions.euler61;
 
+import com.seewhy.math.Numbers;
+
 /**
  * Created by cbyamba on 2014-03-30.
  */
@@ -10,10 +12,18 @@ public class FigurativeNumber {
 
     private Integer value;
 
-    public FigurativeNumber(Integer value) {
+    public Numbers.FigurativeType getType() {
+        return Numbers.FigurativeType.valueOf(value);
+    }
+
+    private FigurativeNumber(Integer value) {
         this.value = value;
         this.firstTwo = value.toString().substring(0, 2);
         this.lastTwo = value.toString().substring(2, 4);
+    }
+
+    public static FigurativeNumber of(int value) {
+        return new FigurativeNumber(value);
     }
 
     public String getFirstTwo() {

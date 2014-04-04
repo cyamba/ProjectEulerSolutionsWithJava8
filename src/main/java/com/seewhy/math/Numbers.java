@@ -26,7 +26,8 @@ public class Numbers {
         PENTAGONAL(5),
         HEXAGONAL(6),
         HEPTAGONAL(7),
-        OCTAGONAL(8);
+        OCTAGONAL(8),
+        UNDEFINED(-1);
 
         private int type;
 
@@ -36,6 +37,52 @@ public class Numbers {
 
         public int getType() {
             return type;
+        }
+
+        public static FigurativeType valueOf(long val) {
+            int value = (int) val; //TODO fix this
+            if (isTriangleGeneralized(value)) {
+                return TRIANGLE;
+            }
+            if (isSquareGeneralized(value)) {
+                return SQUARE;
+            }
+            if (isPentagonalGeneralized(value)) {
+                return PENTAGONAL;
+            }
+            if (isHeptagonalGeneralized(value)) {
+                return HEXAGONAL;
+            }
+            if (isHeptagonalGeneralized(value)) {
+                return HEPTAGONAL;
+            }
+            if (isOctagonalGeneralized(value)) {
+                return OCTAGONAL;
+            }
+            return UNDEFINED;
+        }
+
+        public static FigurativeType valueOf(int type) {
+            switch (type) {
+                case 3:
+                    return TRIANGLE;
+                case 4:
+                    return SQUARE;
+                case 5:
+                    return PENTAGONAL;
+                case 6:
+                    return HEXAGONAL;
+                case 7:
+                    return HEPTAGONAL;
+                case 8:
+                    return OCTAGONAL;
+                default:
+                    return UNDEFINED;
+            }
+        }
+
+        public FigurativeType next() {
+            return valueOf(type + 1);
         }
     }
 
@@ -224,6 +271,24 @@ public class Numbers {
 
     public static List<Integer> octagonalNumbersRangeClosed(int start, int endIclusive) {
         return ngonalNumbers(start, endIclusive, Numbers::octagonalNumber);
+    }
+
+    public static List<Integer> figurativeNumbers(FigurativeType type, int maxInclusive) {
+        switch (type) {
+            case TRIANGLE:
+                return triangularNumbersLessThan(1, maxInclusive);
+            case SQUARE:
+                return squareNumbersLessThan(1, maxInclusive);
+            case PENTAGONAL:
+                return pentagonalNumbersLessThan(1, maxInclusive);
+            case HEXAGONAL:
+                return hexagonalNumbersLessThan(1, maxInclusive);
+            case HEPTAGONAL:
+                return heptagonalNumbersLessThan(1, maxInclusive);
+            case OCTAGONAL:
+                return octagonalNumbersLessThan(1, maxInclusive);
+        }
+        return null;
     }
 
     public static List<Integer> triangularNumbersLessThan(int start, int maxInclusive) {

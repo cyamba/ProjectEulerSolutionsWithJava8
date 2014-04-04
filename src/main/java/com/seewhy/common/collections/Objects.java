@@ -18,4 +18,13 @@ public class Objects {
     public static void main(String[] args) {
         requireNonNull("oops", 1, 2, 3, null, 4, 5, "hello");
     }
+
+    public static <T> boolean containsNull(T... objects) {
+        return java.util.Objects.isNull(objects) ? true : Stream.of(objects).anyMatch(java.util.Objects::isNull);
+    }
+
+    public static <T> boolean areNotNul(T...objects){
+        return !containsNull(objects);
+    }
+
 }
