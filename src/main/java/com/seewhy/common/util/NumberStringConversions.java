@@ -61,6 +61,10 @@ public class NumberStringConversions {
         return Stream.of(longToStringArray(number)).mapToInt(Integer::valueOf).toArray();
     }
 
+    public static Integer[] longToIntegerArray(long number) {
+        return UpDownCastArrays.upCast(longToIntArray(number));
+    }
+
     public static int[] intToIntArray(int number) {
         return Stream.of(intToStringArray(number)).mapToInt(Integer::valueOf).toArray();
     }

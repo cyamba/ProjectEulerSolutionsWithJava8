@@ -8,6 +8,6 @@ import com.seewhy.math.Permutations;
 public class Anagramer {
 
     public static Comparable[] reArrangeWith(Comparable[] original, Integer[] indices) {
-        return Permutations.multiplyByPermutation(original, indices);
+        return Permutations.multiply(original, indices);
     }
 }

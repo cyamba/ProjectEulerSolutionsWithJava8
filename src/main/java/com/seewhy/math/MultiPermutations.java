@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 public class MultiPermutations {
 
     public static Comparable[] multipy(Comparable[] multiPermutation, Integer[] factor) {
-        return Permutations.multiplyByPermutation(multiPermutation, factor);
+        return Permutations.multiply(multiPermutation, factor);
     }
 
     public static boolean sameMultiplicity(Comparable[] first, Comparable[] second) {
@@ -37,5 +37,13 @@ public class MultiPermutations {
 
         return firstAsString.equals(secondAsString);
     }
+
+    /*
+        //TODO find all permutations for a given multipermutation product
+    protected boolean hasPermutation(Tuple<String, String> tuple, Long y) {
+        //TODO string->string <-> square->square
+        return MultiPermutations.multipy(stringToStringArray(tuple._1()), longToIntegerArray(y)) == stringToStringArray(tuple._2());
+     */
+
 
 }

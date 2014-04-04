@@ -6,7 +6,6 @@ import com.seewhy.common.collections.Maps;
 import com.seewhy.common.io.Printer;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
@@ -115,7 +114,7 @@ public class Permutations {
         Integer[] permutationDiff = diff(o, a);
         Printer.print(permutationDiff);
         Integer[] factor = {3, 8, 5, 6, 7, 2, 0, 4, 1};
-        Comparable[] result = multiplyByPermutation(o, factor);
+        Comparable[] result = multiply(o, factor);
         Printer.print(result);
     }
 
@@ -133,7 +132,7 @@ public class Permutations {
                 .map(i -> Maps.inverse(Maps.toMap(original)).get(anagram[i])).toArray(x -> new Integer[original.length]);
     }
 
-    public static Comparable[] multiplyByPermutation(Comparable[] original, Integer[] factor) {
+    public static Comparable[] multiply(Comparable[] original, Integer[] factor) {
         checkIndicesPermutation(factor);
         return (com.seewhy.common.collections.Objects.containsNull(original, factor)
                 || original.length != factor.length) ?
@@ -177,7 +176,7 @@ public class Permutations {
                 .toArray(x -> new Comparable[length]);
         Integer[] diff = diff(permutationSorted, permutation);
         Integer[] identity = IntStream.range(0, length).boxed().toArray(x -> new Integer[length]);
-        return Stream.of(multiplyByPermutation(identity, diff)).toArray(x -> new Integer[length]);
+        return Stream.of(multiply(identity, diff)).toArray(x -> new Integer[length]);
     }
 
     public static boolean arePermutations(Comparable[] original, Comparable[] anagram) {
