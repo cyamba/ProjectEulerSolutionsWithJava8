@@ -38,6 +38,9 @@ public class MultiPermutations {
         return firstAsString.equals(secondAsString);
     }
 
+    //it would be cool to have filterMap that is map if some criteria otherwhile omit. Essentially like a compound function of filter and map
+    //it could be called .mapIf(Predicate<T> p,Function<T,T> f) and mapToIntIf(Predicate<Integer>,IntFunction f) etc
+
     /*
         //TODO find all permutations for a given multipermutation product
     protected boolean hasPermutation(Tuple<String, String> tuple, Long y) {
