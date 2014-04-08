@@ -132,6 +132,11 @@ public class Permutations {
                 .map(i -> Maps.inverse(Maps.toMap(original)).get(anagram[i])).toArray(x -> new Integer[original.length]);
     }
 
+    public static Permutation<Integer> diff(Word original, Word anagram) {
+        Integer[] diff = diff(original.get(), anagram.get());
+        return Permutation.of(diff);
+    }
+
     public static Comparable[] multiply(Comparable[] original, Integer[] factor) {
         checkIndicesPermutation(factor);
         return (com.seewhy.common.collections.Objects.containsNull(original, factor)
@@ -141,6 +146,11 @@ public class Permutations {
                 .boxed()
                 .map(i -> original[factor[i]])
                 .toArray(x -> new Comparable[factor.length]);
+    }
+
+    public static Word multiply(Word original, Permutation<Integer> factor) {
+        Comparable[] product = multiply(original.get(), factor.get());
+        return Word.of(product);
     }
 
     protected static void checkIndicesPermutation(Integer[] factor) {
@@ -184,8 +194,6 @@ public class Permutations {
                 false :
                 deepEquals(Stream.of(original).sorted().toArray(), Stream.of(anagram).sorted().toArray());
     }
-
-
 
 
 }

@@ -1,13 +1,23 @@
 package com.seewhy.math;
 
+import com.seewhy.common.collections.Lists;
+
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
  * Created by cbyamba on 2014-04-02.
- * This class handles a more general form of permutations where repetitions of elements are allowed.
+ * This class handles a more general form of permutations where repetitions of elements are allowed
+ * <p/>
+ * X 01234567
+ * Y AABBABCC   f: X -> Y
+ * <p/>
+ * f(0)=f(1)
  */
 public class MultiPermutations {
 
@@ -47,6 +57,40 @@ public class MultiPermutations {
         //TODO string->string <-> square->square
         return MultiPermutations.multipy(stringToStringArray(tuple._1()), longToIntegerArray(y)) == stringToStringArray(tuple._2());
      */
+
+    /**
+     * ax=b x is xs proper permutation. xs and b is xs multipermutation.
+     *
+     * @param xs
+     * @return
+     */
+    public static Map<Word, List<Permutation>> getPermutationMapping(final Word xs) {
+
+        Integer[] original = IntStream.range(0, xs.count()).boxed().toArray(x -> new Integer[xs.count()]);
+
+        List<Permutation> permutations = Permutations.generatePermutationCollection(original).stream()
+                .map(ps -> Stream.of(ps).toArray(x -> new Integer[ps.length]))
+                .map(is -> Permutation.of(is))
+                .collect(Collectors.<Permutation>toList());
+
+        Map<Word, List<Permutation>> result = permutations.stream()
+                .collect(Collectors.groupingBy(p -> Permutations.multiply(xs, p)));
+
+        return result;
+    }
+
+    /**
+     * solves permutation equation ax = b
+     *
+     * @return
+     */
+    public static List<Permutation> getFactorsForPermutation(final Word a, Word b) {
+        if (a.count() != b.count()) {
+            return Lists.newArrayList();
+        }
+        List<Permutation> permutations = getPermutationMapping(a).get(b);
+        return permutations;
+    }
 
 
 }

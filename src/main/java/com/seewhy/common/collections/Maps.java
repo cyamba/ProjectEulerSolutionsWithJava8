@@ -1,10 +1,6 @@
 package com.seewhy.common.collections;
 
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.TreeSet;
-import java.util.function.Function;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -24,6 +20,10 @@ public class Maps {
         return IntStream.range(0, array.length)
                 .boxed()
                 .collect(Collectors.toMap(i -> i, i -> array[i]));
+    }
+
+    public static <K, V> Map<Set<K>, V> newMultiMap(K... array) {
+        return new HashMap<>();
     }
 
     public static Comparable[] toArray(Map<Integer, Comparable> map) {
