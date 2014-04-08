@@ -21,7 +21,7 @@ import java.util.stream.Stream;
  */
 public class MultiPermutations {
 
-    public static Comparable[] multipy(Comparable[] multiPermutation, Integer[] factor) {
+    public static<T extends Comparable> T[] multipy(T[] multiPermutation, Integer[] factor) {
         return Permutations.multiply(multiPermutation, factor);
     }
 

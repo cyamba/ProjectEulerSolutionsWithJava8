@@ -137,7 +137,7 @@ public class Permutations {
         return Permutation.of(diff);
     }
 
-    public static Comparable[] multiply(Comparable[] original, Integer[] factor) {
+    public static <T extends Comparable> T[] multiply(T[] original, Integer[] factor) {
         checkIndicesPermutation(factor);
         return (com.seewhy.common.collections.Objects.containsNull(original, factor)
                 || original.length != factor.length) ?
@@ -145,7 +145,7 @@ public class Permutations {
                 : IntStream.range(0, factor.length)
                 .boxed()
                 .map(i -> original[factor[i]])
-                .toArray(x -> new Comparable[factor.length]);
+                .toArray(x -> (T[])new Comparable[factor.length]);
     }
 
     public static Word multiply(Word original, Permutation<Integer> factor) {

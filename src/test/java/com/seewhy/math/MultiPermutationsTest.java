@@ -19,7 +19,7 @@ public class MultiPermutationsTest {
         String[] multiPermutation1 = {"1", "2", "2", "3"};
         Integer[] factor = {1, 2, 4, 3};
         String[] expected = {"1", "2", "3", "2"};
-        Assert.assertEquals(expected, MultiPermutations.multipy(multiPermutation1, Permutations.toIndicesPermutation(factor)));
+        Assert.assertTrue(Arrays.deepEquals(expected, MultiPermutations.multipy(multiPermutation1, Permutations.toIndicesPermutation(factor))));
     }
 
     @Test
@@ -29,6 +29,14 @@ public class MultiPermutationsTest {
         permutationMapping.entrySet().stream().forEach(
                 e -> Printer.print("key : " + Arrays.deepToString(e.getKey().get()) + " value : " + Arrays.deepToString(e.getValue().toArray()))
         );
+
+    }
+
+    @Test
+    public void testGetDiff() {
+        String[] multiPermutation1 = {"A", "A", "B", "B", "C"};
+        List<Permutation> factorsForPermutation = MultiPermutations.getFactorsForPermutation(Word.of(multiPermutation1), Word.of(multiPermutation1));
+        Printer.print(factorsForPermutation.toArray());
     }
 
 }
