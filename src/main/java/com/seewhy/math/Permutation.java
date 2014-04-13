@@ -1,6 +1,7 @@
 package com.seewhy.math;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 /**
  * Created by cbyamba on 2014-04-08.
@@ -19,6 +20,10 @@ public class Permutation<T extends Comparable> {
 
     public T[] get() {
         return permutation;
+    }
+
+    public Integer[] getAsIntegers() {
+        return Stream.of(permutation).mapToInt(x -> (Integer) x).boxed().toArray(x -> new Integer[permutation.length]);
     }
 
     @Override

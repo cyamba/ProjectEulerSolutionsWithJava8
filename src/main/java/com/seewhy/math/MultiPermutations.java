@@ -21,8 +21,9 @@ import java.util.stream.Stream;
  */
 public class MultiPermutations {
 
-    public static<T extends Comparable> T[] multipy(T[] multiPermutation, Integer[] factor) {
-        return Permutations.multiply(multiPermutation, factor);
+
+    public static Word multiply(Word word, Permutation permutation) {
+        return Word.of(Permutations.multiply(word.get(), permutation.getAsIntegers()));
     }
 
     public static boolean sameMultiplicity(Comparable[] first, Comparable[] second) {
@@ -88,9 +89,12 @@ public class MultiPermutations {
         if (a.count() != b.count()) {
             return Lists.newArrayList();
         }
-        List<Permutation> permutations = getPermutationMapping(a).get(b);
-        return permutations;
+        List<Permutation> factors = getPermutationMapping(a).get(b);
+        return factors == null ? Lists.newArrayList() : factors;
     }
 
 
+    public static String[] multipy(String[] multiPermutation1, Integer[] integers) {
+        return multiply(Word.of(multiPermutation1), Permutation.of(integers)).getAsStrings();
+    }
 }

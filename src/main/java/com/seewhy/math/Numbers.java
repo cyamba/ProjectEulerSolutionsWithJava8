@@ -10,6 +10,7 @@ import java.util.function.IntUnaryOperator;
 import java.util.function.LongFunction;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 import static java.lang.Math.*;
 import static java.util.Arrays.copyOfRange;
@@ -241,7 +242,7 @@ public class Numbers {
         return pentagonalNumbersLessThanImperative(number).contains(number);
     }
 
-    public static List<Integer> ngonalNumbers(int start, int endInclusive, IntUnaryOperator function) {
+    public static List<Integer> nGonalNumbers(int start, int endInclusive, IntUnaryOperator function) {
         return IntStream
                 .rangeClosed(start, endInclusive)
                 .map(function)
@@ -249,28 +250,38 @@ public class Numbers {
                 .collect(toList());
     }
 
+    public static IntStream nGonalNumberIntStream(int start, int endInclusive, IntUnaryOperator function) {
+        return IntStream
+                .rangeClosed(start, endInclusive)
+                .map(function);
+    }
+
+    public static Stream<Integer> nGonalNumberIntegerStream(int start, int endInclusive, IntUnaryOperator function) {
+        return nGonalNumberIntStream(start, endInclusive, function).mapToObj(x -> x);
+    }
+
     public static List<Integer> triangleNumbersRangeClosed(int start, int endInclusive) {
-        return ngonalNumbers(start, endInclusive, Numbers::triangularNumber);
+        return nGonalNumbers(start, endInclusive, Numbers::triangularNumber);
     }
 
     public static List<Integer> squareNumbersRangeClosed(int start, int endInclusive) {
-        return ngonalNumbers(start, endInclusive, Numbers::squareNumber);
+        return nGonalNumbers(start, endInclusive, Numbers::squareNumber);
     }
 
     public static List<Integer> pentagonalNumbersRangeClosed(int start, int endInclusive) {
-        return ngonalNumbers(start, endInclusive, Numbers::pentagonalNumber);
+        return nGonalNumbers(start, endInclusive, Numbers::pentagonalNumber);
     }
 
     public static List<Integer> hexagonalNumbersRangeClosed(int start, int endInclusive) {
-        return ngonalNumbers(start, endInclusive, Numbers::hexagonalNumber);
+        return nGonalNumbers(start, endInclusive, Numbers::hexagonalNumber);
     }
 
     public static List<Integer> heptagonalNumbersRangeClosed(int start, int endInclusive) {
-        return ngonalNumbers(start, endInclusive, Numbers::heptagonalNumber);
+        return nGonalNumbers(start, endInclusive, Numbers::heptagonalNumber);
     }
 
     public static List<Integer> octagonalNumbersRangeClosed(int start, int endIclusive) {
-        return ngonalNumbers(start, endIclusive, Numbers::octagonalNumber);
+        return nGonalNumbers(start, endIclusive, Numbers::octagonalNumber);
     }
 
     public static List<Integer> figurativeNumbers(FigurativeType type, int maxInclusive) {
@@ -455,8 +466,8 @@ public class Numbers {
 
     public static boolean isHeptagonalNumber(int n) {
         return heptagonalNumbersLessThan((int) Math.floor(n), (int) Math.ceil(n)).contains(n);
-
     }
+
 
     public static long nextOddComposite(long x) {
         long candidate = (x % 2 == 0) ? x + 1 : x + 2;

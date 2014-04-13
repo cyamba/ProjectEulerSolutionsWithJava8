@@ -12,18 +12,23 @@ public class FigurativeNumber {
 
     private Integer value;
 
+    private Numbers.FigurativeType type;
+
     public Numbers.FigurativeType getType() {
-        return Numbers.FigurativeType.valueOf(value);
+        return type;
     }
 
-    private FigurativeNumber(Integer value) {
+    private FigurativeNumber(Integer value, Numbers.FigurativeType type) {
         this.value = value;
-        this.firstTwo = value.toString().substring(0, 2);
-        this.lastTwo = value.toString().substring(2, 4);
+        if (value.toString().length() == 4) {
+            this.firstTwo = value.toString().substring(0, 2);
+            this.lastTwo = value.toString().substring(2, 4);
+        }
+        this.type = type;
     }
 
-    public static FigurativeNumber of(int value) {
-        return new FigurativeNumber(value);
+    public static FigurativeNumber of(int value, Numbers.FigurativeType type) {
+        return new FigurativeNumber(value, type);
     }
 
     public String getFirstTwo() {
@@ -45,13 +50,17 @@ public class FigurativeNumber {
 
         FigurativeNumber that = (FigurativeNumber) o;
 
+        if (type != that.type) return false;
         if (value != null ? !value.equals(that.value) : that.value != null) return false;
+
         return true;
     }
 
     @Override
     public int hashCode() {
-        return value != null ? value.hashCode() : 0;
+        int result = value != null ? value.hashCode() : 0;
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        return result;
     }
 
     @Override

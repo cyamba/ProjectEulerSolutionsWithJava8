@@ -1,6 +1,7 @@
 package com.seewhy.math;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 /**
  * Created by cbyamba on 2014-04-08.
@@ -41,5 +42,9 @@ public class Word {
 
     public Comparable[] get() {
         return word;
+    }
+
+    public String[] getAsStrings() {
+        return Stream.of(word).map(s -> s.toString()).toArray(x -> new String[word.length]);
     }
 }

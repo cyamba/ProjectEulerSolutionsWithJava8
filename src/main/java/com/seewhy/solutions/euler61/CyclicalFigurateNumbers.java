@@ -27,13 +27,13 @@ public class CyclicalFigurateNumbers extends AbstractEulerSolver {
     public String doSolve() {
 
         List<Integer> triangulars = triangularNumbersLessThan(1, 3 * END);
-        Map<String, List<FigurativeNumber>> collect = triangulars
-                .stream().filter(PREDICATE)
-                .map(x -> FigurativeNumber.of(x))
-                .collect(Collectors.groupingBy(FigurativeNumber::getFirstTwo));
+      //  Map<String, List<FigurativeNumber>> collect = triangulars
+      //          .stream().filter(PREDICATE)
+                //.map(x -> FigurativeNumber.of(x))
+                //.collect(Collectors.groupingBy(FigurativeNumber::getFirstTwo));
 
-        Cycle result = algorithm(triangulars.stream()
-                .map(FigurativeNumber::of), Cycle.of(FigurativeNumber.of(triangulars.get(0))));
+        //Cycle result = algorithm(triangulars.stream()
+        //        .map(FigurativeNumber::of), Cycle.of(FigurativeNumber.of(triangulars.get(0))));
         /**
          * start with triangular
          * take lastTo
@@ -48,8 +48,9 @@ public class CyclicalFigurateNumbers extends AbstractEulerSolver {
          * if no take next triangular and repeat
          * else return cycle
          */
-        return "" + result.getCycle().stream()
-                .mapToLong(figNumber -> (long) figNumber.getValue()).sum();
+        //return "" + result.getCycle().stream()
+        //        .mapToLong(figNumber -> (long) figNumber.getValue()).sum();
+        return "";
     }
 
 
@@ -63,8 +64,8 @@ public class CyclicalFigurateNumbers extends AbstractEulerSolver {
             if (type == FigurativeType.UNDEFINED) {
                 break;
             }
-            numberStream = Numbers.figurativeNumbers(type, 3 * END).stream()
-                    .filter(PREDICATE).map(FigurativeNumber::of);
+           // numberStream = Numbers.figurativeNumbers(type, 3 * END).stream()
+           //         .filter(PREDICATE).map(FigurativeNumber::of);
         }
         if (nextNumber == null) {
             return null;

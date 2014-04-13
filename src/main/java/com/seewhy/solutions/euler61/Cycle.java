@@ -22,7 +22,7 @@ public class Cycle {
     }
 
     public static Cycle of(FigurativeNumber... numbers) {
-        return new Cycle(Lists.newArrayList(numbers));
+        return new Cycle(Lists.of(numbers));
     }
 
     public Cycle add(FigurativeNumber number) {
