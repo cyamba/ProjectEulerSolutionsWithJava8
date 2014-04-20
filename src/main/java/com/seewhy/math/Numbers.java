@@ -2,6 +2,7 @@ package com.seewhy.math;
 
 import com.seewhy.common.io.Printer;
 import com.seewhy.common.util.NumberStringConversions;
+import com.seewhy.solutions.euler61.FigurativeNumber;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -20,6 +21,30 @@ import static java.util.stream.Collectors.toList;
  * Created by cbyamba on 2014-01-24.
  */
 public class Numbers {
+
+    public static boolean isNGonalNumber(FigurativeNumber lastPiece, FigurativeType... types) {
+        return Stream.of(types).anyMatch(type -> isNGonalNumber(lastPiece, type));
+    }
+
+    public static boolean isNGonalNumber(FigurativeNumber number, FigurativeType type) {
+        switch (type) {
+            case TRIANGLE:
+                isTriangleGeneralized(number.getValue());
+            case SQUARE:
+                isSquareGeneralized(number.getValue());
+            case PENTAGONAL:
+                isPentagonalGeneralized(number.getValue());
+            case HEXAGONAL:
+                isHexagonalGeneralized(number.getValue());
+            case HEPTAGONAL:
+                isHeptagonalGeneralized(number.getValue());
+            case OCTAGONAL:
+                isOctagonalGeneralized(number.getValue());
+            default:
+                return false;
+        }
+    }
+
 
     public static enum FigurativeType {
         TRIANGLE(3),

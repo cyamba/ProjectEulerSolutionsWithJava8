@@ -3,6 +3,7 @@ package com.seewhy.solutions.euler61;
 import com.seewhy.common.collections.Lists;
 import com.seewhy.common.collections.Streams;
 import com.seewhy.common.io.Printer;
+import com.seewhy.math.Numbers;
 import com.seewhy.solutions.AbstractEulerSolver;
 import com.seewhy.solutions.EulerRunner;
 
@@ -34,20 +35,28 @@ public class Euler61 extends AbstractEulerSolver {
         Printer.print(filteredFigs.toArray());
         Map<Object, List<FigurativeNumber>> firstTwoFilteredMap = filteredFigs.stream().filter(fig -> fig.getFirstTwo() != null).collect(Collectors.groupingBy(fig -> fig.getFirstTwo()));
 
-        List<Cycle> cycles = findCycles(filteredFigs, Lists.of(Cycle.of()));
+        int startPosition = 0;
+        List<Cycle> cycles = getCycles(filteredFigs, startPosition, Lists.of(Cycle.of()));
         Printer.print(cycles.toArray());
 
         List<Cycle> cyclesOfLength4 = cycles.stream().filter(cycle -> cycle.size() == 4).collect(Collectors.toList());
         Printer.print(cyclesOfLength4.toArray());
 
-        Optional<Cycle> result = cyclesOfLength4.stream().filter(this::isCyclicalFigurativeNumbers).findFirst();
+        //Optional<Cycle> result = cyclesOfLength4.stream().filter(this::isCyclicalFigurativeNumbers).findFirst();
 
         //return filteredFigs.stream().map(x -> x.toString()).collect(Collectors.joining("\n"));
-        return result.toString();
+        return cyclesOfLength4.toString();
     }
 
+    //OBS one figurative number can have many types!
+    //TODO bitwise function mapping for predicates with multivariable booleans
+    //10001->five boolean functions on or off. true ~ on
     protected boolean isCyclicalFigurativeNumbers(Cycle cycle) {
-        return isDistinct(cycle) && isOrderN(cycle) && isDistinctFigurativeTypes(cycle);
+        return
+                isDistinct(cycle)
+                        && isOrderN(cycle)
+                        &&
+                        isDistinctFigurativeTypes(cycle);
     }
 
     protected boolean isDistinct(Cycle cycle) {
@@ -83,7 +92,7 @@ public class Euler61 extends AbstractEulerSolver {
         return order0(cycle, nextNumber.get(), ++order);
     }
 
-    protected List<FigurativeNumber> getFigurativeNumbers() {
+    public List<FigurativeNumber> getFigurativeNumbers() {
         return Streams.of((Stream<FigurativeNumber>) nGonalNumberIntegerStream(1, MAX_INCLUSIVE, x -> triangularNumber(x))
                 .map(x -> FigurativeNumber.of(x, FigurativeType.TRIANGLE)),
                 (Stream<FigurativeNumber>) nGonalNumberIntegerStream(1, MAX_INCLUSIVE, x -> squareNumber(x))
@@ -99,29 +108,57 @@ public class Euler61 extends AbstractEulerSolver {
         ).collect(Collectors.toList());
     }
 
-    protected static List<Cycle> findCycles(List<FigurativeNumber> figList, List<Cycle> accumulation) {
-        Optional<FigurativeNumber> head = Lists.head(figList);
-        if (!head.isPresent()) {
+    protected static List<Cycle> getCycles(List<FigurativeNumber> figList, int currentPos, List<Cycle> accumulation) {
+
+        Optional<FigurativeNumber> current = currentPos >= figList.size() ?
+                Optional.empty()
+                : Optional.of(figList.get(currentPos));
+
+        if (!current.isPresent()) {
             return accumulation;
         }
-        Cycle cycle = findFourCycles0(figList, Cycle.of(head.get()));
-        return findCycles(Lists.tail(figList), Lists.<Cycle>of(cycle, accumulation));
+        Cycle cycle = getCycles0(figList, Cycle.of(current.get()));
+
+        return getCycles(figList, ++currentPos, Lists.<Cycle>of(cycle, accumulation));
     }
 
-    protected static Cycle findFourCycles0(List<FigurativeNumber> figs, Cycle cycle) {
-        Optional<FigurativeNumber> head = Streams.head(figs.stream());
+    protected static Cycle getCycles0(List<FigurativeNumber> numbers, Cycle cycle) {
+        //TODO fix this
+        Optional<FigurativeNumber> head = Streams.head(numbers.stream());
         if (!head.isPresent()) {
             return cycle;
         }
-        if (cycle.size() == CYCLE_LENGTH) {
-            return cycle;
+        if (cycle.size() == CYCLE_LENGTH - 1) {
+            return arrangeLastPieceOfThePuzzle(cycle, head.get());
         }
-        FigurativeNumber number = head.get();
-        if (cycle.getLast().getLastTwo().equals(number.getFirstTwo())) {
+        if (cycle.size() < CYCLE_LENGTH - 1) {
+            FigurativeNumber number = head.get();
+            if (cycle.getLast().getLastTwo().equals(number.getFirstTwo())) {
+                cycle.add(number);
+            }
+        }
+        return getCycles0(Lists.tail(numbers), cycle);
+
+    }
+
+    /**
+     * Given
+     * [8128, 2839, 3940, ?] the last piece is at ?
+     * This amounts to finding a figurative number that begins this the last two digits of
+     * the third entry and ends with the first two digits of the first entry
+     * i.e. (3940, 8128) gives 4081
+     *
+     * @param cycle
+     * @return
+     */
+    protected static Cycle arrangeLastPieceOfThePuzzle(Cycle cycle, FigurativeNumber number) {
+        FigurativeNumber lastPiece = cycle.getLast();
+        boolean isNGonalNumber = Numbers.isNGonalNumber(lastPiece, FigurativeType.values());
+        if (isNGonalNumber) {
             cycle.add(number);
         }
-
-        return findFourCycles0(Lists.tail(figs), cycle);
+        Printer.print("found last piece");
+        return cycle;
     }
 
     public static void main(String... args) {

@@ -2,10 +2,13 @@ package com.seewhy.solutions.euler61;
 
 import com.seewhy.math.Numbers;
 
+import java.util.Optional;
+
 /**
  * Created by cbyamba on 2014-03-30.
  */
 public class FigurativeNumber {
+
 
     private String firstTwo;
     private String lastTwo;
@@ -20,6 +23,7 @@ public class FigurativeNumber {
 
     private FigurativeNumber(Integer value, Numbers.FigurativeType type) {
         this.value = value;
+        //check(value);
         if (value.toString().length() == 4) {
             this.firstTwo = value.toString().substring(0, 2);
             this.lastTwo = value.toString().substring(2, 4);
@@ -27,8 +31,18 @@ public class FigurativeNumber {
         this.type = type;
     }
 
+    private void check(Integer value) {
+        if (value.toString().length() != 4) {
+            throw new IllegalArgumentException("Only 4-digit figurative numbers allowed");
+        }
+    }
+
     public static FigurativeNumber of(int value, Numbers.FigurativeType type) {
         return new FigurativeNumber(value, type);
+    }
+
+    public static FigurativeNumber of(int value) {
+        return new FigurativeNumber(value, Numbers.FigurativeType.UNDEFINED);
     }
 
     public String getFirstTwo() {
@@ -66,5 +80,9 @@ public class FigurativeNumber {
     @Override
     public String toString() {
         return "" + value;
+    }
+
+    public String toStringInfo() {
+        return String.format("[type : %s value : %s]", value, type.name());
     }
 }

@@ -1,0 +1,7 @@
+*.class
+*.jar
+*.iml
+*.iws
+*.ipr
+target
+test.txt
