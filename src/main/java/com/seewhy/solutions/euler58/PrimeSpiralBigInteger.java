@@ -1,5 +1,6 @@
 package com.seewhy.solutions.euler58;
 
+import com.seewhy.common.io.Printer;
 import com.seewhy.math.Primes;
 import com.seewhy.solutions.AbstractEulerSolver;
 import com.seewhy.solutions.EulerRunner;
@@ -22,7 +23,7 @@ public class PrimeSpiralBigInteger extends AbstractEulerSolver {
 
     @Override
     public String doSolve() {
-        Optional<Tuple<Integer, BigDecimal>> first = this.accumulatedCountsAsTuples(LongStream.range(0, SIZE)
+        Optional<Tuple<Integer, BigDecimal>> first = accumulatedCountsAsTuples(LongStream.range(0, SIZE)
                 .parallel()
                 .map(n -> this.primeCount(n))
                 .toArray())
@@ -30,7 +31,7 @@ public class PrimeSpiralBigInteger extends AbstractEulerSolver {
                 .map(tuple -> {
                     BigInteger accumulatedCount = BigInteger.valueOf(tuple._2());
                     BigInteger m = BigInteger.valueOf(tuple._1());
-                    BigInteger diagonalCount = this.totalDiagonalCount(m);
+                    BigInteger diagonalCount = totalDiagonalCount(m);
                     return Tuple.tuple(tuple._1(), BigFraction
                             .bigFraction(accumulatedCount, diagonalCount)
                             .getValue());
@@ -44,12 +45,12 @@ public class PrimeSpiralBigInteger extends AbstractEulerSolver {
     }
 
     protected long[] accumulateCounts(long[] counts) {
-        long sum = 0;
+        System.out.println("hello");
         long[] accu = new long[counts.length];
         for (int i = 0; i < counts.length; i++) {
-            sum += counts[i];
-            accu[i] = sum;
+            accu[i] += counts[i];
         }
+        Printer.print(accu);
         return accu;
     }
 

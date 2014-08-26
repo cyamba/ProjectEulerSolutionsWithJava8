@@ -45,4 +45,6 @@ public class Lists {
     public static <T> boolean isDistinct(List<T> list) {
         return list.stream().distinct().count() == list.size();
     }
+
+
 }

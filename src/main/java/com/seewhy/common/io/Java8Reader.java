@@ -12,6 +12,7 @@ public class Java8Reader {
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new FileReader(fileName));
+            reader = new BufferedReader(new InputStreamReader(System.in));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

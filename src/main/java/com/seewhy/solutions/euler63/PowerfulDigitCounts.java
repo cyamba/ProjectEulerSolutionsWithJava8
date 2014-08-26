@@ -1,12 +1,7 @@
 package com.seewhy.solutions.euler63;
 
-import com.seewhy.common.io.Printer;
 import com.seewhy.solutions.AbstractEulerSolver;
 import com.seewhy.solutions.EulerRunner;
-
-import java.math.BigInteger;
-import java.util.Arrays;
-import java.util.stream.LongStream;
 
 /**
  * Created by cbyamba on 2014-02-14.

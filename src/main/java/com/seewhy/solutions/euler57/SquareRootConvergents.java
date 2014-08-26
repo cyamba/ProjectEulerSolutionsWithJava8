@@ -21,8 +21,8 @@ public class SquareRootConvergents extends AbstractEulerSolver {
                 .count();
     }
 
-    private boolean numeratorExceedsDenominator(Fraction frac) {
-        return frac.getNumerator().toString().length() > frac.getDenominator().toString().length();
+    private boolean numeratorExceedsDenominator(Fraction fraction) {
+        return fraction.getNumerator().toString().length() > fraction.getDenominator().toString().length();
     }
 
     public static Fraction compute(Fraction fraction, int count, int max) {

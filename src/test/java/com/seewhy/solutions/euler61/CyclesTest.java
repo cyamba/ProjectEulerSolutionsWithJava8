@@ -92,7 +92,6 @@ public class CyclesTest {
         return one.stream()
                 .flatMap(o -> result.stream()
                         .map(n -> o.add(n)))
-                .map(o -> (Cycle) o)
                 .filter(predicateOptional.isPresent() ? predicateOptional.get() : x -> true)
                 .collect(Collectors.toList());
     }

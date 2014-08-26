@@ -3,10 +3,10 @@ package com.seewhy.solutions.euler51;
 import com.seewhy.common.util.NumberStringConversions;
 import com.seewhy.math.Sets;
 import com.seewhy.solutions.AbstractEulerSolver;
-import com.seewhy.solutions.EulerRunner;
+
+import static com.seewhy.solutions.EulerRunner.runEulerSolvers;
 
 import java.util.*;
-import java.util.stream.IntStream;
 
 /**
  * Created by cbyamba on 2014-02-20.
@@ -40,6 +40,6 @@ public class PrimeDigitReplacementImperative extends AbstractEulerSolver {
     }
 
     public static void main(String... args) {
-        EulerRunner.runEulerSolvers(new PrimeDigitReplacementImperative());
+        runEulerSolvers(new PrimeDigitReplacementImperative());
     }
 }
