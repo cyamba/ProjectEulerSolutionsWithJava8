@@ -2,13 +2,19 @@ package com.seewhy.math;
 
 
 import com.seewhy.common.io.Printer;
+import com.seewhy.solutions.euler54.poker.Tuple;
 
+import java.util.Arrays;
 import java.util.List;
 
 import java.math.BigInteger;
 import java.util.Map;
+import java.util.TreeMap;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
+
+import static java.lang.Math.*;
 
 /**
  * Created by cbyamba on 2014-01-10.
@@ -19,14 +25,46 @@ public class Divisibility {
         return LongStream.range(1, n).filter(k -> isCoprime(n, k)).count();
     }
 
-    public static Map<Long, Integer> primeFactors(long n) {
-        //Primes.generatePrimesAsList(n).stream().collect(Collectors.groupingBy((Long p) -> p, p -> multiplicity(p, n, 1)));
-        return null;
+    public static long totient2(long n) {
+        if (n % 4 == 0) {
+            return 2 * totient(n / 2);
+        }
+        if (BigInteger.valueOf(n).isProbablePrime(10)) {
+            return n - 1;
+        }
+        return totient3(n);
     }
 
-    private static int multiplicity(long p, int n, int k) {
+    public static long totient3(long number) {
+        List<Long> primeFactors = primeFactors(number);
+        double a = primeFactors.parallelStream().mapToDouble(p -> 1d - (1d / p.doubleValue()))
+                .reduce((x, accu) -> accu * x).orElse(0);
+        double b = (double) number;
+        double c = a * b;
+        return (long) c;
+    }
+
+    /**
+     * @param number
+     * @return
+     */
+    public static List<Tuple<Long, Integer>> primeFactorsMultiplicity(final long number) {
+        return Primes.generatePrimesAsList(((long) ceil((sqrt(number)))))
+                .stream()
+                .map(p -> Tuple.of(p, multiplicity(p, number, 0)))
+                .collect(Collectors.toList());
+    }
+
+    public static List<Long> primeFactors(long number) {
+        return Primes.generatePrimesAsList(number)
+                .stream()
+                .filter(x -> Primes.isPrime(x) && number % x == 0)
+                .collect(Collectors.toList());
+    }
+
+    private static int multiplicity(long p, long n, int k) {
         if (n % p != 0) {
-            return --k;
+            return k;
         }
         return multiplicity(p * p, n, ++k);
     }
@@ -58,6 +96,7 @@ public class Divisibility {
                 .filter(p -> n % p == 0)
                 .collect(Collectors.toList());
     }
+
 
     public static long[] totients(int startInclusive, int endInclusive) {
         return LongStream.rangeClosed(startInclusive, endInclusive).map(Divisibility::totient).toArray();
@@ -112,6 +151,9 @@ public class Divisibility {
      * @return
      */
     public static int gcd(int a, int b) {
+        if ((Primes.isPrime(a) | Primes.isPrime(b)) && a != b) {
+            return 1;
+        }
         if (a < b) {
             return gcd(b, a);
         }

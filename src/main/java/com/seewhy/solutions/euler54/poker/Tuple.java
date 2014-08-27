@@ -12,6 +12,10 @@ public class Tuple<T, U> {
         this.second = second;
     }
 
+    public static <T, U> Tuple<T, U> of(T first, U second) {
+        return new Tuple<>(first, second);
+    }
+
     public static <T, U> Tuple<T, U> tuple(T first, U second) {
         return new Tuple<>(first, second);
     }
