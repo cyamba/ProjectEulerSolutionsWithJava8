@@ -46,8 +46,11 @@ public class DivisibilityTest {
         //1/3
         assertEquals(Fraction.of(1, 3), Divisibility.primeFraction(BigIntegers.THREE));
 
-        Fraction totient = Divisibility.totient(Lists.of(BigIntegers.TWO));
-        assertEquals(Fraction.of(1, 2), totient);
+        assertEquals(Fraction.ONE, Divisibility.totient(Lists.of(BigIntegers.TWO)));
+
+        assertEquals(Fraction.TWO, Divisibility.totient(Lists.of(BigIntegers.THREE)));
+        assertEquals(Fraction.THREE, Divisibility.totient(Lists.of(BigIntegers.FOUR)));
+        assertEquals(Fraction.FOUR, Divisibility.totient(Lists.of(BigIntegers.FOUR)));
 
     }
 }

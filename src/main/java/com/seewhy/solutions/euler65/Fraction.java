@@ -25,6 +25,10 @@ public class Fraction {
 
     public static final Fraction THREE = of(3, 1);
 
+    public static final Fraction FOUR = of(4, 1);
+
+    public static final Fraction FIVE = of(5, 1);
+
     public static final Fraction NEGATIVE_ONE = of(-1, 1);
 
     public Fraction(BigInteger numerator, BigInteger denominator) {
