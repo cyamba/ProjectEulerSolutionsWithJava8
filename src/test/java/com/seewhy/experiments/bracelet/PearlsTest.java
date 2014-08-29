@@ -40,11 +40,8 @@ public class PearlsTest {
     public void testFlattenedEqualsNegative() {
 
         assertFalse(Pearls.flattenedEquals(REPEATED_LETTER, ABCD));
-
         assertFalse(Pearls.flattenedEquals(WRONG_ORDER, ABCD));
-
         assertFalse(Pearls.flattenedEquals(TOO_LONG, ABCD));
-
         assertFalse(Pearls.flattenedEquals(NULL, ABCD));
     }
 }

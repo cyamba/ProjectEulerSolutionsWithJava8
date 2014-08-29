@@ -13,6 +13,7 @@ public class BraceletTest {
 
     @Test
     public void testBraceletEqualsPositive() {
+
         assertTrue(Bracelet.of(ABCD).equals(Bracelet.of(ABCD)));
         assertTrue(Bracelet.of(ABCD).equals(Bracelet.of(DABC)));
         assertTrue(Bracelet.of(ABCD).equals(Bracelet.of(CDAB)));
@@ -21,6 +22,7 @@ public class BraceletTest {
 
     @Test
     public void testBraceletEqualsNegative() {
+
         assertFalse(Bracelet.of(ABCD).equals(Bracelet.of(REPEATED_LETTER)));
         assertFalse(Bracelet.of(ABCD).equals(Bracelet.of(WRONG_ORDER)));
         assertFalse(Bracelet.of(ABCD).equals(Bracelet.of(TOO_LONG)));
