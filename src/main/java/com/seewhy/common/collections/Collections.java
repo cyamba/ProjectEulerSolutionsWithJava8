@@ -3,6 +3,7 @@ package com.seewhy.common.collections;
 import com.seewhy.common.io.Printer;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -12,6 +13,13 @@ import java.util.stream.LongStream;
  * Created by cbyamba on 2014-03-12.
  */
 public class Collections {
+
+    public static <T> List<T> shuffle(List<T> list) {
+        List<T> newList = Lists.copy(list);
+        java.util.Collections.shuffle(newList);
+        return list;
+    }
+
 
     public static Long[] copiesOf(Long number, int count) {
         Printer.print("upper");

@@ -1,6 +1,7 @@
 package com.seewhy.common.collections;
 
 import java.util.*;
+import java.util.Collections;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -14,8 +15,16 @@ public class Lists {
         return Arrays.deepEquals(list1.toArray(), list2.toArray());
     }
 
+    public static <T> List<T> copy(List<T> list) {
+        return list.stream().collect(Collectors.toList());
+    }
+
     public static <T> List<T> newArrayList() {
         return new ArrayList<>();
+    }
+
+    public static <T> List<T> newArrayList(T... elements) {
+        return of(elements);
     }
 
     public static <T> List<T> of(T... elements) {
@@ -46,5 +55,11 @@ public class Lists {
         return list.stream().distinct().count() == list.size();
     }
 
+
+    public static List<String> shuffle(List<String> list) {
+        List<String> copy = copy(list);
+        Collections.shuffle(copy);
+        return copy;
+    }
 
 }

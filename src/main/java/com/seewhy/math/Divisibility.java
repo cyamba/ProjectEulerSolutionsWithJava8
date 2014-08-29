@@ -3,6 +3,9 @@ package com.seewhy.math;
 
 import com.seewhy.common.io.Printer;
 import com.seewhy.solutions.euler54.poker.Tuple;
+import com.seewhy.solutions.euler65.Fraction;
+import com.seewhy.solutions.euler70.Fractions;
+import com.seewhy.solutions.euler97.BigIntegers;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +16,7 @@ import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
+
 
 import static java.lang.Math.*;
 
@@ -186,5 +190,19 @@ public class Divisibility {
         p = p - 1d;
         Printer.print("======");
         Printer.print(totients(10));
+    }
+
+    public static Fraction totient(List<BigInteger> primes) {
+        BigInteger n = BigIntegers.multiply(primes.toArray(new BigInteger[primes.size()]));
+        Printer.print("n = " + n);
+        Fraction[] fractions = primes.stream().map(p -> primeFraction(p)).toArray(i -> new Fraction[primes.size()]);
+        Printer.print(fractions);
+        Fraction product = Fractions.multiply(fractions);
+        Printer.print(product.toString());
+        return Fraction.of(n).multiply(product);
+    }
+
+    public static Fraction primeFraction(BigInteger prime) {
+        return Fractions.ONE.subtract(Fraction.of(1, prime.longValue()));
     }
 }

@@ -2,6 +2,7 @@ package com.seewhy.math;
 
 
 import com.seewhy.common.io.Printer;
+import com.seewhy.solutions.euler97.BigIntegers;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
+import static com.seewhy.solutions.euler97.BigIntegers.priorPrime;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -172,6 +174,10 @@ public class Primes {
 
     private static long[] sieve(long[] numbers, LongPredicate predicate) {
         return LongStream.of(numbers).filter(predicate).toArray();
+    }
+
+    public static BigInteger priorPrime(BigInteger number) {
+        return BigIntegers.priorPrime(number);
     }
 
     public static LongPredicate isPrimeLambda() {

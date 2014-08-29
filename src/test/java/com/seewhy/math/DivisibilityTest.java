@@ -1,7 +1,11 @@
 package com.seewhy.math;
 
+import com.seewhy.common.collections.Lists;
+import com.seewhy.solutions.euler65.Fraction;
+import com.seewhy.solutions.euler97.BigIntegers;
 import org.junit.Test;
 
+import java.math.BigInteger;
 import java.util.stream.LongStream;
 
 import static com.seewhy.math.Divisibility.gcd;
@@ -33,5 +37,17 @@ public class DivisibilityTest {
         Long[] expectedObjects = LongStream.of(expected).boxed().toArray(x -> new Long[expected.length]);
 
         assertEquals(String.format("%s", deepToString(totientsObjects)), deepToString(expectedObjects), deepToString(totientsObjects));
+    }
+
+    @Test
+    public void testPrimeFraction() {
+        //1/2
+        assertEquals(Fraction.of(1, 2), Divisibility.primeFraction(BigIntegers.TWO));
+        //1/3
+        assertEquals(Fraction.of(1, 3), Divisibility.primeFraction(BigIntegers.THREE));
+
+        Fraction totient = Divisibility.totient(Lists.of(BigIntegers.TWO));
+        assertEquals(Fraction.of(1, 2), totient);
+
     }
 }

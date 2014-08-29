@@ -4,7 +4,10 @@ package com.seewhy.math;
 import com.seewhy.common.collections.Arrays1D;
 import com.seewhy.common.collections.Maps;
 import com.seewhy.common.io.Printer;
+import com.seewhy.common.util.Strings;
+import com.seewhy.solutions.euler97.BigIntegers;
 
+import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -23,6 +26,37 @@ import static java.util.stream.Stream.of;
  */
 public class Permutations {
 
+    /**
+     * For testing purposes
+     *
+     * @param args
+     */
+    public static void main(String... args) {
+        Printer.print(generatePermutation(new long[]{1l, 2l, 3l, 4l, 5l}));
+
+        String[] o = {"I", "N", "T", "R", "O", "D", "U", "C", "E"};
+        String[] a = {"R", "E", "D", "U", "C", "T", "I", "O", "N"};
+        Printer.print(diff(o, a));
+        Integer[] permutationDiff = diff(o, a);
+        Printer.print(permutationDiff);
+        Integer[] factor = {3, 8, 5, 6, 7, 2, 0, 4, 1};
+        Comparable[] result = multiply(o, factor);
+        Printer.print(result);
+
+        long _long = 34672834203764l;
+        BigInteger originalNumber = BigIntegers._(_long);
+        String shuffled = Strings.shuffle(Strings.of(_long));
+        BigInteger shuffledNumber = new BigInteger(shuffled);
+
+        boolean arePerm = arePermutations(originalNumber, shuffledNumber);
+        Printer.print(String.format("%s %s %s", originalNumber, shuffledNumber, arePerm ? " are permutations" : " are not permutations"));
+    }
+
+    /**
+     * For testing purposes
+     *
+     * @param permutation
+     */
     public static void printPermutations(Comparable[] permutation) {
         System.out.println(Arrays.toString(permutation));
         while ((permutation = nextPermutation(permutation)) != null) {
@@ -30,6 +64,10 @@ public class Permutations {
         }
     }
 
+    /**
+     * @param perm
+     * @return
+     */
     public static long[][] generatePermutation(long[] perm) {
         Comparable[] permutation = LongStream.of(perm).boxed().toArray(x -> new Long[perm.length]);
         Comparable[][] result = new Long[Combinatorics.faculty(perm.length).intValue()][perm.length];
@@ -40,6 +78,10 @@ public class Permutations {
         return toLong2dArray(result);
     }
 
+    /**
+     * @param permutation
+     * @return
+     */
     public static Comparable[][] generatePermutation(Comparable[] permutation) {
         Comparable[][] result = new Comparable[Combinatorics.faculty(permutation.length).intValue()][permutation.length];
         int i = 0;
@@ -105,19 +147,6 @@ public class Permutations {
                 .toArray(x -> new Integer[permutationAsList.size()]);
     }
 
-    public static void main(String... args) {
-        Printer.print(generatePermutation(new long[]{1l, 2l, 3l, 4l, 5l}));
-
-        String[] o = {"I", "N", "T", "R", "O", "D", "U", "C", "E"};
-        String[] a = {"R", "E", "D", "U", "C", "T", "I", "O", "N"};
-        Printer.print(diff(o, a));
-        Integer[] permutationDiff = diff(o, a);
-        Printer.print(permutationDiff);
-        Integer[] factor = {3, 8, 5, 6, 7, 2, 0, 4, 1};
-        Comparable[] result = multiply(o, factor);
-        Printer.print(result);
-    }
-
         /*
         0 1 2 3 4 5 6 7 8   -> 0 1 2 3 4 5 6 7 8
         I N T R O D U C E   -> R E D U C T I O N
@@ -125,6 +154,11 @@ public class Permutations {
     //1. i Permutation gör en funktion som tar två Comparable och returnerar heltalspermutationen från 0 till n-1 som denna motsvarar
     //2. Givet en Comparable och en heltalspermutation från 0 till n-1 returnera  den resulterande permutationen om dessa väljs som index.
 
+    /**
+     * @param original
+     * @param anagram
+     * @return
+     */
     public static Integer[] diff(Comparable[] original, Comparable[] anagram) {
         return (!arePermutations(original, anagram)) ?
                 null
@@ -132,11 +166,22 @@ public class Permutations {
                 .map(i -> Maps.inverse(Maps.toMap(original)).get(anagram[i])).toArray(x -> new Integer[original.length]);
     }
 
+    /**
+     * @param original
+     * @param anagram
+     * @return
+     */
     public static Permutation<Integer> diff(Word original, Word anagram) {
         Integer[] diff = diff(original.get(), anagram.get());
         return Permutation.of(diff);
     }
 
+    /**
+     * @param original
+     * @param factor
+     * @param <T>
+     * @return
+     */
     public static <T extends Comparable> T[] multiply(T[] original, Integer[] factor) {
         checkIndicesPermutation(factor);
         return (com.seewhy.common.collections.Objects.containsNull(original, factor)
@@ -145,9 +190,14 @@ public class Permutations {
                 : IntStream.range(0, factor.length)
                 .boxed()
                 .map(i -> original[factor[i]])
-                .toArray(x -> (T[])new Comparable[factor.length]);
+                .toArray(x -> (T[]) new Comparable[factor.length]);
     }
 
+    /**
+     * @param original
+     * @param factor
+     * @return
+     */
     public static Word multiply(Word original, Permutation<Integer> factor) {
         Comparable[] product = multiply(original.get(), factor.get());
         return Word.of(product);
@@ -161,7 +211,10 @@ public class Permutations {
         }
     }
 
-    protected static void checkIfNonMultiPermutation(Comparable[] permutation) {
+    /**
+     * @param permutation
+     */
+    public static void checkIfNonMultiPermutation(Comparable[] permutation) {
         Comparable[] sorted = Stream.of(permutation).sorted().toArray(x -> new Comparable[permutation.length]);
         IntStream.range(0, sorted.length - 1).forEachOrdered(
                 i -> {
@@ -189,10 +242,47 @@ public class Permutations {
         return Stream.of(multiply(identity, diff)).toArray(x -> new Integer[length]);
     }
 
+    /**
+     * @param original
+     * @param anagram
+     * @return
+     */
     public static boolean arePermutations(Comparable[] original, Comparable[] anagram) {
         return com.seewhy.common.collections.Objects.containsNull(original, anagram) ?
                 false :
                 deepEquals(Stream.of(original).sorted().toArray(), Stream.of(anagram).sorted().toArray());
+    }
+
+    /**
+     * @param first
+     * @param second
+     * @return
+     */
+    public static boolean arePermutations(BigInteger first, BigInteger second) {
+        if (checkIfNull(first, second)) {
+            return false;
+        }
+        return arePermutations(first.toString(), second.toString());
+    }
+
+    /**
+     * @param first
+     * @param second
+     * @return
+     */
+    public static boolean arePermutations(String first, String second) {
+        if (checkIfNull(first, second)) {
+            return false;
+        }
+        return sortString(first).equals(sortString(second));
+    }
+
+    private static String sortString(String string) {
+        return string.chars().sorted().boxed().map(String::valueOf).collect(Collectors.joining());
+    }
+
+    private static <T> boolean checkIfNull(T... objects) {
+        return com.seewhy.common.collections.Objects.containsNull(objects);
     }
 
 

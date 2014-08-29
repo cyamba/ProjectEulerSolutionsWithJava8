@@ -1,8 +1,13 @@
 package com.seewhy.solutions.euler65;
 
+import com.seewhy.solutions.euler70.Fractions;
+
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.stream.Stream;
 
 import static com.seewhy.solutions.euler97.BigIntegers._;
+import static com.seewhy.solutions.euler97.BigIntegers._1;
 
 /**
  * Created by cbyamba on 2014-08-24.
@@ -12,13 +17,15 @@ public class Fraction {
     private BigInteger numerator;
     private BigInteger denominator;
 
-    public static Fraction ZERO = of(0, 1);
+    public static final Fraction ZERO = of(0, 1);
 
-    public static Fraction ONE = of(1, 1);
+    public static final Fraction ONE = of(1, 1);
 
-    public static Fraction TWO = of(2, 1);
+    public static final Fraction TWO = of(2, 1);
 
-    public static Fraction THREE = of(3, 1);
+    public static final Fraction THREE = of(3, 1);
+
+    public static final Fraction NEGATIVE_ONE = of(-1, 1);
 
     public Fraction(BigInteger numerator, BigInteger denominator) {
         BigInteger gcd = numerator.gcd(denominator);
@@ -34,6 +41,14 @@ public class Fraction {
         return of(n, 1);
     }
 
+    public static Fraction of(BigInteger numerator) {
+        return new Fraction(numerator, _1);
+    }
+
+    public static Fraction of(BigInteger numerator, BigInteger denominator) {
+        return new Fraction(numerator, denominator);
+    }
+
     public Fraction invert() {
         return new Fraction(denominator, numerator);
     }
@@ -46,8 +61,26 @@ public class Fraction {
         return new Fraction(newNumerator, newDenominator);
     }
 
+    public Fraction subtract(Fraction other) {
+        return add(Fraction.NEGATIVE_ONE.add(other));
+    }
+
+    public Fraction multiply(Fraction other) {
+        BigInteger newNumerator = other.numerator.multiply(this.numerator);
+        BigInteger newDenominator = this.denominator.multiply(other.denominator);
+        return new Fraction(newNumerator, newDenominator);
+    }
+
+    public BigInteger toBigInteger() {
+        return numerator.divide(denominator);
+    }
+
     public BigInteger getNumerator() {
         return numerator;
+    }
+
+    public Fraction multiply(Fraction... fractions) {
+        return Fractions.multiply(fractions);
     }
 
     @Override
