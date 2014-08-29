@@ -18,6 +18,11 @@ public class PearlsTest {
 
     public static final String[][] ROTATIONS = {ABCD, DABC, CDAB, BCDA};
 
+    public static final String[] REPEATED_LETTER = {"A", "A", "D", "C"};
+    public static final String[] WRONG_ORDER = {"A", "C", "B", "D"};
+    public static final String[] TOO_LONG = {"A", "C", "B", "D", "E"};
+    public static final String[] NULL = null;
+
     /**
      * tests all unique pairs of rotated bracelets (i.e. they are all equal)
      */
@@ -35,14 +40,14 @@ public class PearlsTest {
     public void testFlattenedEqualsNegative() {
 
         //repeated letter
-        assertFalse(Pearls.flattenedEquals(new String[]{"A", "A", "D", "C"}, ABCD));
+        assertFalse(Pearls.flattenedEquals(REPEATED_LETTER, ABCD));
 
         //wrong order of letters
-        assertFalse(Pearls.flattenedEquals(new String[]{"A", "C", "B", "D"}, ABCD));
+        assertFalse(Pearls.flattenedEquals(WRONG_ORDER, ABCD));
 
         //wrong length
-        assertFalse(Pearls.flattenedEquals(new String[]{"A", "C", "B", "D", "E"}, ABCD));
+        assertFalse(Pearls.flattenedEquals(TOO_LONG, ABCD));
 
-        assertFalse(Pearls.flattenedEquals(null, ABCD));
+        assertFalse(Pearls.flattenedEquals(NULL, ABCD));
     }
 }
