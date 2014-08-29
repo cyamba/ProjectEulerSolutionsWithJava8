@@ -27,6 +27,9 @@ public class Bracelet {
         if (other == null || getClass() != other.getClass()) return false;
 
         String[] otherPearls = ((Bracelet) other).getPearls();
+        if (otherPearls == null) {
+            return false;
+        }
         return Pearls.flattenedEquals(pearls, otherPearls);
     }
 

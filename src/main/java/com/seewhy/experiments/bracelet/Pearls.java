@@ -17,10 +17,12 @@ public class Pearls {
      * @return true if first is a substring of second concatenated with itself.
      */
     public static boolean flattenedEquals(String[] first, String[] second) {
-        String firstString = Stream.of(first).collect(joining());
-        String secondString = Stream.of(second).collect(joining());
-        String flattenedSecond = secondString.concat(secondString);
-        return flattenedSecond.contains(firstString);
+        String secondString = asString(second);
+        return secondString.concat(secondString).contains(asString(first));
+    }
+
+    private static String asString(String[] strings) {
+        return Stream.of(strings).collect(joining());
     }
 
 }
