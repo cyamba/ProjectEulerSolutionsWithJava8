@@ -13,7 +13,7 @@ public class Bracelet {
         this.pearls = pearls;
     }
 
-    public static Bracelet of(String[] pearls) {
+    public static Bracelet of(String... pearls) {
         return new Bracelet(pearls);
     }
 

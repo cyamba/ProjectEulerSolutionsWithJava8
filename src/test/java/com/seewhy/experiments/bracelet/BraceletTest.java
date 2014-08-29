@@ -28,4 +28,11 @@ public class BraceletTest {
         assertFalse(Bracelet.of(ABCD).equals(Bracelet.of(TOO_LONG)));
         assertFalse(Bracelet.of(ABCD).equals(Bracelet.of(NULL)));
     }
+
+    @Test
+    public void testMoreBracelets() {
+        assertTrue(Bracelet.of("A", "A", "D", "C", "E", "E").equals(Bracelet.of("D", "C", "E", "E", "A", "A")));
+        assertFalse(Bracelet.of("A", "A", "D", "G", "E", "E").equals(Bracelet.of("D", "C", "E", "E", "A", "A")));
+        assertFalse(Bracelet.of("A", "G", "E", "E").equals(Bracelet.of("D", "C", "E", "E", "A", "A")));
+    }
 }

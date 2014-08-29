@@ -44,4 +44,5 @@ public class PearlsTest {
         assertFalse(Pearls.flattenedEquals(TOO_LONG, ABCD));
         assertFalse(Pearls.flattenedEquals(NULL, ABCD));
     }
+
 }
