@@ -29,6 +29,6 @@ public class Pearls {
     }
 
     private static String asString(String[] strings, Comparator<String> order) {
-        return Stream.of(strings).collect(joining());
+        return Stream.of(strings).sorted(order).collect(joining());
     }
 }
