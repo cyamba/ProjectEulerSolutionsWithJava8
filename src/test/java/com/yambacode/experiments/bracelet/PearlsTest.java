@@ -1,5 +1,6 @@
 package com.yambacode.experiments.bracelet;
 
+import com.yambacode.common.io.Printer;
 import junit.framework.Assert;
 import org.junit.Test;
 
@@ -15,6 +16,8 @@ public class PearlsTest {
     public static final String[] DABC = {"D", "A", "B", "C"};
     public static final String[] CDAB = {"C", "D", "A", "B"};
     public static final String[] BCDA = {"B", "C", "D", "A"};
+
+    public static final String[] DCBA = {"D", "C", "B", "A"};
 
     public static final String[][] ROTATIONS = {ABCD, DABC, CDAB, BCDA};
 
@@ -37,12 +40,18 @@ public class PearlsTest {
         }
     }
 
+    @Test
+    public void mirrorIdentity() {
+        Printer.print("mirror");
+        assertTrue(Pearls.flattenedEquals(ABCD, DCBA));
+    }
+
+    @Test
     public void testFlattenedEqualsNegative() {
 
         assertFalse(Pearls.flattenedEquals(REPEATED_LETTER, ABCD));
         assertFalse(Pearls.flattenedEquals(WRONG_ORDER, ABCD));
         assertFalse(Pearls.flattenedEquals(TOO_LONG, ABCD));
-        assertFalse(Pearls.flattenedEquals(NULL, ABCD));
     }
 
 }
