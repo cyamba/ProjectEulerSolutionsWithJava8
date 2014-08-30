@@ -24,8 +24,7 @@ public class Pearls {
     public static boolean flattenedEquals(String[] first, String[] second) {
         String secondString = asString(second, naturalOrder);
         String concatSecondString = secondString.concat(secondString);
-        String firstStringReversed = asString(first, reversedOrder);
-        return concatSecondString.contains(asString(first, naturalOrder)) || concatSecondString.contains(firstStringReversed);
+        return concatSecondString.contains(asString(first, naturalOrder)) || concatSecondString.contains(asString(first, reversedOrder));
     }
 
     private static String asString(String[] strings, Comparator<String> order) {
