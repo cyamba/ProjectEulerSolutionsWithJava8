@@ -1,11 +1,9 @@
 package com.yambacode.experiments.bracelet;
 
-import com.yambacode.common.io.Printer;
-
-import static java.util.stream.Collectors.joining;
-
 import java.util.Comparator;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.joining;
 
 /**
  * Created by cbyamba on 2014-08-29.
@@ -14,6 +12,7 @@ public class Pearls {
 
     /**
      * Example : "ABC" is a substring of "CABCAB" ("CAB"+CAB) and thus "ABC" and "CAB" are "rotation" equivalent
+     * Also reverse "ABC" to check for mirror cases of bracelets
      *
      * @param first  ("ABC")
      * @param second ("CAB")
@@ -22,10 +21,8 @@ public class Pearls {
     public static boolean flattenedEquals(String[] first, String[] second) {
         String secondString = asString(second);
         String concatSecondString = secondString.concat(secondString);
-        String firstString = asString(first);
         String firstStringReversed = asStringReversed(first);
-        Printer.print(String.format("first %s secondConcat %s firstReversed %s", firstString, concatSecondString, firstStringReversed));
-        return concatSecondString.contains(firstString) ||
+        return concatSecondString.contains(asString(first)) ||
                 concatSecondString.contains(firstStringReversed);
     }
 
