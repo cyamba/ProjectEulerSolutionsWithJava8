@@ -1,6 +1,5 @@
 package com.yambacode.experiments.bracelet;
 
-import java.util.Comparator;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.joining;
@@ -9,9 +8,6 @@ import static java.util.stream.Collectors.joining;
  * Created by cbyamba on 2014-08-29.
  */
 public class Pearls {
-
-    private static final Comparator<String> naturalOrder = Comparator.<String>naturalOrder();
-    private static final Comparator<String> reversedOrder = Comparator.<String>reverseOrder();
 
     /**
      * Example : "ABC" is a substring of "CABCAB" ("CAB"+CAB) and thus "ABC" and "CAB" are "rotation" equivalent
@@ -22,12 +18,13 @@ public class Pearls {
      * @return true if first is a substring of second concatenated with itself.
      */
     public static boolean flattenedEquals(String[] first, String[] second) {
-        String secondString = asString(second, naturalOrder);
+        String secondString = asString(second);
         String concatSecondString = secondString.concat(secondString);
-        return concatSecondString.contains(asString(first, naturalOrder)) || concatSecondString.contains(asString(first, reversedOrder));
+        String firstString = asString(first);
+        return concatSecondString.contains(firstString) || concatSecondString.contains(new StringBuilder(firstString).reverse());
     }
 
-    private static String asString(String[] strings, Comparator<String> order) {
-        return Stream.of(strings).sorted(order).collect(joining());
+    private static String asString(String[] strings) {
+        return Stream.of(strings).collect(joining());
     }
 }

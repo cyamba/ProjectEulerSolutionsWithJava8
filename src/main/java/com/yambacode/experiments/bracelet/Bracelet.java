@@ -1,6 +1,12 @@
 package com.yambacode.experiments.bracelet;
 
+
+import static java.util.Comparator.reverseOrder;
+
 import java.util.Arrays;
+import java.util.stream.Stream;
+
+import static com.yambacode.experiments.bracelet.Pearls.flattenedEquals;
 
 /**
  * Created by cbyamba on 2014-08-29.
@@ -30,7 +36,10 @@ public class Bracelet {
         if (otherPearls == null) {
             return false;
         }
-        return Pearls.flattenedEquals(pearls, otherPearls);
+        return flattenedEquals(pearls, otherPearls);
+        //could have kept the rotation equals as before and just invoked flattenedEquals with :
+        //String[] pearlsReversed = Stream.of(pearls).sorted(reverseOrder()).toArray(x -> new String[pearls.length]);
+        //return flattenedEquals(pearls, otherPearls) || flattenedEquals(pearlsReversed, otherPearls);
     }
 
     @Override

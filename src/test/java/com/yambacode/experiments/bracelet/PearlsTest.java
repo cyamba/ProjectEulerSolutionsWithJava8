@@ -42,7 +42,6 @@ public class PearlsTest {
 
     @Test
     public void mirrorIdentity() {
-        Printer.print("mirror");
         assertTrue(Pearls.flattenedEquals(ABCD, DCBA));
     }
 
