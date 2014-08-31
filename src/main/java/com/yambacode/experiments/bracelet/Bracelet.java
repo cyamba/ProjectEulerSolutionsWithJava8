@@ -4,6 +4,7 @@ package com.yambacode.experiments.bracelet;
 import static java.util.Comparator.reverseOrder;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static com.yambacode.experiments.bracelet.Pearls.flattenedEquals;
@@ -38,8 +39,11 @@ public class Bracelet {
         }
         return flattenedEquals(pearls, otherPearls);
         //could have kept the rotation equals as before and just invoked flattenedEquals with :
-        //String[] pearlsReversed = Stream.of(pearls).sorted(reverseOrder()).toArray(x -> new String[pearls.length]);
-        //return flattenedEquals(pearls, otherPearls) || flattenedEquals(pearlsReversed, otherPearls);
+//        int length = pearls.length;
+//        String[] pearlsReversed = IntStream.range(0, length)
+//                .mapToObj(i -> pearls[length - 1 - i])
+//                .toArray(x -> new String[length]);
+//        return flattenedEquals(pearls, otherPearls) || flattenedEquals(pearlsReversed, otherPearls);
     }
 
     @Override
