@@ -1,6 +1,6 @@
 package com.yambacode.solutions.euler11;
 
-import com.sun.tools.javac.util.List;
+import java.util.List;
 
 import java.io.File;
 import java.io.FileNotFoundException;

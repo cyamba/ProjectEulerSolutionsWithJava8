@@ -26,7 +26,7 @@ public class Objects {
         return java.util.Objects.isNull(objects) ? true : Stream.of(objects).anyMatch(java.util.Objects::isNull);
     }
 
-    public static <T> boolean areNotNul(T... objects) {
+    public static <T> boolean areNotNull(T... objects) {
         return !containsNull(objects);
     }
 

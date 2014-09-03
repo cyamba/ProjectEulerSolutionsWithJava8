@@ -11,6 +11,7 @@ import java.util.List;
 
 import java.math.BigInteger;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
 
@@ -200,5 +201,17 @@ public class Divisibility {
 
     public static Fraction primeFraction(BigInteger prime) {
         return Fractions.ONE.subtract(Fraction.of(1, prime.longValue()));
+    }
+
+    public static int[] properDivisors(int n) {
+        return IntStream.range(1, n).filter(x -> n % x == 0).toArray();
+    }
+
+    public static List<Integer> properDivisorsList(int n) {
+        return IntStream.range(1, n).filter(x -> n % x == 0).boxed().collect(Collectors.toList());
+    }
+
+    public static int sumOfProperDivisors(int n) {
+        return IntStream.of(properDivisors(n)).sum();
     }
 }

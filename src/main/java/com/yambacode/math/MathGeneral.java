@@ -16,7 +16,5 @@ public class MathGeneral {
         return (long) Math.pow((n * (n + 1) / 2), 2);
     }
 
-    public static int[] properDivisors(int n) {
-        return IntStream.range(2, (int) Math.ceil(Math.sqrt(n))).filter(x -> n % x == 0).toArray();
-    }
+
 }
