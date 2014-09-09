@@ -18,7 +18,7 @@ import java.util.stream.Stream;
  */
 public class HandGenerator {
 
-    public static final String pokerCachePath = "/Users/cbyamba/programming/github/EulerSolutionsWithJava8/src/main/java/com/yambacode/solutions/euler54/pokercache.y";
+    public static final String pokerCachePath = "./src/main/java/com/yambacode/solutions/euler54/pokercache.y";
 
 
     public static List<Card> allCards = generateAllCards();
@@ -62,9 +62,10 @@ public class HandGenerator {
         // writeHands();
         //Printer.print("Written down poker cache. Now try loading it..");
 
+        /*
         Printer.print(
                 Combinatorics.combinations(52,5).toString()
-        );
+        );*/
 
         Printer.print("Loading cache...");
         long start = System.currentTimeMillis();

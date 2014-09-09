@@ -1,6 +1,7 @@
 package com.yambacode.solutions.euler11;
 
 import com.yambacode.solutions.AbstractEulerSolver;
+import com.yambacode.solutions.EulerRunner;
 
 import java.io.File;
 
@@ -9,7 +10,7 @@ import java.io.File;
  */
 public class LargestProductInAGrid extends AbstractEulerSolver {
 
-    private static final String PATH = "/Users/cbyamba/IdeaProjects/Java8Poc/src/com/company/euler/euler11/grid.eu";
+    private static final String PATH = "./src/main/java/com/yambacode/solutions/euler11/grid.eu";
 
     @Override
     public String doSolve() {
@@ -25,5 +26,9 @@ public class LargestProductInAGrid extends AbstractEulerSolver {
             }
             System.out.println();
         }
+    }
+
+    public static void main(String...args) {
+        EulerRunner.runEulerSolvers(new LargestProductInAGrid());
     }
 }

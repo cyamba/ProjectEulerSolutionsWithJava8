@@ -14,7 +14,7 @@ import static java.util.stream.Stream.of;
  */
 public class LargeSum extends AbstractEulerSolver {
 
-    private static final String PATH = "/Users/cbyamba/IdeaProjects/Java8Poc/src/com/company/euler/euler13/50numbers.eu";
+    private static final String PATH = "./src/main/java/com/yambacode/solutions/euler13/50numbers.eu";
 
     private static File file = new File(PATH);
 

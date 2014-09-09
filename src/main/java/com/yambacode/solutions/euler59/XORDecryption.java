@@ -3,9 +3,12 @@ package com.yambacode.solutions.euler59;
 import com.yambacode.common.collections.CollectionBlocks;
 import com.yambacode.common.collections.Collections;
 import com.yambacode.common.collections.Lists;
-import com.yambacode.common.io.Java8Reader;
+
+import static com.yambacode.common.io.Java8Reader.reader;
+
 import com.yambacode.solutions.AbstractEulerSolver;
-import com.yambacode.solutions.EulerRunner;
+
+import static com.yambacode.solutions.EulerRunner.runEulerSolvers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,18 +25,18 @@ public class XORDecryption extends AbstractEulerSolver {
 
     private static final int KEY_LENGTH = 3;
 
-    public static final String CIPHER = "/Users/cbyamba/programming/github/EulerSolutionsWithJava8" +
-            "/src/main/java/com/yambacode/solutions/euler59/cipher1.txt";
+    public static final String PATH = "./src/main/java/com/yambacode/solutions/euler59/";
 
-    private static final String DICTIONARY = "/Users/cbyamba/programming/github/EulerSolutionsWithJava8" +
-            "/src/main/java/com/yambacode/solutions/euler59/words_remove_before_commit";
+    public static final String CIPHER = PATH + "cipher1.txt";
+
+    private static final String DICTIONARY = PATH + "words_remove_before_commit";
 
     private static final List<Character> ALPHABET = Collections.integerToCharacterList(
             IntStream.range(97, 97 + 26)
                     .boxed()
                     .collect(toList()));
 
-    private static final List<String> dictionaryWords = Java8Reader.reader(DICTIONARY)
+    private static final List<String> dictionaryWords = reader(DICTIONARY)
             .lines()
             .map(line -> line.trim())
             .collect(toList());
@@ -130,7 +133,7 @@ public class XORDecryption extends AbstractEulerSolver {
     }
 
     public Stream<String> getCipherStream() {
-        return Java8Reader.reader(CIPHER).lines().flatMap(line -> {
+        return reader(CIPHER).lines().flatMap(line -> {
             String regex = "" + ',';
             String[] words = line.split(regex);
             return Stream.of(words);
@@ -143,6 +146,6 @@ public class XORDecryption extends AbstractEulerSolver {
     }
 
     public static void main(String... args) {
-        EulerRunner.runEulerSolvers(new XORDecryption());
+        runEulerSolvers(new XORDecryption());
     }
 }

@@ -19,15 +19,13 @@ import static java.util.stream.Stream.of;
  */
 public class LargestProductInASeries extends AbstractEulerSolver {
 
-    private static final String PATH = "/Users/cbyamba/programming/github/EulerSolutionsWithJava8/src/main/java/com/yambacode/solutions/euler8/test.euler";
+    private static final String PATH = "./src/main/java/com/yambacode/solutions/euler8/test.euler";
 
     @Override
     public String doSolve() {
-        String content = getContent(new File(PATH));
-        Integer[] numbers = convert(content);
+        Integer[] numbers = convert(getContent(new File(PATH)));
         int[][] partition = toEqualParts(numbers, 5);
-        Stream<int[]> partitionStream = of(partition);
-        Stream<Integer> result = partitionStream.map(x -> of(x).reduce(1, (a, b) -> a * b));
+        Stream<Integer> result = Stream.of(partition).map(x -> of(x).reduce(1, (a, b) -> a * b));
         return result.sorted(Comparator.<Integer>naturalOrder().reversed()).findFirst().get().toString();
 
     }

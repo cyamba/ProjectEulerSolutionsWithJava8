@@ -1,7 +1,8 @@
 package com.yambacode.solutions.euler57;
 
 import com.yambacode.solutions.AbstractEulerSolver;
-import com.yambacode.solutions.EulerRunner;
+
+import static com.yambacode.solutions.EulerRunner.runEulerSolvers;
 
 import java.util.stream.IntStream;
 
@@ -32,7 +33,7 @@ public class SquareRootConvergents extends AbstractEulerSolver {
         return compute(fraction.add(2).inv(), ++count, max);
     }
 
-    public static void main(String[] args) {
-        EulerRunner.runEulerSolvers(new SquareRootConvergents());
+    public static void main(String... args) {
+        runEulerSolvers(new SquareRootConvergents());
     }
 }

@@ -1,7 +1,9 @@
 package com.yambacode.solutions.euler58;
 
 import com.yambacode.common.io.Printer;
-import com.yambacode.math.Primes;
+
+import static com.yambacode.math.Primes.filterPrimes;
+
 import com.yambacode.solutions.AbstractEulerSolver;
 import com.yambacode.solutions.EulerRunner;
 import com.yambacode.solutions.euler54.poker.Tuple;
@@ -65,7 +67,7 @@ public class PrimeSpiralBigInteger extends AbstractEulerSolver {
     }
 
     protected long primeCount(long n) {
-        return Primes.filterPrimes(spiralDiagonal(BigInteger.valueOf(n))).count();
+        return filterPrimes(spiralDiagonal(BigInteger.valueOf(n))).count();
     }
 
 
