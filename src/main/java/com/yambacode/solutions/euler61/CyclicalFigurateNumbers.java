@@ -1,6 +1,6 @@
 package com.yambacode.solutions.euler61;
 
-import static com.yambacode.math.Numbers.*;
+import static com.yambacode.math.FigurativeNumbers.*;
 
 import com.yambacode.solutions.AbstractEulerSolver;
 import com.yambacode.solutions.EulerRunner;

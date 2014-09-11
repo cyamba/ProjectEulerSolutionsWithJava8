@@ -1,7 +1,7 @@
 package com.yambacode.solutions.euler61;
 
 import com.yambacode.common.io.Printer;
-import com.yambacode.math.Numbers;
+import com.yambacode.math.FigurativeNumbers;
 import org.junit.Test;
 
 /**
@@ -16,9 +16,9 @@ public class Euler61Test {
         //Triangles 2775, 2850, 2926, 3003, 3081, 3160, 3240, 3321, 3403, 3486, 3570, 3655, 3741, 3828, 3916, 4005
         //Squares  1024, 1089, 1156, 1225, 1296, 1369, 1444, 1521, 1600, 1681, 1764, 1849, 1936, 2025, 2116, 2209,
 
-        Printer.print(Numbers.squareNumbersLessThan(1, 10000).toArray());
-        Cycle cycle = Cycle.of(FigurativeNumber.of(2775, Numbers.FigurativeType.TRIANGLE),
-                FigurativeNumber.of(1024, Numbers.FigurativeType.SQUARE));
+        Printer.print(FigurativeNumbers.squareNumbersLessThan(1, 10000).toArray());
+        Cycle cycle = Cycle.of(FigurativeNumber.of(2775, FigurativeNumbers.FigurativeType.TRIANGLE),
+                FigurativeNumber.of(1024, FigurativeNumbers.FigurativeType.SQUARE));
         boolean orderN = euler61.isOrderN(cycle);
         Printer.print(orderN);
         boolean distinctFigurativeTypes = euler61.isDistinctFigurativeTypes(cycle);

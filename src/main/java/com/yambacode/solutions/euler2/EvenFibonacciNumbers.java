@@ -1,7 +1,7 @@
 package com.yambacode.solutions.euler2;
 
 
-import static com.yambacode.math.Numbers.*;
+import static com.yambacode.math.FigurativeNumbers.*;
 
 import com.yambacode.common.io.Printer;
 import com.yambacode.solutions.AbstractEulerSolver;

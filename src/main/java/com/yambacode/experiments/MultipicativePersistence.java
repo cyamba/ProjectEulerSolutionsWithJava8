@@ -1,7 +1,7 @@
 package com.yambacode.experiments;
 
-import static com.yambacode.math.Numbers.multiplicativePersistence;
-import static com.yambacode.math.Numbers.lowestMultiplicativePersistenceRoot;
+import static com.yambacode.math.FigurativeNumbers.multiplicativePersistence;
+import static com.yambacode.math.FigurativeNumbers.lowestMultiplicativePersistenceRoot;
 
 import com.yambacode.solutions.AbstractEulerSolver;
 import com.yambacode.solutions.EulerRunner;

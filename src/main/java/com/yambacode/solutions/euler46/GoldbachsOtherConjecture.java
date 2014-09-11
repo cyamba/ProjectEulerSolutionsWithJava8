@@ -3,7 +3,7 @@ package com.yambacode.solutions.euler46;
 
 import com.yambacode.solutions.AbstractEulerSolver;
 
-import static com.yambacode.math.Numbers.nextOddComposite;
+import static com.yambacode.math.FigurativeNumbers.nextOddComposite;
 import static com.yambacode.math.Primes.isPrime;
 import static java.util.stream.LongStream.of;
 import static java.util.stream.LongStream.rangeClosed;

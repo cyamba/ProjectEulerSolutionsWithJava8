@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static com.yambacode.math.Numbers.*;
+import static com.yambacode.math.FigurativeNumbers.*;
 
 /**
  * Created by cbyamba on 2014-02-03.

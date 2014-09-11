@@ -2,16 +2,19 @@ package com.yambacode.math;
 
 import static junit.framework.Assert.*;
 
+import com.yambacode.common.io.Printer;
 import org.junit.Test;
+
+import java.util.List;
 
 import static java.util.Arrays.*;
 
-import static com.yambacode.math.Numbers.*;
+import static com.yambacode.math.FigurativeNumbers.*;
 
 /**
  * Created by cbyamba on 2014-02-13.
  */
-public class NumbersTest {
+public class FigurativeNumbersTest {
 
     /**
      * Triangle
@@ -52,7 +55,12 @@ public class NumbersTest {
      */
     @Test
     public void testFigurativeNumbers() {
-
+        Printer.print(nGonalNumbers(10000, 3).toArray());
+        Printer.print(nGonalNumbers(10000, 4).toArray());
+        Printer.print(nGonalNumbers(10000, 5).toArray());
+        Printer.print(nGonalNumbers(10000, 6).toArray());
+        Printer.print(nGonalNumbers(10000, 7).toArray());
+        Printer.print(nGonalNumbers(10000, 8).toArray());
     }
 
 }

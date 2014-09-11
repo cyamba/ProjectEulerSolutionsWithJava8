@@ -2,7 +2,7 @@ package com.yambacode.solutions.euler61;
 
 import com.yambacode.common.collections.Lists;
 import com.yambacode.common.io.Printer;
-import com.yambacode.math.Numbers;
+import com.yambacode.math.FigurativeNumbers;
 import com.yambacode.solutions.euler61.fresh.CFN;
 import org.junit.Test;
 
@@ -24,7 +24,7 @@ public class CyclesTest {
 
     @Test
     public void testCycleValidation() {
-        Cycle cycle = api.getCycle(FigurativeNumber.of(1225, Numbers.FigurativeType.SQUARE));
+        Cycle cycle = api.getCycle(FigurativeNumber.of(1225, FigurativeNumbers.FigurativeType.SQUARE));
 
     }
 

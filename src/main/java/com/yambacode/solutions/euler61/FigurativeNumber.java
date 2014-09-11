@@ -1,6 +1,6 @@
 package com.yambacode.solutions.euler61;
 
-import com.yambacode.math.Numbers;
+import com.yambacode.math.FigurativeNumbers;
 
 /**
  * Created by cbyamba on 2014-03-30.
@@ -13,13 +13,13 @@ public class FigurativeNumber {
 
     private Integer value;
 
-    private Numbers.FigurativeType type;
+    private FigurativeNumbers.FigurativeType type;
 
-    public Numbers.FigurativeType getType() {
+    public FigurativeNumbers.FigurativeType getType() {
         return type;
     }
 
-    private FigurativeNumber(Integer value, Numbers.FigurativeType type) {
+    private FigurativeNumber(Integer value, FigurativeNumbers.FigurativeType type) {
         this.value = value;
         //check(value);
         if (value.toString().length() == 4) {
@@ -35,12 +35,12 @@ public class FigurativeNumber {
         }
     }
 
-    public static FigurativeNumber of(int value, Numbers.FigurativeType type) {
+    public static FigurativeNumber of(int value, FigurativeNumbers.FigurativeType type) {
         return new FigurativeNumber(value, type);
     }
 
     public static FigurativeNumber of(int value) {
-        return new FigurativeNumber(value, Numbers.FigurativeType.UNDEFINED);
+        return new FigurativeNumber(value, FigurativeNumbers.FigurativeType.UNDEFINED);
     }
 
     public String getFirstTwo() {

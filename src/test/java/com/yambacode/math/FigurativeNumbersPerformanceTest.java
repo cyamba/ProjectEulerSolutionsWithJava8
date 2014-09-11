@@ -9,12 +9,12 @@ import java.util.stream.Stream;
 /**
  * Created by cbyamba on 2014-02-13.
  */
-public class NumbersPerformanceTest {
+public class FigurativeNumbersPerformanceTest {
 
     @Test
     public void testPerformance() {
         //times(1000, Numbers::isTriangleGeneralized, Numbers::isTriangularNumber);
-        times(100000, Numbers::isTriangularNumber, Numbers::isTriangleGeneralized);
+        times(100000, FigurativeNumbers::isTriangularNumber, FigurativeNumbers::isTriangleGeneralized);
 
         //times();
     }

@@ -3,7 +3,7 @@ package com.yambacode.solutions.euler61;
 import com.yambacode.common.collections.Lists;
 import com.yambacode.common.collections.Streams;
 import com.yambacode.common.io.Printer;
-import com.yambacode.math.Numbers;
+import com.yambacode.math.FigurativeNumbers;
 import com.yambacode.solutions.AbstractEulerSolver;
 import com.yambacode.solutions.EulerRunner;
 
@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.yambacode.math.Numbers.*;
+import static com.yambacode.math.FigurativeNumbers.*;
 
 /**
  * Created by cbyamba on 2014-04-12.
@@ -153,7 +153,7 @@ public class Euler61 extends AbstractEulerSolver {
      */
     protected static Cycle arrangeLastPieceOfThePuzzle(Cycle cycle, FigurativeNumber number) {
         FigurativeNumber lastPiece = cycle.getLast();
-        boolean isNGonalNumber = Numbers.isNGonalNumber(lastPiece, FigurativeType.values());
+        boolean isNGonalNumber = FigurativeNumbers.isNGonalNumber(lastPiece, FigurativeType.values());
         if (isNGonalNumber) {
             cycle.add(number);
         }

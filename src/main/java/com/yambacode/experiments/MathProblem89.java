@@ -6,7 +6,7 @@ import com.yambacode.solutions.EulerRunner;
 import java.util.Arrays;
 import java.util.stream.LongStream;
 
-import static com.yambacode.math.Numbers.fibbo;
+import static com.yambacode.math.FigurativeNumbers.fibbo;
 
 /**
  * Created by cbyamba on 2014-03-08.

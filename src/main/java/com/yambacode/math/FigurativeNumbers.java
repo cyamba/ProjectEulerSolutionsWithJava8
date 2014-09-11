@@ -7,6 +7,9 @@ import com.yambacode.solutions.euler61.FigurativeNumber;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
+import java.util.function.Function;
+import java.util.function.IntBinaryOperator;
 import java.util.function.IntUnaryOperator;
 import java.util.function.LongFunction;
 import java.util.stream.IntStream;
@@ -20,7 +23,59 @@ import static java.util.stream.Collectors.toList;
 /**
  * Created by cbyamba on 2014-01-24.
  */
-public class Numbers {
+public class FigurativeNumbers {
+
+    public static List<Integer> nGonalNumbers(int max, int type) {
+        return LongStream.range(1, max)
+                .map(n -> nGonalFunction.applyAsInt((int) n, type))
+                .filter(n -> n < max)
+                .mapToInt(n -> (int) n)
+                .boxed()
+                .collect(toList());
+    }
+
+    public static IntBinaryOperator nGonalFunction = (n, type) -> {
+        switch (type) {
+            case 3:
+                return triangularNumber(n);
+            case 4:
+                return squareNumber(n);
+            case 5:
+                return pentagonalNumber(n);
+            case 6:
+                return hexagonalNumber(n);
+            case 7:
+                return heptagonalNumber(n);
+            case 8:
+                return octagonalNumber(n);
+            default:
+                throw new UnsupportedOperationException("Undefined type : " + type);
+        }
+    };
+
+    public static List<Integer> triangularNumbers(int max) {
+        return nGonalNumbers(max, 3);
+    }
+
+    public static List<Integer> squareNumbers(int max) {
+        return nGonalNumbers(max, 4);
+    }
+
+    public static List<Integer> pentagonalNumbers(int max) {
+        return nGonalNumbers(max, 5);
+    }
+
+    public static List<Integer> hexagonalNumbers(int max) {
+        return nGonalNumbers(max, 6);
+    }
+
+    public static List<Integer> heptagonalNumbers(int max) {
+        return nGonalNumbers(max, 7);
+    }
+
+    public static List<Integer> octagonalNumbers(int max) {
+        return nGonalNumbers(max, 8);
+    }
 
     public static boolean isNGonalNumber(FigurativeNumber lastPiece, FigurativeType... types) {
         return Stream.of(types).anyMatch(type -> isNGonalNumber(lastPiece, type));
@@ -112,6 +167,7 @@ public class Numbers {
         }
     }
 
+    //TODO move
     public static long[] fibbo(long max, long[] numbers) {
         int length = numbers.length;
         if (numbers[length - 1] >= max) {
@@ -124,6 +180,7 @@ public class Numbers {
     }
 
 
+    //TODO  move
     public static long[] fibbo(int length, long[] numbers) {
         int size = numbers.length;
         if (size >= length) {
@@ -135,6 +192,7 @@ public class Numbers {
                         LongStream.of(numbers[size - 1] + numbers[size - 2])).toArray());
     }
 
+    //TODO move
     public static List<BigInteger> fibbo(int length, BigInteger[] numbers) {
         List<BigInteger> result = new ArrayList<>(length);
         BigInteger first = null;
@@ -286,27 +344,27 @@ public class Numbers {
     }
 
     public static List<Integer> triangleNumbersRangeClosed(int start, int endInclusive) {
-        return nGonalNumbers(start, endInclusive, Numbers::triangularNumber);
+        return nGonalNumbers(start, endInclusive, FigurativeNumbers::triangularNumber);
     }
 
     public static List<Integer> squareNumbersRangeClosed(int start, int endInclusive) {
-        return nGonalNumbers(start, endInclusive, Numbers::squareNumber);
+        return nGonalNumbers(start, endInclusive, FigurativeNumbers::squareNumber);
     }
 
     public static List<Integer> pentagonalNumbersRangeClosed(int start, int endInclusive) {
-        return nGonalNumbers(start, endInclusive, Numbers::pentagonalNumber);
+        return nGonalNumbers(start, endInclusive, FigurativeNumbers::pentagonalNumber);
     }
 
     public static List<Integer> hexagonalNumbersRangeClosed(int start, int endInclusive) {
-        return nGonalNumbers(start, endInclusive, Numbers::hexagonalNumber);
+        return nGonalNumbers(start, endInclusive, FigurativeNumbers::hexagonalNumber);
     }
 
     public static List<Integer> heptagonalNumbersRangeClosed(int start, int endInclusive) {
-        return nGonalNumbers(start, endInclusive, Numbers::heptagonalNumber);
+        return nGonalNumbers(start, endInclusive, FigurativeNumbers::heptagonalNumber);
     }
 
     public static List<Integer> octagonalNumbersRangeClosed(int start, int endIclusive) {
-        return nGonalNumbers(start, endIclusive, Numbers::octagonalNumber);
+        return nGonalNumbers(start, endIclusive, FigurativeNumbers::octagonalNumber);
     }
 
     public static List<Integer> figurativeNumbers(FigurativeType type, int maxInclusive) {
@@ -440,27 +498,27 @@ public class Numbers {
     }
 
     public static boolean areTriangleNumbers(int... numbers) {
-        return IntStream.of(numbers).allMatch(Numbers::isTriangleGeneralized);
+        return IntStream.of(numbers).allMatch(FigurativeNumbers::isTriangleGeneralized);
     }
 
     public static boolean areSquareNumbers(int... numbers) {
-        return IntStream.of(numbers).allMatch(Numbers::isSquareGeneralized);
+        return IntStream.of(numbers).allMatch(FigurativeNumbers::isSquareGeneralized);
     }
 
     public static boolean arePentagonalNumbers(int... numbers) {
-        return IntStream.of(numbers).allMatch(Numbers::isPentagonalGeneralized);
+        return IntStream.of(numbers).allMatch(FigurativeNumbers::isPentagonalGeneralized);
     }
 
     public static boolean areHexagonalNumbers(int... numbers) {
-        return IntStream.of(numbers).allMatch(Numbers::isHeptagonalGeneralized);
+        return IntStream.of(numbers).allMatch(FigurativeNumbers::isHeptagonalGeneralized);
     }
 
     public static boolean areHeptagonalNumbers(int... numbers) {
-        return IntStream.of(numbers).allMatch(Numbers::isHeptagonalGeneralized);
+        return IntStream.of(numbers).allMatch(FigurativeNumbers::isHeptagonalGeneralized);
     }
 
     public static boolean areOctagonalNumbers(int... numbers) {
-        return IntStream.of(numbers).allMatch(Numbers::isOctagonalGeneralized);
+        return IntStream.of(numbers).allMatch(FigurativeNumbers::isOctagonalGeneralized);
     }
 
     /**
@@ -493,7 +551,7 @@ public class Numbers {
         return heptagonalNumbersLessThan((int) Math.floor(n), (int) Math.ceil(n)).contains(n);
     }
 
-
+    //TODO move
     public static long nextOddComposite(long x) {
         long candidate = (x % 2 == 0) ? x + 1 : x + 2;
         while (Primes.isPrime(candidate)) {
@@ -525,6 +583,7 @@ public class Numbers {
         return mp0Root(IntStream.of(digits).reduce((prod, x) -> prod * x).getAsInt(), ++count, persistence);
     }
 
+    //TODO move
     public static Integer lowestMultiplicativePersistenceRoot(Integer persistence) {
         int number = 10;
         while (mp0Root(number, 0, persistence)) {

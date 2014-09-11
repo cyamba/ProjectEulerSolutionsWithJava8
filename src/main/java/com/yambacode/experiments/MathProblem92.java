@@ -1,6 +1,6 @@
 package com.yambacode.experiments;
 
-import com.yambacode.math.Numbers;
+import com.yambacode.math.FigurativeNumbers;
 import com.yambacode.solutions.AbstractEulerSolver;
 import com.yambacode.solutions.EulerRunner;
 
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class MathProblem92 extends AbstractEulerSolver {
     @Override
     public String doSolve() {
-        Map<Integer, Long> result = Numbers.fibbo(10000, new BigInteger[]{BigInteger.ONE, BigInteger.ONE})
+        Map<Integer, Long> result = FigurativeNumbers.fibbo(10000, new BigInteger[]{BigInteger.ONE, BigInteger.ONE})
                 .parallelStream()
                 .map(this::firstDigit
                 )

@@ -3,7 +3,7 @@ package com.yambacode.solutions.euler44;
 import com.yambacode.common.collections.LongStreams;
 import com.yambacode.common.collections.Streams;
 
-import static com.yambacode.math.Numbers.*;
+import static com.yambacode.math.FigurativeNumbers.*;
 
 import com.yambacode.solutions.AbstractEulerSolver;
 
