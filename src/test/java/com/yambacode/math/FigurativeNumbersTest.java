@@ -3,10 +3,18 @@ package com.yambacode.math;
 import static junit.framework.Assert.*;
 
 import com.yambacode.common.io.Printer;
+import com.yambacode.solutions.euler54.poker.Tuple;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.groupingBy;
 import static java.util.Arrays.*;
 
 import static com.yambacode.math.FigurativeNumbers.*;
@@ -15,6 +23,9 @@ import static com.yambacode.math.FigurativeNumbers.*;
  * Created by cbyamba on 2014-02-13.
  */
 public class FigurativeNumbersTest {
+
+    public static final int START = 1000;
+    public static final int END = 10000;
 
     /**
      * Triangle
@@ -55,12 +66,48 @@ public class FigurativeNumbersTest {
      */
     @Test
     public void testFigurativeNumbers() {
-        Printer.print(nGonalNumbers(10000, 3).toArray());
+        /*Printer.print(nGonalNumbers(10000, 3).toArray());
         Printer.print(nGonalNumbers(10000, 4).toArray());
         Printer.print(nGonalNumbers(10000, 5).toArray());
         Printer.print(nGonalNumbers(10000, 6).toArray());
         Printer.print(nGonalNumbers(10000, 7).toArray());
-        Printer.print(nGonalNumbers(10000, 8).toArray());
+        Printer.print(nGonalNumbers(10000, 8).toArray());*/
+
+        Map<Tuple<Integer, Integer>, List<Integer>> connections = new HashMap<>();
+        for (int i = 3; i <= 8; i++) {
+            for (int j = i + 1; j < 8; j++) {
+                connections.putAll(getNGonalNumbers(i, j));
+            }
+        }
+        Printer.print(connections.entrySet().toArray());
+    }
+
+    private Map<Tuple<Integer, Integer>, List<Integer>> getNGonalNumbers(int i, int j) {
+        Map<Tuple<Integer, Integer>, List<Integer>> connections = new HashMap<>();
+        List<Integer> secondList = nGonalNumbers(START, END, j);
+        List<Integer> firstList = nGonalNumbers(START, END, i);
+        Map<String, List<Integer>> firstTwoOfSecondList = secondList.stream()
+                .collect(groupingBy(x -> x.toString().substring(0, 2)));
+        for (Integer type : firstList) {
+            String key = type.toString().substring(2);
+            if (firstTwoOfSecondList.containsKey(key)) {
+                connections.put(Tuple.of(i, type), firstTwoOfSecondList.get(key));
+            }
+        }
+        return connections;
+    }
+
+
+    @Test
+    public void test() {
+        for (int i = 3; i <= 8; i++) {
+            
+        }
+    }
+
+    public Map<String, List<Integer>> groupBy(List<Integer> numbers) {
+        Map<String, List<Integer>> collect = numbers.stream().collect(groupingBy(i -> i.toString().substring(0, 2)));
+        return collect;
     }
 
 }

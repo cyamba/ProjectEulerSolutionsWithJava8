@@ -25,12 +25,32 @@ import static java.util.stream.Collectors.toList;
  */
 public class FigurativeNumbers {
 
+    public static List<com.yambacode.solutions.euler61.newtry.FigurativeNumber> figurativeNumbers(int start, int end, int type) {
+        return nGonalNumbers(start, end, type).stream()
+                .map(x -> com.yambacode.solutions.euler61.newtry.FigurativeNumber.of(type, x))
+                .collect(toList());
+    }
+
+    public static List<com.yambacode.solutions.euler61.newtry.FigurativeNumber> figurativeNumbers(int start, int end, int... types) {
+        return IntStream.of(types).boxed().flatMap(t -> figurativeNumbers(start, end, t).stream()).collect(toList());
+    }
+
     public static List<Integer> nGonalNumbers(int max, int type) {
         return LongStream.range(1, max)
                 .map(n -> nGonalFunction.applyAsInt((int) n, type))
                 .filter(n -> n < max)
                 .mapToInt(n -> (int) n)
                 .boxed()
+                .collect(toList());
+    }
+
+    public static List<Integer> nGonalNumbers(int start, int max, int type) {
+        return nGonalNumbers(max, type).stream().filter(x -> x >= start).collect(toList());
+    }
+
+    public static List<Integer> nGonalNumbers(int start, int max, int... types) {
+        return IntStream.of(types).boxed()
+                .flatMap(t -> nGonalNumbers(start, max, t).stream())
                 .collect(toList());
     }
 
