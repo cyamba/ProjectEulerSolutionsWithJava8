@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
  */
 public class Combinatorics {
 
-    public static BigInteger faculty(int n) {
+    public static BigInteger factorial(int n) {
         BigInteger product = BigInteger.ONE;
         for (int i = 2; i <= n; i++) {
             product = product.multiply(BigInteger.valueOf(i));
@@ -17,7 +17,7 @@ public class Combinatorics {
     }
 
     public static BigInteger combinations(int n, int k) {
-        return faculty(n).divide(faculty(k).multiply(faculty(n - k)));
+        return factorial(n).divide(factorial(k).multiply(factorial(n - k)));
     }
 
     /**

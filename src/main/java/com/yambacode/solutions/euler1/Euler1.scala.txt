@@ -1,0 +1,10 @@
+println ((1 to 1000).filter(n => n % 3 == 0 || n % 5 == 0).reduceLeft(_ + _))
+
+((0, 1) /: (1 to n)) ((a, dummy) => (a._2, a._1 + a._2))
+
+object EulerSolution {
+      def main(args: Array[String]) {
+           val solution = "replace_me"
+           println(solution)
+      }
+}

@@ -7,9 +7,11 @@ import com.yambacode.solutions.euler65.Fraction;
 import com.yambacode.solutions.euler70.Fractions;
 import com.yambacode.solutions.euler97.BigIntegers;
 
+import java.util.HashSet;
 import java.util.List;
 
 import java.math.BigInteger;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
@@ -21,6 +23,24 @@ import static java.lang.Math.*;
  * Created by cbyamba on 2014-01-10.
  */
 public class Divisibility {
+
+    /**
+     * 2011-11-12
+     * @param number
+     * @return
+     */
+    public static int numberOfDivisors(BigInteger number) {
+        BigInteger divisor = BigInteger.ONE;
+        int count = 1;
+        while (divisor.compareTo(number) < 0) {
+            if (number.mod(divisor).equals(BigInteger.ZERO)) {
+                count++;
+            }
+            //TODO find optimizing criteras for which to return
+            divisor = divisor.add(BigInteger.ONE);
+        }
+        return count;
+    }
 
     public static long totient(long n) {
         return LongStream.range(1, n).filter(k -> isCoprime(n, k)).count();
@@ -213,5 +233,24 @@ public class Divisibility {
 
     public static int sumOfProperDivisors(int n) {
         return IntStream.of(properDivisors(n)).sum();
+    }
+
+    public static Result numberOfPrimeFactors(int m, List<Long> p) {
+        List<Long> primes = p;
+        Set<Long> divisors = new HashSet<Long>();
+        Integer first = m;
+        for (Long i : primes) {
+            while (m % i == 0) {
+                m /= i;
+                divisors.add(i);
+            }
+            if (i >= m) {
+                break;
+            }
+        }
+        return ResultBuilder.create()
+                .first(first)
+                .count(divisors.size())
+                .build();
     }
 }

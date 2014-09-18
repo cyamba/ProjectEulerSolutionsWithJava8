@@ -13,7 +13,6 @@ public class SummationOfPrimes extends AbstractEulerSolver {
 
     public String doSolve() {
         return "" + range(1, 2000000)
-                //.parallel()
                 .filter(x -> isPrime(x))
                 .sum();
 

@@ -70,7 +70,7 @@ public class Permutations {
      */
     public static long[][] generatePermutation(long[] perm) {
         Comparable[] permutation = LongStream.of(perm).boxed().toArray(x -> new Long[perm.length]);
-        Comparable[][] result = new Long[Combinatorics.faculty(perm.length).intValue()][perm.length];
+        Comparable[][] result = new Long[Combinatorics.factorial(perm.length).intValue()][perm.length];
         int i = 0;
         while ((permutation = nextPermutation(permutation)) != null) {
             result[i++] = Arrays.copyOf(permutation, result[0].length);
@@ -83,7 +83,7 @@ public class Permutations {
      * @return
      */
     public static Comparable[][] generatePermutation(Comparable[] permutation) {
-        Comparable[][] result = new Comparable[Combinatorics.faculty(permutation.length).intValue()][permutation.length];
+        Comparable[][] result = new Comparable[Combinatorics.factorial(permutation.length).intValue()][permutation.length];
         int i = 0;
         result[i++] = Arrays.copyOf(permutation, permutation.length);
         while ((permutation = nextPermutation(permutation)) != null) {

@@ -7,6 +7,8 @@ import com.yambacode.common.io.Printer;
 import com.yambacode.solutions.AbstractEulerSolver;
 import com.yambacode.solutions.EulerRunner;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,10 +66,13 @@ public class NewAttempt extends AbstractEulerSolver {
             dictionary.put(number, continuation.stream().filter(f -> f.getType() != number.getType()).collect(toList()));
         }
         Printer.print(dictionary.entrySet().toArray());
+
         return null;
     }
 
     public static void main(String... args) {
         EulerRunner.runEulerSolvers(new NewAttempt());
+
+        Printer.print(BigInteger.valueOf(2).pow(64).toString());
     }
 }
