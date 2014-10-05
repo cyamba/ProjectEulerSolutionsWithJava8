@@ -36,6 +36,6 @@ public class Subsets {
 
     public static void main(String[] args) {
         System.out.println(Arrays.deepToString(toSubset(4, 15).toArray()));
-        System.out.println(Arrays.deepToString(subsets(4).toArray()));
+        System.out.println(Arrays.deepToString(subsets(20).toArray()));
     }
 }

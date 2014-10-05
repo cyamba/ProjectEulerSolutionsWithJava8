@@ -42,6 +42,6 @@ public class Compositions {
     }
 
     public static void main(String[] args) {
-        System.out.println(compositionsOf(5));
+        System.out.println(compositionsOf(20));
     }
 }
