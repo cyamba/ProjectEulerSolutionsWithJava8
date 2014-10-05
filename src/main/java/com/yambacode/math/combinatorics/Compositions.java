@@ -1,5 +1,7 @@
 package com.yambacode.math.combinatorics;
 
+import com.yambacode.common.io.Printer;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,7 @@ public class Compositions {
         if (length < 0 || number < 0) {
             throw new IllegalArgumentException("length and number must be non negative integers");
         }
-        if (BigInteger.valueOf(number).compareTo(BigInteger.valueOf(2).pow(length - 1)) > 0) {
+        if (BigInteger.valueOf(number).compareTo(BigInteger.valueOf(2).pow(length)) > 0) {
             throw new IllegalArgumentException("number is too big");
         }
         List<Integer> composition = new ArrayList<>();
@@ -34,13 +36,12 @@ public class Compositions {
     }
 
     public static List<List<Integer>> compositionsOf(int n) {
-        int length = Integer.highestOneBit(n);
-        return IntStream.range(0, BigInteger.valueOf(2).pow(length - 1).intValue())
-                .mapToObj(i -> toComposition(length, i))
+        return IntStream.range(0, BigInteger.valueOf(2).pow(n - 1).intValue())
+                .mapToObj(i -> toComposition(n, i))
                 .collect(Collectors.toList());
     }
 
     public static void main(String[] args) {
-        System.out.println(compositionsOf(4));
+        System.out.println(compositionsOf(5));
     }
 }
