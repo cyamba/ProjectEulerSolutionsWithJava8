@@ -1,4 +1,4 @@
-package com.yambacode.math;
+package com.yambacode.math.combinatorics;
 
 
 import com.yambacode.common.collections.Arrays1D;

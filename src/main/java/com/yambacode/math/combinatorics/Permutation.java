@@ -1,4 +1,4 @@
-package com.yambacode.math;
+package com.yambacode.math.combinatorics;
 
 import java.util.Arrays;
 import java.util.stream.Stream;

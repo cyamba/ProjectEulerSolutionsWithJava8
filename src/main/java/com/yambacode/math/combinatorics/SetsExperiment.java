@@ -1,6 +1,7 @@
-package com.yambacode.math;
+package com.yambacode.math.combinatorics;
 
 import com.yambacode.common.io.Printer;
+import com.yambacode.math.Primes;
 
 import java.math.BigInteger;
 import java.util.*;
@@ -8,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
-import static com.yambacode.math.Sets.subsetsFixedSize;
+import static com.yambacode.math.combinatorics.Sets.subsetsFixedSize;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;

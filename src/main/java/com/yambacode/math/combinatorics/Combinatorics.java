@@ -1,4 +1,4 @@
-package com.yambacode.math;
+package com.yambacode.math.combinatorics;
 
 import java.math.BigInteger;
 import java.util.stream.IntStream;

@@ -1,4 +1,4 @@
-package com.yambacode.math;
+package com.yambacode.math.combinatorics;
 
 /**
  * Created by cbyamba on 2014-01-13.
