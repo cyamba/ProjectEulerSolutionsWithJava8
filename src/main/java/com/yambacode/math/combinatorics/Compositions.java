@@ -34,7 +34,6 @@ public class Compositions {
             composition[j++] = part;
             i++;
         }
-        System.out.println(Arrays.deepToString(IntStream.of(composition).boxed().toArray()));
         return composition;
     }
 
