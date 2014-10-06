@@ -1,5 +1,6 @@
-package com.yambacode.math;
+package com.yambacode.math.combinatorics;
 
+import com.yambacode.math.combinatorics.Word;
 import junit.framework.Assert;
 import org.junit.Test;
 

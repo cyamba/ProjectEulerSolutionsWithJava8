@@ -1,6 +1,7 @@
-package com.yambacode.math;
+package com.yambacode.math.combinatorics;
 
 import com.yambacode.common.io.Printer;
+import com.yambacode.math.combinatorics.Permutations;
 import org.junit.Assert;
 import org.junit.Test;
 

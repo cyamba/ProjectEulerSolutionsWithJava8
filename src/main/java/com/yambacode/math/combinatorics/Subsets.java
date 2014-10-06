@@ -12,30 +12,32 @@ import java.util.stream.IntStream;
  */
 public class Subsets {
 
-    public static List<Integer> toSubset(int length, int number) {
+    public static int[] toSubset(int length, int number) {
         if (length < 0) {
             throw new IllegalArgumentException("length must be non-negative");
         }
         if (BigInteger.valueOf(number).compareTo(BigInteger.valueOf(2).pow(length)) > 0) {
             throw new IllegalArgumentException("number is to big");
         }
-        List<Integer> subset = new ArrayList<>();
+        int[] subset = new int[Integer.bitCount(number)];
+        int j = 0;
         for (int i = 0; i < length; i++) {
             if (((number >>> i) & 1) == 1) {
-                subset.add(i);
+                subset[j++] = i;
             }
         }
         return subset;
     }
 
-    public static List<List<Integer>> subsets(int length) {
-        return IntStream.range(0, BigInteger.valueOf(2).pow(length).intValue())
+    public static int[][] subsets(int length) {
+        if (length < 0) {
+            throw new IllegalArgumentException("length must be non-negative");
+        }
+        int size = BigInteger.valueOf(2).pow(length).intValue();
+        return IntStream.range(0, size)
                 .mapToObj(i -> toSubset(length, i))
-                .collect(Collectors.toList());
+                .toArray(int[][]::new);
     }
 
-    public static void main(String[] args) {
-        System.out.println(Arrays.deepToString(toSubset(4, 15).toArray()));
-        System.out.println(Arrays.deepToString(subsets(20).toArray()));
-    }
+
 }

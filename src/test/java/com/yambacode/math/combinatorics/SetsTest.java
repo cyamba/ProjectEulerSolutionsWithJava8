@@ -1,4 +1,4 @@
-package com.yambacode.math;
+package com.yambacode.math.combinatorics;
 
 import org.junit.Test;
 
@@ -9,8 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.yambacode.math.Combinatorics.*;
-import static com.yambacode.math.Sets.subsetsFixedSize;
+import static com.yambacode.math.combinatorics.Combinatorics.*;
+import static com.yambacode.math.combinatorics.Sets.subsetsFixedSize;
 
 /**
  * Created by cbyamba on 2014-02-08.
