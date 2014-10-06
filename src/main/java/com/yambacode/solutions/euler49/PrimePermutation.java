@@ -7,7 +7,7 @@ import java.util.Collection;
 
 import static com.yambacode.common.util.NumberStringConversions.comparableArrayToLong;
 import static com.yambacode.common.util.NumberStringConversions.longArrayToLong;
-import static com.yambacode.math.Permutations.generatePermutationCollection;
+import static com.yambacode.math.combinatorics.Permutations.generatePermutationCollection;
 import static java.util.stream.Collectors.toList;
 
 /**

@@ -3,7 +3,7 @@ package com.yambacode.solutions.euler70;
 import com.yambacode.common.collections.Lists;
 import com.yambacode.common.io.Printer;
 import com.yambacode.math.Divisibility;
-import com.yambacode.math.Permutations;
+import com.yambacode.math.combinatorics.Permutations;
 import com.yambacode.solutions.AbstractEulerSolver;
 import com.yambacode.solutions.EulerRunner;
 

@@ -1,7 +1,7 @@
 package com.yambacode.solutions.euler51;
 
 import com.yambacode.common.util.NumberStringConversions;
-import com.yambacode.math.Sets;
+import com.yambacode.math.combinatorics.Sets;
 import com.yambacode.solutions.AbstractEulerSolver;
 
 import static com.yambacode.solutions.EulerRunner.runEulerSolvers;

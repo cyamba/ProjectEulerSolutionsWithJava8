@@ -5,7 +5,7 @@ import com.yambacode.solutions.EulerRunner;
 
 import static com.yambacode.common.util.NumberStringConversions.comparableArrayToLong;
 import static com.yambacode.common.util.NumberStringConversions.longToComparableArray;
-import static com.yambacode.math.Permutations.generatePermutationCollection;
+import static com.yambacode.math.combinatorics.Permutations.generatePermutationCollection;
 import static com.yambacode.math.Primes.generatePrimesAsList;
 import static com.yambacode.math.Primes.isPrime;
 import static java.util.stream.Collectors.joining;

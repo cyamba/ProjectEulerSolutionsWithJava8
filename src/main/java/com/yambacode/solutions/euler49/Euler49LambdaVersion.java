@@ -7,7 +7,7 @@ import java.util.stream.LongStream;
 
 import static com.yambacode.common.util.NumberStringConversions.longToLongArray;
 import static com.yambacode.common.util.UpDownCastArrays.upCast;
-import static com.yambacode.math.Permutations.generatePermutationCollection;
+import static com.yambacode.math.combinatorics.Permutations.generatePermutationCollection;
 import static com.yambacode.math.Primes.generatePrimes;
 import static java.util.stream.LongStream.of;
 

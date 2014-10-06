@@ -2,7 +2,7 @@ package com.yambacode.solutions.euler52;
 
 import com.yambacode.solutions.AbstractEulerSolver;
 
-import static com.yambacode.math.Permutations.arePermutations;
+import static com.yambacode.math.combinatorics.Permutations.arePermutations;
 import static java.util.stream.LongStream.range;
 import static java.util.stream.LongStream.rangeClosed;
 

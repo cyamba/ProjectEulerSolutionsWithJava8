@@ -2,6 +2,7 @@ package com.yambacode.solutions.euler3;
 
 import com.yambacode.math.Primes;
 import com.yambacode.solutions.AbstractEulerSolver;
+import com.yambacode.solutions.EulerRunner;
 
 /**
  * Created by cbyamba on 2014-01-10.
@@ -24,6 +25,10 @@ public class LargestPrimeFactorLazyVersion extends AbstractEulerSolver {
             }
         }
         return "";
+    }
+
+    public static void main(String... args) {
+        EulerRunner.runEulerSolvers(new LargestPrimeFactorLazyVersion());
     }
 
 }

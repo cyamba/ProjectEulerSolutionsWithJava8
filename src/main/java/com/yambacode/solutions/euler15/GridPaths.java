@@ -2,7 +2,7 @@ package com.yambacode.solutions.euler15;
 
 import com.yambacode.solutions.AbstractEulerSolver;
 
-import static com.yambacode.math.Combinatorics.combinations;
+import static com.yambacode.math.combinatorics.Combinatorics.combinations;
 
 /**
  * * A nice little case of multinomial coefficient.

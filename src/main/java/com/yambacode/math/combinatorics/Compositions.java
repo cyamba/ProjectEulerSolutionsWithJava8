@@ -1,12 +1,6 @@
 package com.yambacode.math.combinatorics;
 
-import com.yambacode.common.io.Printer;
-
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -15,6 +9,12 @@ import java.util.stream.IntStream;
 public class Compositions {
 
 
+    /**
+     *
+     * @param length
+     * @param number
+     * @return
+     */
     public static int[] toComposition(int length, int number) {
         if (length < 0 || number < 0) {
             throw new IllegalArgumentException("length and number must be non negative integers");
@@ -37,6 +37,11 @@ public class Compositions {
         return composition;
     }
 
+    /**
+     * 
+     * @param n
+     * @return
+     */
     public static int[][] compositionsOf(int n) {
         if (n < 0) {
             throw new IllegalArgumentException("number must be non negative");

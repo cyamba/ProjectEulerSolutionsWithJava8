@@ -1,6 +1,9 @@
 package com.yambacode.solutions.euler98;
 
-import com.yambacode.math.*;
+import com.yambacode.math.combinatorics.MultiPermutations;
+import com.yambacode.math.combinatorics.Permutation;
+import com.yambacode.math.combinatorics.Sets;
+import com.yambacode.math.combinatorics.Word;
 import com.yambacode.solutions.AbstractEulerSolver;
 import com.yambacode.solutions.EulerRunner;
 import com.yambacode.solutions.euler54.poker.Tuple;
@@ -12,7 +15,7 @@ import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 import static com.yambacode.common.util.NumberStringConversions.*;
-import static com.yambacode.math.MultiPermutations.sameMultiplicity;
+import static com.yambacode.math.combinatorics.MultiPermutations.sameMultiplicity;
 
 /**
  * Created by cbyamba on 2014-04-04.

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static com.yambacode.math.Combinatorics.combinations;
+import static com.yambacode.math.combinatorics.Combinatorics.combinations;
 
 /**
  * http://projecteuler.net/problem=53

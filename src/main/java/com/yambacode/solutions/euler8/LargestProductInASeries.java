@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 import static com.yambacode.common.io.ContentReader.getContent;
 import static com.yambacode.common.util.StringToIntegers.convert;
-import static com.yambacode.math.Partitions.toEqualParts;
+import static com.yambacode.math.combinatorics.Partitions.toEqualParts;
 import static java.util.stream.IntStream.of;
 import static java.util.stream.Stream.of;
 

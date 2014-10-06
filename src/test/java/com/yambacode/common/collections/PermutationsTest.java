@@ -1,7 +1,7 @@
 package com.yambacode.common.collections;
 
 import com.yambacode.common.io.Printer;
-import com.yambacode.math.Permutations;
+import com.yambacode.math.combinatorics.Permutations;
 import org.junit.Test;
 
 /**

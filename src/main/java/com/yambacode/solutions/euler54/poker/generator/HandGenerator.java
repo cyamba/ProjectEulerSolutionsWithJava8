@@ -2,8 +2,7 @@ package com.yambacode.solutions.euler54.poker.generator;
 
 import com.yambacode.common.io.Printer;
 import com.yambacode.common.io.Serializer;
-import com.yambacode.math.Combinatorics;
-import com.yambacode.math.Sets;
+import com.yambacode.math.combinatorics.Sets;
 import com.yambacode.solutions.euler54.poker.Card;
 import com.yambacode.solutions.euler54.poker.Hand;
 import com.yambacode.solutions.euler54.poker.Suit;

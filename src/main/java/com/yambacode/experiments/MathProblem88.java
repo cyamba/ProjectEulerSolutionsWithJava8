@@ -1,7 +1,7 @@
 package com.yambacode.experiments;
 
 import com.yambacode.common.util.NumberStringConversions;
-import com.yambacode.math.Permutations;
+import com.yambacode.math.combinatorics.Permutations;
 import com.yambacode.solutions.AbstractEulerSolver;
 import com.yambacode.solutions.EulerRunner;
 

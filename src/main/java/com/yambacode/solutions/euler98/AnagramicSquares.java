@@ -3,8 +3,8 @@ package com.yambacode.solutions.euler98;
 import static com.yambacode.common.io.Java8Reader.*;
 
 import com.yambacode.common.util.NumberStringConversions;
-import com.yambacode.math.MultiPermutations;
-import com.yambacode.math.Permutations;
+import com.yambacode.math.combinatorics.MultiPermutations;
+import com.yambacode.math.combinatorics.Permutations;
 import com.yambacode.solutions.AbstractEulerSolver;
 
 import static com.yambacode.solutions.EulerRunner.*;

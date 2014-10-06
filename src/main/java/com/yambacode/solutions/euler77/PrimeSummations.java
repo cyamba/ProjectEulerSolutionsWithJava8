@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import static com.yambacode.math.Primes.generatePrimesAsList;
-import static com.yambacode.math.Sets.subsets;
+import static com.yambacode.math.combinatorics.Sets.subsets;
 import static com.yambacode.solutions.EulerRunner.runEulerSolvers;
 import static java.util.stream.Collectors.toList;
 

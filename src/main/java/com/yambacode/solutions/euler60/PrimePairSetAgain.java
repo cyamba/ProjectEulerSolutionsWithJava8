@@ -1,7 +1,7 @@
 package com.yambacode.solutions.euler60;
 
 import com.yambacode.math.Primes;
-import com.yambacode.math.Sets;
+import com.yambacode.math.combinatorics.Sets;
 import com.yambacode.solutions.AbstractEulerSolver;
 import com.yambacode.solutions.EulerRunner;
 

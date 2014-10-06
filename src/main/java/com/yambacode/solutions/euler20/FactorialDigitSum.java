@@ -3,7 +3,7 @@ package com.yambacode.solutions.euler20;
 import com.yambacode.solutions.AbstractEulerSolver;
 
 import static com.yambacode.common.util.CollectionConversion.bigIntegerToDigits;
-import static com.yambacode.math.Combinatorics.factorial;
+import static com.yambacode.math.combinatorics.Combinatorics.factorial;
 import static java.util.stream.IntStream.of;
 
 /**

@@ -6,7 +6,7 @@ import com.yambacode.solutions.AbstractEulerSolver;
 
 import static com.yambacode.common.util.NumberStringConversions.comparableArrayToLong;
 import static com.yambacode.common.util.NumberStringConversions.intArrayToInt;
-import static com.yambacode.math.Permutations.generatePermutationCollection;
+import static com.yambacode.math.combinatorics.Permutations.generatePermutationCollection;
 import static java.util.Arrays.copyOfRange;
 import static java.util.stream.IntStream.rangeClosed;
 import static java.util.stream.Stream.of;

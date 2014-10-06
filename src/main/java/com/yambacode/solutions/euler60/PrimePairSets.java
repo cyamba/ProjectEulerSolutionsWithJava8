@@ -1,9 +1,9 @@
 package com.yambacode.solutions.euler60;
 
 import static com.yambacode.math.Primes.*;
-import static com.yambacode.math.Sets.*;
+import static com.yambacode.math.combinatorics.Sets.*;
 
-import com.yambacode.math.SetsExperiment;
+import com.yambacode.math.combinatorics.SetsExperiment;
 import com.yambacode.solutions.AbstractEulerSolver;
 
 import java.util.List;

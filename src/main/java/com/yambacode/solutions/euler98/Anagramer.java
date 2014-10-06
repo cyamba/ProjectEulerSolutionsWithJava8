@@ -1,6 +1,6 @@
 package com.yambacode.solutions.euler98;
 
-import com.yambacode.math.Permutations;
+import com.yambacode.math.combinatorics.Permutations;
 
 /**
  * Created by cbyamba on 2014-04-02.

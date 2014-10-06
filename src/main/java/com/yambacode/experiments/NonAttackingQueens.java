@@ -7,7 +7,7 @@ import com.yambacode.solutions.EulerRunner;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static com.yambacode.math.Permutations.generatePermutationCollection;
+import static com.yambacode.math.combinatorics.Permutations.generatePermutationCollection;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 

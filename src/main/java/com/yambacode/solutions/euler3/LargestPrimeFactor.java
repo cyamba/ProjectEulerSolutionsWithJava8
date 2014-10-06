@@ -1,10 +1,13 @@
 package com.yambacode.solutions.euler3;
 
 
+import com.yambacode.common.io.Printer;
 import com.yambacode.solutions.AbstractEulerSolver;
+import com.yambacode.solutions.EulerRunner;
 
 import java.util.function.LongPredicate;
 import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 /**
  * TODO fix java.lang.OutOfMemoryError: Java heap space
@@ -27,6 +30,7 @@ public class LargestPrimeFactor extends AbstractEulerSolver {
      * @return
      */
     public long[] primeSieve(long[] numbers, long[] primes, LongPredicate predicate, long composite) {
+
         long lastPrime = primes[primes.length - 1];
         if (lastPrime >= Math.sqrt(composite)) {
             return primes;
@@ -75,6 +79,10 @@ public class LargestPrimeFactor extends AbstractEulerSolver {
         long[] numbers = LongStream.range(2, INPUT_VALUE).toArray();
         long[] primes = primeSieve(numbers, new long[]{2}, x -> x % 2 != 0, INPUT_VALUE);
         return String.valueOf(getLargestPrimeFactor(primes, INPUT_VALUE));
+    }
+
+    public static void main(String... args) {
+        throw new UnsupportedOperationException("TODO fixmeifyoucan!");
     }
 
 

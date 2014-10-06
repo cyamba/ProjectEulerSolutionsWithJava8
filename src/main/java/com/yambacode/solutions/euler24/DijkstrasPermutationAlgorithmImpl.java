@@ -1,6 +1,6 @@
 package com.yambacode.solutions.euler24;
 
-import com.yambacode.math.Combinatorics;
+import com.yambacode.math.combinatorics.Combinatorics;
 import com.yambacode.solutions.AbstractEulerSolver;
 
 /**
