@@ -12,16 +12,22 @@ import java.util.stream.IntStream;
  */
 public class Subsets {
 
-    public static int[] toSubset(int length, int number) {
-        if (length < 0) {
-            throw new IllegalArgumentException("length must be non-negative");
+    /**
+     *
+     * @param size - number of elements of the set
+     * @param number - the number to be converted to a subset.
+     * @return
+     */
+    public static int[] toSubset(int size, int number) {
+        if (size < 0) {
+            throw new IllegalArgumentException("size must be non-negative");
         }
-        if (BigInteger.valueOf(number).compareTo(BigInteger.valueOf(2).pow(length)) > 0) {
+        if (BigInteger.valueOf(number).compareTo(BigInteger.valueOf(2).pow(size)) > 0) {
             throw new IllegalArgumentException("number is to big");
         }
         int[] subset = new int[Integer.bitCount(number)];
         int j = 0;
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < size; i++) {
             if (((number >>> i) & 1) == 1) {
                 subset[j++] = i;
             }
@@ -29,6 +35,11 @@ public class Subsets {
         return subset;
     }
 
+    /**
+     *
+     * @param length
+     * @return
+     */
     public static int[][] subsets(int length) {
         if (length < 0) {
             throw new IllegalArgumentException("length must be non-negative");
