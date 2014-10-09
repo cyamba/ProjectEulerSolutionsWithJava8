@@ -8,7 +8,10 @@ import com.yambacode.common.util.Strings;
 import com.yambacode.solutions.euler97.BigIntegers;
 
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;

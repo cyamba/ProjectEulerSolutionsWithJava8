@@ -1,11 +1,9 @@
 package com.yambacode.math;
 
-import java.util.stream.IntStream;
-
 /**
  * Created by cbyamba on 2014-01-07.
  */
-public class MathGeneral {
+public class YMath {
 
 
     public static long sumOfSquares(int n) {

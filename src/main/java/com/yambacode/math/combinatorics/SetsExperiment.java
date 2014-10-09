@@ -10,7 +10,6 @@ import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
 import static com.yambacode.math.combinatorics.Sets.subsetsFixedSize;
-import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 

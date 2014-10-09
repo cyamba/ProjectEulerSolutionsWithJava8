@@ -1,10 +1,8 @@
 package com.yambacode.math.combinatorics;
 
+import static com.yambacode.math.YMath.log;
+
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -13,8 +11,7 @@ import java.util.stream.IntStream;
 public class Subsets {
 
     /**
-     *
-     * @param size - number of elements of the set
+     * @param size   - number of elements of the set
      * @param number - the number to be converted to a subset.
      * @return
      */
@@ -22,8 +19,8 @@ public class Subsets {
         if (size < 0) {
             throw new IllegalArgumentException("size must be non-negative");
         }
-        if (BigInteger.valueOf(number).compareTo(BigInteger.valueOf(2).pow(size)) > 0) {
-            throw new IllegalArgumentException("number is to big");
+        if (log(number, 2) > size) {
+            throw new IllegalArgumentException("number is too big");
         }
         int[] subset = new int[Integer.bitCount(number)];
         int j = 0;
@@ -36,7 +33,6 @@ public class Subsets {
     }
 
     /**
-     *
      * @param length
      * @return
      */

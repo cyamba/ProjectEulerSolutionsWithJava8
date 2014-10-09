@@ -1,5 +1,6 @@
 package com.yambacode.math.combinatorics;
 
+import com.yambacode.common.io.Printer;
 import junit.framework.Assert;
 import org.junit.Test;
 
@@ -10,7 +11,9 @@ public class CompositionsTest {
 
     @Test
     public void testPositive() {
-        Assert.assertEquals(16, Compositions.compositionsOf(5).length);
+        int[][] compositions = Compositions.compositionsOf(5);
+        Assert.assertEquals(16, compositions.length);
+        Printer.print(compositions);
     }
 
     @Test(expected = IllegalArgumentException.class)

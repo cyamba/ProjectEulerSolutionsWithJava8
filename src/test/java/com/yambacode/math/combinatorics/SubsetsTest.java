@@ -1,5 +1,6 @@
 package com.yambacode.math.combinatorics;
 
+import com.yambacode.common.io.Printer;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,9 +11,11 @@ public class SubsetsTest {
 
     @Test
     public void testPositive() {
-        Assert.assertEquals(16, Subsets.subsets(4));
-        Assert.assertEquals(32, Subsets.subsets(5));
-        Assert.assertEquals(64, Subsets.subsets(6));
+        Assert.assertEquals(16, Subsets.subsets(4).length);
+        Assert.assertEquals(32, Subsets.subsets(5).length);
+        int[][] subsets = Subsets.subsets(6);
+        Assert.assertEquals(64, subsets.length);
+        Printer.print(subsets);
     }
 
     @Test(expected = IllegalArgumentException.class)

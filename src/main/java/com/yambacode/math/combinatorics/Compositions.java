@@ -1,5 +1,7 @@
 package com.yambacode.math.combinatorics;
 
+import static com.yambacode.math.YMath.log;
+
 import java.math.BigInteger;
 import java.util.stream.IntStream;
 
@@ -10,22 +12,21 @@ public class Compositions {
 
 
     /**
-     *
-     * @param length
+     * @param size
      * @param number
      * @return
      */
-    public static int[] toComposition(int length, int number) {
-        if (length < 0 || number < 0) {
-            throw new IllegalArgumentException("length and number must be non negative integers");
+    public static int[] toComposition(int size, int number) {
+        if (size < 0 || number < 0) {
+            throw new IllegalArgumentException("size and number must be non negative integers");
         }
-        if (BigInteger.valueOf(number).compareTo(BigInteger.valueOf(2).pow(length)) > 0) {
-            throw new IllegalArgumentException("number is too big");
+        if (log(number, 2) > size) {
+            throw new IllegalArgumentException("number is to big");
         }
-        int[] composition = new int[length - Integer.bitCount(number)];
+        int[] composition = new int[size - Integer.bitCount(number)];
         int i = 0;
         int j = 0;
-        while (i < length) {
+        while (i < size) {
             Integer part = 1;
             while (((number >>> i) & 1) == 1) {
                 part += 1;
@@ -38,7 +39,6 @@ public class Compositions {
     }
 
     /**
-     * 
      * @param n
      * @return
      */
@@ -46,6 +46,7 @@ public class Compositions {
         if (n < 0) {
             throw new IllegalArgumentException("number must be non negative");
         }
+        BigInteger.valueOf(n).intValue();
         return IntStream.range(0, BigInteger.valueOf(2).pow(n - 1).intValue())
                 .mapToObj(i -> toComposition(n, i)).toArray(int[][]::new);
     }

@@ -2,7 +2,6 @@ package com.yambacode.math.combinatorics;
 
 
 import com.yambacode.common.io.Printer;
-import com.yambacode.math.combinatorics.Combinatorics;
 import com.yambacode.solutions.euler54.poker.Tuple;
 
 import java.math.BigInteger;
