@@ -21,7 +21,7 @@ public class Compositions {
             throw new IllegalArgumentException("size and number must be non negative integers");
         }
         if (log(number, 2) > size) {
-            throw new IllegalArgumentException("number is to big");
+            throw new IllegalArgumentException("number is too big");
         }
         int[] composition = new int[size - Integer.bitCount(number)];
         int i = 0;
