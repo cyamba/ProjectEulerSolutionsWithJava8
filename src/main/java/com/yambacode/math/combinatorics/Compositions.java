@@ -12,16 +12,13 @@ public class Compositions {
 
 
     /**
-     * @param size
-     * @param number
-     * @return
+     * @param size   - length of the corresponding bit string
+     * @param number - a non negative integer
+     * @return - an int array representing the composition
      */
     public static int[] toComposition(int size, int number) {
-        if (size < 0 || number < 0) {
-            throw new IllegalArgumentException("size and number must be non negative integers");
-        }
-        if (log(number, 2) > size) {
-            throw new IllegalArgumentException("number is too big");
+        if (number < 0 || size < 0 || log(number, 2) > size) {
+            return new int[]{};
         }
         int[] composition = new int[size - Integer.bitCount(number)];
         int i = 0;
@@ -39,12 +36,12 @@ public class Compositions {
     }
 
     /**
-     * @param n
-     * @return
+     * @param n - a non negative integer
+     * @return - an array of all compositions of n
      */
     public static int[][] compositionsOf(int n) {
         if (n < 0) {
-            throw new IllegalArgumentException("number must be non negative");
+            return new int[][]{};
         }
         return IntStream.range(0, BigInteger.valueOf(2).pow(n - 1).intValue())
                 .mapToObj(i -> toComposition(n, i)).toArray(int[][]::new);
