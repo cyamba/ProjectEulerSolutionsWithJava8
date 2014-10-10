@@ -11,8 +11,8 @@ public class CompositionsTest {
 
     @Test
     public void testPositive() {
-        int[][] compositions = Compositions.compositionsOf(5);
-        Assert.assertEquals(16, compositions.length);
+        int[][] compositions = Compositions.compositionsOf(15);
+        Assert.assertEquals(16384, compositions.length);
         Printer.print(compositions);
     }
 
