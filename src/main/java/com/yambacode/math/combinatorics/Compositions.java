@@ -46,7 +46,6 @@ public class Compositions {
         if (n < 0) {
             throw new IllegalArgumentException("number must be non negative");
         }
-        BigInteger.valueOf(n).intValue();
         return IntStream.range(0, BigInteger.valueOf(2).pow(n - 1).intValue())
                 .mapToObj(i -> toComposition(n, i)).toArray(int[][]::new);
     }
