@@ -14,5 +14,9 @@ public class YMath {
         return (long) Math.pow((n * (n + 1) / 2), 2);
     }
 
+    public static double log(int n, int base) {
+        return (Math.log(n) / Math.log(base));
+    }
+
 
 }

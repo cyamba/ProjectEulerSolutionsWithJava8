@@ -7,17 +7,16 @@ import com.yambacode.solutions.euler65.Fraction;
 import com.yambacode.solutions.euler70.Fractions;
 import com.yambacode.solutions.euler97.BigIntegers;
 
+import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.List;
-
-import java.math.BigInteger;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
-
-import static java.lang.Math.*;
+import static java.lang.Math.ceil;
+import static java.lang.Math.sqrt;
 
 /**
  * Created by cbyamba on 2014-01-10.

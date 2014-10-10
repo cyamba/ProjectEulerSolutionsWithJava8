@@ -7,8 +7,6 @@ import com.yambacode.solutions.euler61.FigurativeNumber;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
-import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
 import java.util.function.IntUnaryOperator;
 import java.util.function.LongFunction;
