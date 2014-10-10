@@ -12,7 +12,7 @@ public class CompositionsTest {
     @Test
     public void testPositive() {
         int[][] compositions = Compositions.compositionsOf(15);
-        Assert.assertEquals(16384, compositions.length);
+        Assert.assertEquals(1 << (15 - 1), compositions.length);
         Printer.print(compositions);
     }
 
