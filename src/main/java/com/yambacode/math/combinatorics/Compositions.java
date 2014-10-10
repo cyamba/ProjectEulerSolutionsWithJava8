@@ -17,7 +17,9 @@ public class Compositions {
      * @return - an int array representing the composition
      */
     public static int[] toComposition(int size, int number) {
-        if (number < 0 || size < 0 || log(number, 2) > size) {
+        if (number < 0 || size < 0
+                || log(number, 2) > size //number is too big
+                ) {
             return new int[]{};
         }
         int[] composition = new int[size - Integer.bitCount(number)];

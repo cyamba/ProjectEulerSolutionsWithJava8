@@ -16,11 +16,10 @@ public class Subsets {
      * @return
      */
     public static int[] toSubset(int size, int number) {
-        if (size < 0) {
-            throw new IllegalArgumentException("size must be non-negative");
-        }
-        if (log(number, 2) > size) {
-            throw new IllegalArgumentException("number is too big");
+        if (number < 0 || size < 0
+                || log(number, 2) > size //number is too big
+                ) {
+            return new int[]{};
         }
         int[] subset = new int[Integer.bitCount(number)];
         int j = 0;
@@ -38,7 +37,7 @@ public class Subsets {
      */
     public static int[][] subsets(int length) {
         if (length < 0) {
-            throw new IllegalArgumentException("length must be non-negative");
+            return new int[][]{};
         }
         int size = BigInteger.valueOf(2).pow(length).intValue();
         return IntStream.range(0, size)
