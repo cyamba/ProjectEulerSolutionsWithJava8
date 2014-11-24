@@ -23,7 +23,7 @@ public class Sorting {
             key = numbers[j]; //9
             for (i = j - 1; (i >= 0) && (numbers[i] > key); i--)   // Smaller values are moving up
             {
-                numbers[i + 1] = numbers[i];//copy from left to right one position
+                numbers[i + 1] = numbers[i];//copy from right to left one position
             }
             numbers[i + 1] = key;    // Put the key in its proper location
         }

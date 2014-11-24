@@ -22,12 +22,12 @@ public class PrPaSe extends AbstractEulerSolver {
     public String doSolve() {
         List<Long> primes = Primes.generatePrimesAsList(10000);
 
-        //populate prime clubs with one member
+        //partition prime clubs with one member
         List<PrimeClub> primeClubs = primes.stream()
                 .map(p -> new PrimeClub().add(p))
                 .collect(Collectors.toList());
 
-        //populate prime clubs of size 2 to 5
+        //partition prime clubs of size 2 to 5
         List<PrimeClub> result = populate(primeClubs, primes, 1);
 
         //group size 5 clubs by sum

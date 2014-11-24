@@ -1,0 +1,7 @@
+public class GroovyEuler1 {
+
+    static def solve(def n=1000) {
+        (1..n).
+    }
+
+}
