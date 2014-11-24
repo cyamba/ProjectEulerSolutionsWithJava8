@@ -36,7 +36,7 @@ public class LargestPalindromeProduct extends AbstractEulerSolver {
     }
 
     public static void main(String... args) {
-        Printer.print(new LargestPalindromeProduct().solve());
+        Printer.print(new LargestPalindromeProduct()    .solve());
     }
 
 }

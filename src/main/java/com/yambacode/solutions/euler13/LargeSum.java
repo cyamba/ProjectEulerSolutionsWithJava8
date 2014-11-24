@@ -2,6 +2,7 @@ package com.yambacode.solutions.euler13;
 
 import com.yambacode.common.io.Printer;
 import com.yambacode.solutions.AbstractEulerSolver;
+import com.yambacode.solutions.EulerRunner;
 
 import java.io.File;
 import java.math.BigInteger;
@@ -30,6 +31,6 @@ public class LargeSum extends AbstractEulerSolver {
     }
 
     public static void main(String... args) {
-        Printer.print(new LargeSum().solve());
+        EulerRunner.runEulerSolvers(new LargeSum());
     }
 }
