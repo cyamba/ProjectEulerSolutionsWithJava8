@@ -5,6 +5,7 @@ import static com.yambacode.math.FigurativeNumbers.*;
 
 import com.yambacode.common.io.Printer;
 import com.yambacode.solutions.AbstractEulerSolver;
+import com.yambacode.solutions.EulerRunner;
 
 import java.util.stream.LongStream;
 
@@ -22,6 +23,14 @@ public class EvenFibonacciNumbers extends AbstractEulerSolver {
     }
 
     public static void main(String... args) {
-        Printer.print(new EvenFibonacciNumbers().solve());
+        EulerRunner.runEulerSolvers(
+                new EvenFibonacciNumbers()
+                //,
+               // new Euler2Imperative(),
+               // new GroovyEuler2(),
+               // new EvenFibonacciNumbers(),
+               // new GroovyEuler2(),
+               // new Euler2Imperative()
+        );
     }
 }
