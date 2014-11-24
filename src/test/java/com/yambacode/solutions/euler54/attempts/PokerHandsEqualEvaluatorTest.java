@@ -31,9 +31,9 @@ public class PokerHandsEqualEvaluatorTest {
 
 
         //test all
-        PokerHandsReader.getAllPokerHandsTuples()
-                .map(tuple -> tuple(handWithRankValue(rank(tuple._1()), 1, tuple._1().getCards()),
-                        handWithRankValue(rank(tuple._2()), 2, tuple._2().getCards())))
-                .forEach(tuple -> Printer.print(tuple.toString() + " --> " + PokerHandsEqualEvaluator.evaluate(tuple)));
+        //PokerHandsReader.getAllPokerHandsTuples()
+               // .map(tuple -> tuple(handWithRankValue(rank(tuple._1()), 1, tuple._1().getCards()),
+               //         handWithRankValue(rank(tuple._2()), 2, tuple._2().getCards())))
+               // .forEach(tuple -> Printer.print(tuple.toString() + " --> " + PokerHandsEqualEvaluator.evaluate(tuple)));
     }
 }
