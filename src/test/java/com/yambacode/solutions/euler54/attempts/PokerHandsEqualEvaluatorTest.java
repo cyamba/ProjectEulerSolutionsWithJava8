@@ -18,16 +18,16 @@ import org.junit.Test;
  */
 public class PokerHandsEqualEvaluatorTest {
 
-    @Test
+    //@Test
     public void testWinningHands() {
         //equal pairs
-        PokerHandsReader.getAllPokerHandsTuples()
+     //   PokerHandsReader.getAllPokerHandsTuples()
 //                .peek(tuple -> Printer.print(tuple.toString()))
-                .map(tuple -> tuple(handWithRankValue(rank(tuple._1()), 1, tuple._1().getCards()),
-                        handWithRankValue(rank(tuple._2()), 2, tuple._2().getCards())))
+       //         .map(tuple -> tuple(handWithRankValue(rank(tuple._1()), 1, tuple._1().getCards()),
+        //                handWithRankValue(rank(tuple._2()), 2, tuple._2().getCards())))
                         //              .peek(tuple -> Printer.print(tuple.toString()))
-                .filter(tuple -> tuple._1().getRank() == tuple._2().getRank())
-                .forEach(tuple -> Printer.print(tuple.toString() + " --> " + PokerHandsEqualEvaluator.evaluate(tuple)));
+          //      .filter(tuple -> tuple._1().getRank() == tuple._2().getRank())
+           //     .forEach(tuple -> Printer.print(tuple.toString() + " --> " + PokerHandsEqualEvaluator.evaluate(tuple)));
 
 
         //test all

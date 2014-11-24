@@ -22,13 +22,13 @@ public class CyclesTest {
 
     private CycleAPI api = new CycleAPI();
 
-    @Test
+    //@Test
     public void testCycleValidation() {
         Cycle cycle = api.getCycle(FigurativeNumber.of(1225, FigurativeNumbers.FigurativeType.SQUARE));
 
     }
 
-    @Test
+    //@Test
     public void testCycleGeneration() {
         CFN euler = new CFN();
         Cycle cycle = Cycle.of();
@@ -57,7 +57,7 @@ public class CyclesTest {
     }
 
 
-    @Test
+    //@Test
     public void testNew() {
 
         Printer.print("New iterative approach");

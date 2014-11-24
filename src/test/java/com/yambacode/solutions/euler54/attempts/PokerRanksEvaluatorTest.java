@@ -38,7 +38,7 @@ import static org.junit.Assert.assertTrue;
 public class PokerRanksEvaluatorTest {
 
 
-    @Test
+    //@Test
     public void testIsFlush() {
 
         Hand actualHand = hand(1, card(10, 's'), card(13, 's'), card(12, 's'), card(11, 's'), card(10, 's'));
@@ -49,7 +49,7 @@ public class PokerRanksEvaluatorTest {
                 .forEach(hand -> Printer.print(hand.toString()));
     }
 
-    @Test
+    //@Test
     public void testIsRoyalflush() {
 
         Hand actualHand = hand(1, card(14, 's'), card(13, 's'), card(12, 's'), card(11, 's'), card(10, 's'));
@@ -60,7 +60,7 @@ public class PokerRanksEvaluatorTest {
                 .forEach(hand -> Printer.print(hand.toString()));
     }
 
-    @Test
+   // @Test
     public void testIsStraight() {
 
         Hand actualHand = hand(1, card(2, 's'), card(3, 'h'), card(4, 'h'), card(5, 'h'), card(14, 'h'));
@@ -71,7 +71,7 @@ public class PokerRanksEvaluatorTest {
                 .forEach(hand -> Printer.print(hand.toString()));
     }
 
-    @Test
+    //@Test
     public void testIsStraightFlush() {
         Hand actualHand = hand(1, card(2, 'h'), card(3, 'h'), card(4, 'h'), card(5, 'h'), card(6, 'h'));
         assertTrue(PokerRanksEvaluator.isStraightFlush(actualHand));
@@ -81,7 +81,7 @@ public class PokerRanksEvaluatorTest {
                 .forEach(hand -> Printer.print(hand.toString()));
     }
 
-    @Test
+   // @Test
     public void testIsFourOfAKind() {
         Hand actualHand = hand(1, card(2, 'c'), card(2, 'h'), card(2, 's'), card(2, 'h'), card(6, 'h'));
         assertTrue(PokerRanksEvaluator.isFourOfAkind(actualHand));
@@ -91,28 +91,28 @@ public class PokerRanksEvaluatorTest {
                 .forEach(hand -> Printer.print(hand.toString()));
     }
 
-    @Test
+    //@Test
     public void testIsThreeOfAKind() {
         Hand actualHand = hand(1, card(2, 'c'), card(2, 'h'), card(2, 's'), card(7, 'h'), card(6, 'h'));
         assertTrue(PokerRanksEvaluator.isThreeOfAKind(actualHand));
 
-        PokerHandsReader.getAllPokerHands()
-                .filter(PokerRanksEvaluator::isThreeOfAKind)
-                .filter(hand -> Stream.of(hand.getCards()).mapToInt(Card::getValue).distinct().count() == 3)
-                .forEach(hand -> Printer.print(hand.toString()));
+//        PokerHandsReader.getAllPokerHands()
+//                .filter(PokerRanksEvaluator::isThreeOfAKind)
+//                .filter(hand -> Stream.of(hand.getCards()).mapToInt(Card::getValue).distinct().count() == 3)
+//                .forEach(hand -> Printer.print(hand.toString()));
     }
 
-    @Test
+    //@Test
     public void testIsTwoPairs() {
         Hand actualHand = hand(1, card(2, 'c'), card(2, 'h'), card(7, 's'), card(7, 'h'), card(6, 'h'));
         assertTrue(PokerRanksEvaluator.isTwoPairs(actualHand));
 
-        PokerHandsReader.getAllPokerHands()
-                .filter(PokerRanksEvaluator::isTwoPairs)
-                .forEach(hand -> Printer.print(hand.toString()));
+//        PokerHandsReader.getAllPokerHands()
+//                .filter(PokerRanksEvaluator::isTwoPairs)
+//                .forEach(hand -> Printer.print(hand.toString()));
     }
 
-    @Test
+    //@Test
     public void testIsOnePair() {
         Hand actualHand = hand(1, card(2, 'c'), card(2, 'h'), card(7, 's'), card(3, 'h'), card(6, 'h'));
         assertTrue(PokerRanksEvaluator.isOnePair(actualHand));
@@ -122,17 +122,17 @@ public class PokerRanksEvaluatorTest {
                 .forEach(hand -> Printer.print(hand.toString()));
     }
 
-    @Test
+    //@Test
     public void testHighCard() {
         Hand actualHand = hand(1, card(11, 'c'), card(2, 'h'), card(7, 's'), card(3, 'h'), card(6, 'h'));
         assertTrue(PokerRanksEvaluator.isHighCard(actualHand));
 
-        PokerHandsReader.getAllPokerHands()
-                .filter(PokerRanksEvaluator::isHighCard)
-                .forEach(hand -> Printer.print(hand.toString()));
+//        PokerHandsReader.getAllPokerHands()
+//                .filter(PokerRanksEvaluator::isHighCard)
+//                .forEach(hand -> Printer.print(hand.toString()));
     }
 
-    @Test
+    //@Test
     public void test() {
         Map<Integer, List<Rank>> ranks = PokerHandsReader.getAllPokerHands()
                 .map(hand -> PokerRanksEvaluator.rank(hand))

@@ -13,7 +13,7 @@ public class XORDecryptionTest {
 
     XORDecryption xorDecryption = new XORDecryption();
 
-    @Test
+    //@Test
     public void test() {
         List<List<Character>> lists = xorDecryption.generateKeys(3);
         String msg = Arrays.deepToString(lists.toArray());

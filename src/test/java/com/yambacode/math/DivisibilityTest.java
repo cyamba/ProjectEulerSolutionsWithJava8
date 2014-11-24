@@ -17,7 +17,7 @@ import static junit.framework.Assert.assertEquals;
  */
 public class DivisibilityTest {
 
-    @Test
+    //@Test
     public void testCoprime() {
         assertEquals(String.format("gcd(6,4)=2"), 2, gcd(6, 4));
     }
@@ -38,7 +38,7 @@ public class DivisibilityTest {
         assertEquals(String.format("%s", deepToString(totientsObjects)), deepToString(expectedObjects), deepToString(totientsObjects));
     }
 
-    @Test
+   // @Test
     public void testPrimeFraction() {
         //1/2
         assertEquals(Fraction.of(1, 2), Divisibility.primeFraction(BigIntegers.TWO));
