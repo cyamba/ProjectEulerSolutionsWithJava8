@@ -19,7 +19,7 @@ class GroovyEuler16 extends AbstractEulerSolver {
         if (n <= 0) {
             return sum
         }
-        return reduce(n.divide(10), sum.add(n.mod(10)))
+        reduce(n.divide(10), sum.add(n.mod(10)))
     }
 
     public static void main(args) {

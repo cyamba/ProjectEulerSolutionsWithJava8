@@ -1,6 +1,7 @@
 package com.yambacode.solutions.euler16;
 
 import com.yambacode.solutions.AbstractEulerSolver;
+import com.yambacode.solutions.EulerRunner;
 
 import static com.yambacode.solutions.euler97.BigIntegers._2;
 
@@ -8,6 +9,7 @@ import static com.yambacode.solutions.euler97.BigIntegers._2;
  * Created by cbyamba on 2011-11-20
  */
 public class SumOfDigitsImperative extends AbstractEulerSolver {
+
     @Override
     public String doSolve() {
         Integer sum = 0;
@@ -16,6 +18,10 @@ public class SumOfDigitsImperative extends AbstractEulerSolver {
             sum += Integer.parseInt(String.valueOf(numberStr.charAt(i)));
         }
         return sum.toString();
+    }
+
+    public static void main(String[] args) {
+        EulerRunner.runEulerSolvers(new SumOfDigitsImperative());
     }
 
 }
