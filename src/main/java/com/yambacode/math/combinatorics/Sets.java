@@ -34,10 +34,11 @@ public class Sets {
     }
 
     /**
-     * @param originalSet
-     * @return
+     * @param originalSet set of integers
+     * @return the set of all subsets of the original set of integers
      */
     public static Set<TreeSet<Integer>> subsets(List<Integer> originalSet) {
+        java.util.Objects.requireNonNull(originalSet);
         if (originalSet.size() == 0) {
             return new HashSet<>();
         }
@@ -130,7 +131,6 @@ public class Sets {
                 .collect(toList());
     }
 
-    //TODO DO
     public static List<TreeSet<Integer>> subsetsOfSizeFour(List<Integer> originalSet) {
         return originalSet
                 .parallelStream()
@@ -190,5 +190,6 @@ public class Sets {
                 )
         );
     }
+
 
 }
