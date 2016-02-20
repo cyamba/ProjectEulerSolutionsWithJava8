@@ -38,6 +38,13 @@ public class Combinatorics {
                 .get();
     }
 
+    /**
+     *
+     * @param higher number of elements of superset
+     * @param lower number of elements of the subset
+     * @param k
+     * @return
+     */
     public static BigInteger diffOfCombinationSumsOverFixK(int higher, int lower, int k) {
 //        Printer.print(String.format("diffOfCombinationSumsOverFixK(%s,%s,%s)",higher,lower,k));
         BigInteger comb1 = combinations(higher, k);

@@ -53,7 +53,7 @@ public class AnagramicSquares extends AbstractEulerSolver {
 
         int length = maxAnagrams.get(0).size();
         Integer[] permutationDiff = Permutations
-                .diff(maxAnagrams.get(0).toArray(new String[length]),
+                .permutationOf(maxAnagrams.get(0).toArray(new String[length]),
                         maxAnagrams.get(0).toArray(new String[length]));
 
         List<String[]> correctMultiplicitySquares = squaresBySortedDigits.entrySet().stream()

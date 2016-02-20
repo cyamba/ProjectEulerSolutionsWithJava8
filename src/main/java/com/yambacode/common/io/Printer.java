@@ -101,7 +101,7 @@ public class Printer {
     }
 
     public static void print(int[] arr) {
-        print(IntStream.of(arr).boxed().toArray(a -> new Integer[arr.length]));
+        System.out.println(Arrays.deepToString(IntStream.of(arr).boxed().toArray(a -> new Integer[arr.length])));
     }
 
     public static void print(Object[] objects) {

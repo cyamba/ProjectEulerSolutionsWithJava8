@@ -39,15 +39,15 @@ public class Permutations {
 
         String[] o = {"I", "N", "T", "R", "O", "D", "U", "C", "E"};
         String[] a = {"R", "E", "D", "U", "C", "T", "I", "O", "N"};
-        Printer.print(diff(o, a));
-        Integer[] permutationDiff = diff(o, a);
+        Printer.print(permutationOf(o, a));
+        Integer[] permutationDiff = permutationOf(o, a);
         Printer.print(permutationDiff);
         Integer[] factor = {3, 8, 5, 6, 7, 2, 0, 4, 1};
         Comparable[] result = multiply(o, factor);
         Printer.print(result);
 
         long _long = 34672834203764l;
-        BigInteger originalNumber = BigIntegers._(_long);
+        BigInteger originalNumber = BigIntegers.__(_long);
         String shuffled = Strings.shuffle(Strings.of(_long));
         BigInteger shuffledNumber = new BigInteger(shuffled);
 
@@ -155,14 +155,14 @@ public class Permutations {
         I N T R O D U C E   -> R E D U C T I O N
          */
     //1. i Permutation gör en funktion som tar två Comparable och returnerar heltalspermutationen från 0 till n-1 som denna motsvarar
-    //2. Givet en Comparable och en heltalspermutation från 0 till n-1 returnera  den resulterande permutationen om dessa väljs som index.
+    //2. Givet en Comparable och en heltalspermutation från 0 till n-1 returnera den resulterande permutationen om dessa väljs som index.
 
     /**
      * @param original
      * @param anagram
      * @return
      */
-    public static Integer[] diff(Comparable[] original, Comparable[] anagram) {
+    public static <T extends Comparable>Integer[] permutationOf(T[] original, T[] anagram) {
         return (!arePermutations(original, anagram)) ?
                 null
                 : IntStream.range(0, original.length).boxed()
@@ -174,8 +174,8 @@ public class Permutations {
      * @param anagram
      * @return
      */
-    public static Permutation<Integer> diff(Word original, Word anagram) {
-        Integer[] diff = diff(original.get(), anagram.get());
+    public static Permutation<Integer> permutationOf(Word original, Word anagram) {
+        Integer[] diff = permutationOf(original.get(), anagram.get());
         return Permutation.of(diff);
     }
 
@@ -218,14 +218,7 @@ public class Permutations {
      * @param permutation
      */
     public static void checkIfNonMultiPermutation(Comparable[] permutation) {
-        Comparable[] sorted = Stream.of(permutation).sorted().toArray(x -> new Comparable[permutation.length]);
-        IntStream.range(0, sorted.length - 1).forEachOrdered(
-                i -> {
-                    if (sorted[i] == sorted[i + 1]) {
-                        throw new IllegalArgumentException("should not have repeated elements");
-                    }
-                }
-        );
+
     }
 
     /**
@@ -240,7 +233,7 @@ public class Permutations {
         Comparable[] permutationSorted = Stream.of(permutation)
                 .sorted()
                 .toArray(x -> new Comparable[length]);
-        Integer[] diff = diff(permutationSorted, permutation);
+        Integer[] diff = permutationOf(permutationSorted, permutation);
         Integer[] identity = IntStream.range(0, length).boxed().toArray(x -> new Integer[length]);
         return Stream.of(multiply(identity, diff)).toArray(x -> new Integer[length]);
     }

@@ -4,7 +4,7 @@ import com.yambacode.solutions.euler70.Fractions;
 
 import java.math.BigInteger;
 
-import static com.yambacode.solutions.euler97.BigIntegers._;
+import static com.yambacode.solutions.euler97.BigIntegers.__;
 import static com.yambacode.solutions.euler97.BigIntegers._1;
 
 /**
@@ -36,7 +36,7 @@ public class Fraction {
     }
 
     public static Fraction of(long numerator, long denominator) {
-        return new Fraction(_(numerator), _(denominator));
+        return new Fraction(__(numerator), __(denominator));
     }
 
     public static Fraction of(long n) {

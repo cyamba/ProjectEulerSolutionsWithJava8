@@ -26,7 +26,7 @@ public class TotientPermutation extends AbstractEulerSolver {
     }
 
     public BigInteger findMinimum(long size) {
-        BigInteger upper = _(size);
+        BigInteger upper = __(size);
         return findMinimum0(upper, priorPrime(upper), _1, _1, Lists.newArrayList());
     }
 

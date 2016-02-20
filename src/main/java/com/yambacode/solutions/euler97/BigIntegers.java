@@ -34,7 +34,7 @@ public class BigIntegers {
     public static final BigInteger TEN = BigInteger.valueOf(10);
 
 
-    public static BigInteger _(long val) {
+    public static BigInteger __(long val) {
         return BigInteger.valueOf(val);
     }
 
@@ -42,7 +42,7 @@ public class BigIntegers {
         Printer.print("searching for a prime less than " + number);
         /*long startLong;
         BigInteger startBigInteger;
-        if (number.compareTo(_(Long.MAX_VALUE)) <= 0) {
+        if (number.compareTo(__(Long.MAX_VALUE)) <= 0) {
             startLong = number.longValue();
         } else {
             startBigInteger = number;

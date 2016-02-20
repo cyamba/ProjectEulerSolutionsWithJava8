@@ -14,9 +14,26 @@ public class CollectionBlocksTest {
 
 
     @Test
-    public void testToBlockStream(){
-        List<Integer> collect = IntStream.range(0, 100).boxed().collect(Collectors.toList());
-        List<List<Integer>> lists = CollectionBlocks.toBlockList(collect, 5);
+    public void testToBlockStream() {
+        List<Integer> list = IntStream.range(0, 100).boxed().collect(Collectors.toList());
+        List<List<Integer>> lists = CollectionBlocks.toBlockList(list, 5);
         Printer.print(lists.toArray());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowIllegalArgumentExceptionWhenBlockListSizeIsLessThanBlockSize() {
+        List<Integer> list = IntStream.range(0, 2).boxed().collect(Collectors.toList());
+        CollectionBlocks.toBlockList(list, 5);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void shouldThrowNullPointerExceptionWhenListArgumentIsNull() {
+        CollectionBlocks.toBlockList(null, 5);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowIllegalArgumentWhenBlockSizeDoesNotDivideListSize() {
+        List<Integer> list = IntStream.range(0, 9).boxed().collect(Collectors.toList());
+        CollectionBlocks.toBlockList(list, 7);
     }
 }

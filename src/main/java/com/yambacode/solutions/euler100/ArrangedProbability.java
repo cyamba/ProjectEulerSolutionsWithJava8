@@ -11,7 +11,6 @@ public class ArrangedProbability extends AbstractEulerSolver {
 
     public static final long TOTAL = 1000_000l;
 
-
     //TODO binary search kind of algorithm
     @Override
     public String doSolve() {

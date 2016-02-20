@@ -9,13 +9,18 @@ import java.util.stream.Stream;
 public class Arrays1D {
 
     public static boolean deepEquals(int[] first, int[] second) {
+        if (first == null && second == null) {
+            return true;
+        }
+        if (first == null || second == null) {
+            return false;
+        }
         if (first.length != second.length) {
             return false;
         }
         return IntStream.range(0, first.length).allMatch(i -> first[i] == second[i]);
     }
 
-    //TODO move to Characters?
     public static Character[] intToCharArray(int[] intArr) {
         Integer[] integers = IntStream.of(intArr).boxed().toArray(x -> new Integer[intArr.length]);
         return intToCharArray(integers);

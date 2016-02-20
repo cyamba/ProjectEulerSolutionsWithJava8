@@ -10,6 +10,7 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.joining;
 
 /**
+ * Utility class to compute non-attacking queens problem.
  * Created by cbyamba on 2014-03-13.
  */
 public class Arrays2D {
@@ -156,7 +157,7 @@ public class Arrays2D {
      * @param permutation a permutation of length n of integers from 0 to n-1
      * @return the corresponding matrix
      */
-    public static int[][] fromPermutation(final Comparable[] permutation) {
+    public static<T extends Comparable> int[][] fromPermutation(final T[] permutation) {
         int length = permutation.length;
         int[][] result = new int[length][];
         Comparable[] newPermutation = sanatizePermutation(permutation);
@@ -170,9 +171,8 @@ public class Arrays2D {
         return result;
     }
 
-    //TODO  move to permutation
     protected static Integer[] sanatizePermutation(Comparable[] permutation) {
-        Map<Comparable, Comparable> map = Maps.toMap(permutation);
+        Map<Integer, Comparable> map = Maps.toMap(permutation);
         TreeMap<Comparable, Comparable> sortedMap = new TreeMap<>(Maps.inverse(map));
         Map<Comparable, Comparable> sanatizedMap = IntStream
                 .range(0, sortedMap.size())
